@@ -7,17 +7,22 @@ import config from './config'
 import Home from './page/Home/Home'
 import Login from './page/Login/Login'
 import Register from './page/Register/Register'
-import HeaderOnly from './layout/HeaderOnly'
+import HeaderSideBar from './layout/admin/HeaderSideBar'
 
 const App:FC = () => {
   return (
    <Container>
     <GlobalStyles />
-    <Routes>
-      <Route path={config.routePath.home} element={<HeaderOnly><Home /></HeaderOnly>}/>
-      <Route path={config.routePath.login} element={<Login />}/>
-      <Route path={config.routePath.register} element={<Register />}/>
-    </Routes>
+
+
+    <div className="admin">
+      <Routes>
+        <Route path={config.routePath.home} element={<HeaderSideBar><Home /></HeaderSideBar>}/>
+        <Route path={config.routePath.login} element={<Login />}/>
+        <Route path={config.routePath.register} element={<Register />}/>
+      </Routes>
+    </div>
+    
    </Container>
   );
 }
@@ -26,4 +31,8 @@ export default App;
 
 const Container = styled.div`
   
+  .admin {
+    display: grid;
+    grid-template-columns: 15% 85%;
+  }
 `

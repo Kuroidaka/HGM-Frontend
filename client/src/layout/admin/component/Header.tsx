@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FiAlignJustify } from 'react-icons/fi'
 import { BiSearch } from 'react-icons/bi'
@@ -8,7 +8,7 @@ interface HeaderProps {}
 
 const Header:FC<HeaderProps> = () => {
     const inputRef = useRef<HTMLInputElement>(null)
-    const inputWrapRef = useRef<HTMLDivElement>(null)
+    const inputWrapRef = useRef<HTMLFormElement>(null)
     const [text, setText] = useState<string>('')
 
     useEffect(() => {
@@ -25,19 +25,27 @@ const Header:FC<HeaderProps> = () => {
     const handleInput = (e:React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }
+
+    const handleSearch = (e:React.ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(text);
+    }
     
     return ( 
         <HeaderBar>
             <Container>
-                <FiAlignJustify className="icon select"/>
 
-                <div ref={inputWrapRef} className="wrap-search-bar">
+                <div className="wrap-select">
+                    <FiAlignJustify className="icon select"/>
+                </div>
+
+                <form ref={inputWrapRef} onSubmit={handleSearch} className="wrap-search-bar">
                     <input value={text} ref={inputRef} type="text" onInput={handleInput} placeholder="Search here ..." />
                     <div className="wrap-icon"> 
                         <BiSearch className="icon search"/>
                     </div>
 
-                </div>
+                </form>
 
             </Container>
         </HeaderBar>
@@ -49,8 +57,9 @@ export default Header;
 const HeaderBar = styled.div`
 
 height: var(--header-height);
-width: 100vw;
-background-color: var(--primary);
+
+width: 100%;
+background-color: var(--primary_admin);
 display: flex;
 align-items: center ;
 justify-content: center;
@@ -59,14 +68,29 @@ justify-content: center;
 `
 
 const Container = styled.div`
-width: 1200px;
+width: 100%;
 height: 100%;
 display: grid;
 align-items: center;
 grid-template-columns: 10% 50% 20% 20%;
 
-    .select {
-        font-size: 30px;
+    .wrap-select{
+        width: 35px;
+        height: 35px;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        transition: all .2s ease-in-out;
+        &:hover{
+            background-color: var(--semi-primary_admin);
+            
+        }
+        .select {
+            font-size: 25px;
+            pointer-events: auto;
+        }
     }
     .wrap-search-bar{
         position: relative;
@@ -76,7 +100,7 @@ grid-template-columns: 10% 50% 20% 20%;
         height: 40px;
         background: white;
         border-radius: 25px;
-        border: 4px solid white;
+        border: 2.5px solid white;
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -117,6 +141,7 @@ grid-template-columns: 10% 50% 20% 20%;
         /* width: ; */
         .wrap-icon{
             box-sizing: border-box;
+            flex-shrink: 0;
     /* position: absolute; */
     color: #07051a;
     text-align: center;
@@ -125,13 +150,14 @@ grid-template-columns: 10% 50% 20% 20%;
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            background-color: var(--secondary);
+            background-color: var(--secondary_admin);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 99;
             .search {
                 font-size: 25px;
+                color: var(--white-color);
             }
     }}
 
