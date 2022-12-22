@@ -32,7 +32,6 @@ export default App;
 const Container = styled.div`
   
   .admin {
-    display: grid;
-    grid-template-columns: 15% 85%;
+    display: flex;
   }
 `

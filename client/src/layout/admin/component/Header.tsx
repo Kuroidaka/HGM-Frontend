@@ -1,15 +1,22 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FiAlignJustify } from 'react-icons/fi'
 import { BiSearch } from 'react-icons/bi'
+import { inputWrapRefProps } from "../HeaderSideBar";
 
-interface HeaderProps {}
+interface HeaderProps {
+    handleClickSelectBtn: (inputWrapRef: inputWrapRefProps) => void,
+    children: ReactNode
+}
 
 
-const Header:FC<HeaderProps> = () => {
+const Header:FC<HeaderProps> = (props) => {
+    const { handleClickSelectBtn } = props
+
     const inputRef = useRef<HTMLInputElement>(null)
     const inputWrapRef = useRef<HTMLFormElement>(null)
     const [text, setText] = useState<string>('')
+
 
     useEffect(() => {
         if(inputRef.current && inputRef.current?.value !== ''){
@@ -30,13 +37,14 @@ const Header:FC<HeaderProps> = () => {
         e.preventDefault()
         console.log(text);
     }
+
     
     return ( 
         <HeaderBar>
             <Container>
 
                 <div className="wrap-select">
-                    <FiAlignJustify className="icon select"/>
+                    <FiAlignJustify className="icon select" onClick={() => handleClickSelectBtn(inputWrapRef)}/>
                 </div>
 
                 <form ref={inputWrapRef} onSubmit={handleSearch} className="wrap-search-bar">

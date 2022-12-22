@@ -1,79 +1,72 @@
 import styled from "styled-components";
-import avatar from '../../../assert/img/7969-ew-thinking.png'
-import { IoMdArrowDropdown } from 'react-icons/io'
-import { CiMail, CiUser, CiSettings, CiLogout, CiHome } from 'react-icons/ci'
-import { useRef, useState } from "react";
+import Tippy from '@tippyjs/react/headless';
+import avatar from '~/assert/img/7969-ew-thinking.png'
+import { AiOutlineHome } from 'react-icons/ai'
+import { FC, useEffect, useRef, useState } from "react";
 import NavItem from "./NavItem";
+import { img } from "~/assert/img";
+import AdminOption from "./AdminOption";
 
-const Sidebar = () => {
+interface SidebarProps {
+    sideBarRef: React.RefObject<HTMLDivElement>,
+    sidebarOpen: Boolean
+}
+
+const Sidebar:FC<SidebarProps> = (props) => {
+    const { sideBarRef, sidebarOpen } = props
     // const [info, setInfo] = useState<Boolean>(false)
+    
     const [activeItem, setActiveBar] = useState<number>()
     const adminNavRef = useRef<HTMLDivElement>(null)
 
     const handleClickAdminInfo = () => {
         adminNavRef.current?.classList.toggle('show')
+        // adminNavRef.current?.setAttribute('style', 'height: 120px')
     }
 
     const handleClickNavItem = (idx: number) => {
         setActiveBar(idx)
     }
 
+
     return ( 
-        <SidebarStyle>
+        <SidebarStyle ref={sideBarRef}>
             <header>
-                <h1>LOGO</h1>
+                <img src={img.logo} alt="logo" />
             </header>
         <Container>
             <div className="info">
-                <div className="avatar-wrap">
-                    <img src={avatar} alt="" />
-                </div>
 
-                <span onClick={handleClickAdminInfo}>
-                    <div className="admin-name-wrap" >
-                            <div id="admin-name" className="admin-name">Canh</div>
-                            <IoMdArrowDropdown />
-                    </div>
-                        <label htmlFor="admin-name">Administrator</label> 
-                </span>
-
-                 <div ref={adminNavRef} className="admin-nav">
-                    <div className="nav-item">
-                        <CiMail /> 
-                        <p>Messages</p>
-                        <div className="notify">
-                            <span>9</span>
-                        </div>
-                    </div>
-
-                    <div className="nav-item">
-                        <CiUser /> 
-                        <p>Profile</p>
-                    </div>
-
-                    <div className="nav-item">
-                        <CiSettings /> 
-                        <p>Setting</p>
-                    </div>
-
-                    <div className="nav-item">
-                        <CiLogout /> 
-                        <p>Logout</p>
-                    </div>
+                <Tippy  
+                interactive={true}
+                offset={[0,15]}
+                placement='right-start'
+                render={attrs => (
+                    !sidebarOpen && <AdminOption handleClickAdminInfo={handleClickAdminInfo} adminNavRef={adminNavRef} />
+                )}>
                     
-                </div>
+                    <div className="avatar-wrap" style={{width: sidebarOpen? '62px': '43px'}}>
+                        <img src={avatar} alt="" />
+                    </div>
+                </Tippy>
+
+               {sidebarOpen && <AdminOption handleClickAdminInfo={handleClickAdminInfo} adminNavRef={adminNavRef} />}
+
             </div>
 
             <Content >
                 <div className="navigation">
-                    <h6>Navigation</h6>
+                   {sidebarOpen && <h6>Navigation</h6>}
 
                     {
                         [1,2,3].map((item, idx) => {
                             return (
                                 <div key={idx} onClick={() => handleClickNavItem(idx)}>
-                                    <NavItem  title='Dashboard' active={activeItem === idx? (true) : (false)}>
-                                        <CiHome />
+                                    <NavItem  
+                                        title='Dashboard' 
+                                        sidebarOpen={sidebarOpen}
+                                        active={activeItem === idx? (true) : (false)}>
+                                        <AiOutlineHome />
                                     </NavItem>
                                 </div>
                             )
@@ -95,14 +88,20 @@ const SidebarStyle = styled.div`
     width: 100%;
     height: 100vh;
     background-color: var(--primary_admin);
+    transition: width .2s ease-in-out;
 
     header{
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: var(--primary_admin);
         height: var(--header-height);
+        img{
+            width: 43px;
+            border-radius: 42px;
 
+        }
     }
 
     .info {
@@ -111,9 +110,9 @@ const SidebarStyle = styled.div`
         justify-content: flex-start;
         align-items: center;
         gap: 5px;
-        margin: 0 26px;
 
         .avatar-wrap {
+            cursor: pointer;
             margin: 32px 0 10px;
             width: 62px;
             border-radius: 50%;
@@ -124,87 +123,8 @@ const SidebarStyle = styled.div`
                 width: 100%;
             }
         }
-        span{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center ;
-            .admin-name-wrap{
-                display: flex;
-                gap: 10px;
-                cursor: pointer;
-                .admin-name {
-                color: var(--primary_admin);
-            }
-
-            svg{
-                color: var(--primary_admin);
-                align-self: flex-end;
-            }
-            }
-            label {
-                color: var(--small_text_admin);
-                font-size: 14px;
-                opacity: .8;
-                cursor: pointer;
-            }
-        }
-
-        .admin-nav{
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            height: 0px;
-            transition: all .5s ease-in;
-            
-            &.show{
-                display: flex;
-                height: auto;
-            }
-
-            .nav-item{
-                cursor: pointer;
-                display: flex;
-                justify-content: flex-start;
-                align-items: center;
-                width: 100%;
-                gap: 10px;
-                color: #c4c4c4;
-                font-size: 16.5px;
-                transition: all .2s ease-in;
-                opacity: .7;
-
-                &.nav-item {
-                margin-top: 10px;
-            }
-
-                svg{
-                    
-                    font-size: 17.5px;
-                    align-self: flex-start;
-                }
-                p {
-                    font-size: 14.5px;
-                    flex: 1;
-                }
-                &:hover{
-                    opacity: 1;
-                }
-                .notify{
-                    opacity: 1!important;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 20px;
-                    height: 20px;
-                    background-color: var(--notify-color);
-                    border-radius: 7px;
-                    span {
-                        color: var(--white-color);
-                }}
-            }
-        }
+        
+        
     }   
 `
 
@@ -213,13 +133,14 @@ const Container = styled.div`
     width: 100%;
     background-color: var(--third_admin);
     border-top-right-radius: 20px;
-    padding: 0 26px;
+    padding: 0 12px;
     display: flex;
     flex-direction: column;
 `
 
 const Content = styled.div `
-    
+    background-color: var(--third_admin);
+    z-index: 99;
     .navigation{
         padding: 16px 0;
 
@@ -228,7 +149,9 @@ const Content = styled.div `
             margin: 0 0 8px;
             color : var(--title-color) ;
         }
+    }
 
-      
+    div {
+        width: 100%;
     }
 `

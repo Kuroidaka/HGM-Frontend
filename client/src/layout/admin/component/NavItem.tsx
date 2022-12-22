@@ -4,16 +4,22 @@ import styled from "styled-components";
 interface NavItemProps {
     title: string,
     children: ReactNode,
+    sidebarOpen : Boolean| undefined,
     active?: Boolean | undefined,
 }
 
+interface NavItemStyles {
+    active: Boolean | undefined
+    sidebarOpen: Boolean | undefined
+}
+
 const NavItem:FC<NavItemProps> = (props) => {
-    const { title, children, active } = props
+    const { title, children, active, sidebarOpen } = props
 
     return ( 
-        <Item active={active} >
+        <Item active={active} sidebarOpen={sidebarOpen} >
             {children}
-            <p >{title}</p>
+            {sidebarOpen && <span >{title}</span>}
         </Item>            
     );
 }
@@ -21,19 +27,21 @@ const NavItem:FC<NavItemProps> = (props) => {
 export default NavItem;
 
 
-const Item = styled.div<{active: Boolean | undefined}>`
+const Item = styled.div<NavItemStyles>`
 
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding: 9.44px 16px;
+    justify-content: ${({sidebarOpen}) => sidebarOpen ? `flex-start` : `center`};
+    padding: 9.44px;
     color: var(--side-bar-normal-text);
     cursor: pointer;
 
     svg{
-        margin-right: 8px;
+        font-size: 20px;
+       
     }
     span{
+        padding-left: 8px;
         font-size: 18px;
     }
 
