@@ -8,6 +8,7 @@ import Home from './page/Home/Home'
 import Login from './page/Login/Login'
 import Register from './page/Register/Register'
 import HeaderSideBar from './layout/admin/HeaderSideBar'
+import Profile from './page/Profile/Profile'
 
 const App:FC = () => {
   return (
@@ -17,9 +18,11 @@ const App:FC = () => {
 
     <div className="admin">
       <Routes>
-        <Route path={config.routePath.home} element={<HeaderSideBar><Home /></HeaderSideBar>}/>
         <Route path={config.routePath.login} element={<Login />}/>
         <Route path={config.routePath.register} element={<Register />}/>
+        <Route path={config.routePath.home} element={<HeaderSideBar><Home /></HeaderSideBar>}/>
+        <Route path={config.routePath.profile} element={<HeaderSideBar><Profile /></HeaderSideBar>}/>
+
       </Routes>
     </div>
     
@@ -31,7 +34,4 @@ export default App;
 
 const Container = styled.div`
   
-  .admin {
-    display: flex;
-  }
 `

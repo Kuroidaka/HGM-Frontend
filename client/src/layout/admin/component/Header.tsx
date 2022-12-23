@@ -1,12 +1,14 @@
 import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FiAlignJustify } from 'react-icons/fi'
-import { BiSearch } from 'react-icons/bi'
+import { FiAlignJustify, FiSearch } from 'react-icons/fi'
+import { IoMdNotificationsOutline } from 'react-icons/io'
+import { BiUser } from 'react-icons/bi'
+import { BsThreeDotsVertical } from 'react-icons/bs'
 import { inputWrapRefProps } from "../HeaderSideBar";
 
 interface HeaderProps {
     handleClickSelectBtn: (inputWrapRef: inputWrapRefProps) => void,
-    children: ReactNode
+
 }
 
 
@@ -18,6 +20,7 @@ const Header:FC<HeaderProps> = (props) => {
     const [text, setText] = useState<string>('')
 
 
+    // handle not to return the original search button when it have value
     useEffect(() => {
         if(inputRef.current && inputRef.current?.value !== ''){
             inputWrapRef.current?.setAttribute('style', 'width: 300px')
@@ -50,10 +53,22 @@ const Header:FC<HeaderProps> = (props) => {
                 <form ref={inputWrapRef} onSubmit={handleSearch} className="wrap-search-bar">
                     <input value={text} ref={inputRef} type="text" onInput={handleInput} placeholder="Search here ..." />
                     <div className="wrap-icon"> 
-                        <BiSearch className="icon search"/>
+                        <FiSearch className="icon search"/>
                     </div>
-
                 </form>
+
+                <div></div>
+
+                <div className="contend-end">
+
+                    <div className="icon">
+                        <IoMdNotificationsOutline />
+                        <BiUser/>
+                        <BsThreeDotsVertical />
+
+                    </div>
+                </div>
+
 
             </Container>
         </HeaderBar>
@@ -80,7 +95,7 @@ width: 100%;
 height: 100%;
 display: grid;
 align-items: center;
-grid-template-columns: 10% 50% 20% 20%;
+grid-template-columns:  5% 55% 20% 20%;;
 
     .wrap-select{
         width: 35px;
@@ -169,7 +184,24 @@ grid-template-columns: 10% 50% 20% 20%;
             }
     }}
 
-    
+    .contend-end{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        justify-content: space-evenly;
+        justify-self: flex-end;
+
+        .icon{
+            display: flex;
+            justify-content: space-evenly;
+            svg{
+                font-size: 25px;
+            }
+
+        }
+
+    }
 
 
 `

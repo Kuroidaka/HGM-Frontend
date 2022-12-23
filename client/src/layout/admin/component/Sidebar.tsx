@@ -6,6 +6,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import NavItem from "./NavItem";
 import { img } from "~/assert/img";
 import AdminOption from "./AdminOption";
+import { useNavigate } from "react-router-dom";
 
 interface SidebarProps {
     sideBarRef: React.RefObject<HTMLDivElement>,
@@ -14,6 +15,7 @@ interface SidebarProps {
 
 const Sidebar:FC<SidebarProps> = (props) => {
     const { sideBarRef, sidebarOpen } = props
+    const navigate = useNavigate()
     // const [info, setInfo] = useState<Boolean>(false)
     
     const [activeItem, setActiveBar] = useState<number>()
@@ -27,16 +29,20 @@ const Sidebar:FC<SidebarProps> = (props) => {
     const handleClickNavItem = (idx: number) => {
         setActiveBar(idx)
     }
+    const handleClickLogo = () => {
+        navigate('/')
+    }
 
 
     return ( 
         <SidebarStyle ref={sideBarRef}>
-            <header>
-                <img src={img.logo} alt="logo" />
+            <header >
+                <img src={img.logo} alt="logo"  onClick={handleClickLogo}/>
             </header>
         <Container>
             <div className="info">
 
+            {/* just active when sidebar's width is being shrunk */}
                 <Tippy  
                 interactive={true}
                 offset={[0,15]}
@@ -86,7 +92,7 @@ export default Sidebar;
 const SidebarStyle = styled.div`
     max-width: 225px;
     width: 100%;
-    height: 100vh;
+    height: calc(100% - var(--header-height));
     background-color: var(--primary_admin);
     transition: width .2s ease-in-out;
 
@@ -100,6 +106,7 @@ const SidebarStyle = styled.div`
         img{
             width: 43px;
             border-radius: 42px;
+            cursor: pointer;
 
         }
     }

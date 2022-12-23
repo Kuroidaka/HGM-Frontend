@@ -2,6 +2,8 @@ import { FC } from "react";
 import styled from "styled-components";
 import { CiLogout, CiMail, CiSettings, CiUser } from "react-icons/ci";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface AdminOptionProps {
     handleClickAdminInfo: () => void
@@ -10,6 +12,11 @@ interface AdminOptionProps {
 
 const AdminOption:FC<AdminOptionProps> = (props) => {
     const {handleClickAdminInfo, adminNavRef} = props
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        navigate('/login')
+    }
 
     return ( 
         <Option>
@@ -30,17 +37,17 @@ const AdminOption:FC<AdminOptionProps> = (props) => {
                     </div>
                 </div>
 
-                <div className="nav-item">
+                <Link to='/profile' className="nav-item">
                     <CiUser /> 
                     <p>Profile</p>
-                </div>
+                </Link>
 
-                <div className="nav-item">
+                <div className="nav-item" > 
                     <CiSettings /> 
                     <p>Setting</p>
                 </div>
 
-                <div className="nav-item">
+                <div className="nav-item" onClick={handleLogout}>
                     <CiLogout /> 
                     <p>Logout</p>
                 </div>

@@ -37,6 +37,7 @@ export const GlobalStyles = createGlobalStyle`
 
     a {
         color: var(--text-color);
+        text-decoration: none;
     }
 
     .icon {

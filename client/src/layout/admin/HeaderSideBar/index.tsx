@@ -1,4 +1,5 @@
 import { FC, Fragment, ReactNode, useRef, useState } from "react";
+import styled from 'styled-components'
 
 import Header from '../component/Header'
 import Sidebar from "../component/Sidebar";
@@ -16,6 +17,7 @@ const HeaderSideBar:FC<HeaderSideBarProps> = ({children}) => {
 
  
 
+    // Change the sidebar width
     const handleClickSelectBtn = (inputWrapRef: inputWrapRefProps) => {
 
         if(sidebarOpen) {
@@ -32,14 +34,29 @@ const HeaderSideBar:FC<HeaderSideBarProps> = ({children}) => {
     }
 
     return (  
-    <Fragment>
+    <Container>
         <Sidebar sideBarRef={sideBarRef} sidebarOpen={sidebarOpen} />
-        <Header handleClickSelectBtn={handleClickSelectBtn}>
+
+        <Content>
+            <Header handleClickSelectBtn={handleClickSelectBtn} />
             {children}
-        </Header>
-    </Fragment>
+        </Content>
+
+
+    </Container>
     );
 }
  
 export default HeaderSideBar;
 
+const Container = styled.div`
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+`
+
+const Content = styled.div`
+    width: 100%;
+    height: 100%;
+    /* height: 100vh; */
+`

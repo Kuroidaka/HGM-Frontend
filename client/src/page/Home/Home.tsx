@@ -8,7 +8,7 @@ interface HomeProps {
 const Home:FC<HomeProps> = () => {
     return ( 
         <Container>
-            home
+            <h1>Home</h1>
         </Container>
      );
 }
@@ -16,6 +16,4 @@ const Home:FC<HomeProps> = () => {
 export default Home;
 
 const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
 `
