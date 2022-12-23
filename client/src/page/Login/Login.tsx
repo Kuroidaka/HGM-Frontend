@@ -1,11 +1,25 @@
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import config from "../../config";
 import { FaFacebookF } from 'react-icons/fa'
 import { AiOutlineGooglePlus } from 'react-icons/ai'
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+import config from "../../config";
+import { img } from "~/assert/img";
 
 
+
+const toastOption = {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+}
 
 
 interface LoginProps {
@@ -13,15 +27,23 @@ interface LoginProps {
 }
 
 const Login:FC<LoginProps> = () => {
+
+    const handleLogin = (e:ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(123);
+        
+        toast.error('Wrong Password or username', toastOption)
+    }
+
     return ( 
     <Container>
        <div className="wrapper">
-            <form className="login-form">
+            <form className="login-form" onSubmit={handleLogin}>
                 <div className="header">
-                    <h1>LOGO</h1>
+                    <img src={img.logo} alt="" />
                 </div>
 
-                <div className="form-body">
+                <div className="form-body" >
                     <div className="input-bar">
                         <input type="text" placeholder="Email or username"/>
                     </div>
@@ -55,6 +77,9 @@ const Login:FC<LoginProps> = () => {
                 </div>
             </form>
        </div>
+
+       <ToastContainer/>
+
     </Container>
     );
 }
@@ -81,10 +106,14 @@ align-items: center;
             padding: 30px;
 
             .header{
-                height: 50px;
+                height: 90px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                img{
+                    height: 100%;
+                }
             }
 
             .form-body{
@@ -171,7 +200,7 @@ const Button = styled.button`
     border: none;
     width: 100%;
     height: 44px;
-    background-color: var(--primary);
+    background-color: var(--third_admin);
     cursor: pointer;
     color: #FAFAFA;
 `

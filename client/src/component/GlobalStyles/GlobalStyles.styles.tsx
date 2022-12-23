@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
         --secondary_admin: #5D6C7E;
         --third_admin: #2A4054;
         --hover-icon: #717070;
+        --hover-item_dark: #526172;
         --white-color: #F7F7F7;
         --black-color: #303030;
         --small_text_admin: #c3c5c7;
@@ -17,7 +18,8 @@ export const GlobalStyles = createGlobalStyle`
         --title-color: #f0f0f0;
         --text-color: #333;
         --side-bar-normal-text:#cccdd0;
-        --header-height: 60px;
+        --header-height: 45px;
+        --overlay-height: 300px;
     }
     
     *{

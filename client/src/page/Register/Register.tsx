@@ -1,22 +1,38 @@
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import config from "../../config";
 import { FaFacebookF } from 'react-icons/fa'
 import { AiOutlineGooglePlus } from 'react-icons/ai'
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
-
-
-
+import config from "../../config";
 interface RegisterProps {
 
 }
 
+const toastOption = {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+}
+
+
 const Register:FC<RegisterProps> = () => {
+
+    const handleRegister = (e:ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        toast.error('Error', toastOption)
+    }
+
     return ( 
     <Container>
        <div className="wrapper">
-            <form className="register-form">
+            <form className="register-form" onSubmit={handleRegister}>
                 <div className="header">
                     <h1>CREATE ACCOUNT</h1>
                 </div>
@@ -55,6 +71,9 @@ const Register:FC<RegisterProps> = () => {
                 </div>
             </form>
        </div>
+
+
+       <ToastContainer />
     </Container>
     );
 }
@@ -172,7 +191,7 @@ const Button = styled.button`
     border: none;
     width: 100%;
     height: 44px;
-    background-color: var(--primary);
+    background-color: var(--third_admin);
     cursor: pointer;
     color: #FAFAFA;
 `

@@ -1,8 +1,8 @@
 import { FC, Fragment, ReactNode, useRef, useState } from "react";
 import styled from 'styled-components'
 
-import Header from '../component/Header'
-import Sidebar from "../component/Sidebar";
+import Header from '../component/Header/Header'
+import Sidebar from "../component/SideBar/Sidebar";
 
 interface HeaderSideBarProps {
     children: ReactNode
@@ -38,8 +38,11 @@ const HeaderSideBar:FC<HeaderSideBarProps> = ({children}) => {
         <Sidebar sideBarRef={sideBarRef} sidebarOpen={sidebarOpen} />
 
         <Content>
-            <Header handleClickSelectBtn={handleClickSelectBtn} />
-            {children}
+            <Header handleClickSelectBtn={handleClickSelectBtn} sidebarOpen={sidebarOpen}/>
+            <div className="overlay"></div>
+            <div className="body">
+                {children}
+            </div>
         </Content>
 
 
@@ -58,5 +61,15 @@ const Container = styled.div`
 const Content = styled.div`
     width: 100%;
     height: 100%;
-    /* height: 100vh; */
+
+    .overlay {
+        height: var(--overlay-height);
+        width: 100%;
+        background-color: var(--primary_admin);
+        border-radius: 0 0 100% 100%/0 0 3vw 3vw;
+    }
+
+    .body{
+        margin-top: calc(0px - var(--overlay-height));
+    }
 `

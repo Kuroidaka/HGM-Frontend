@@ -1,22 +1,31 @@
-import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FiAlignJustify, FiSearch } from 'react-icons/fi'
-import { IoMdNotificationsOutline } from 'react-icons/io'
+import { RiNotification4Line } from 'react-icons/ri'
 import { BiUser } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { inputWrapRefProps } from "../HeaderSideBar";
+
+import { inputWrapRefProps } from "~/layout/admin/HeaderSideBar";
+import Tippy from "@tippyjs/react/headless";
+import NotifyPopper from "./NotifyPopper";
 
 interface HeaderProps {
     handleClickSelectBtn: (inputWrapRef: inputWrapRefProps) => void,
+    sidebarOpen: Boolean
+}
 
+interface ContainerStyleProps {
+    sidebarOpen: Boolean
+    notifyModal: boolean
 }
 
 
 const Header:FC<HeaderProps> = (props) => {
-    const { handleClickSelectBtn } = props
+    const { handleClickSelectBtn, sidebarOpen } = props
 
     const inputRef = useRef<HTMLInputElement>(null)
     const inputWrapRef = useRef<HTMLFormElement>(null)
+    const [notifyModal, setNotifyModal] = useState<boolean>(false)
     const [text, setText] = useState<string>('')
 
 
@@ -41,31 +50,53 @@ const Header:FC<HeaderProps> = (props) => {
         console.log(text);
     }
 
+    const handleClickNotifyBtn = () => {
+        setNotifyModal(!notifyModal)
+    }
+
     
     return ( 
         <HeaderBar>
-            <Container>
+            <Container sidebarOpen={sidebarOpen} notifyModal={notifyModal}>
 
                 <div className="wrap-select">
                     <FiAlignJustify className="icon select" onClick={() => handleClickSelectBtn(inputWrapRef)}/>
                 </div>
 
-                <form ref={inputWrapRef} onSubmit={handleSearch} className="wrap-search-bar">
-                    <input value={text} ref={inputRef} type="text" onInput={handleInput} placeholder="Search here ..." />
-                    <div className="wrap-icon"> 
-                        <FiSearch className="icon search"/>
-                    </div>
-                </form>
+                <div className="header-body">
+                    <form ref={inputWrapRef} onSubmit={handleSearch} className="wrap-search-bar">
+                        <input value={text} ref={inputRef} type="text" onInput={handleInput} placeholder="Search here ..." />
+                        <div className="wrap-icon"> 
+                            <FiSearch className="icon search"/>
+                        </div>
+                    </form>
 
-                <div></div>
+                </div>    
 
-                <div className="contend-end">
+                <div className="header-end">
+                    <div className="icon-box">      
+                        <Tippy
+                            visible={notifyModal}
+                            interactive={true}
+                            // offset={[0,0]}
+                            placement='bottom-end'
+                            onClickOutside={handleClickNotifyBtn}
+                            render={attrs => (
+                                <NotifyPopper />
+                            )}
+                        >
+                            <div className="icon-wrap notify notification" onClick={handleClickNotifyBtn}>
+                                <RiNotification4Line className="icon"/>
+                            </div>
+                        </Tippy>
 
-                    <div className="icon">
-                        <IoMdNotificationsOutline />
-                        <BiUser/>
-                        <BsThreeDotsVertical />
+                        <div className="icon-wrap">
+                            <BiUser className="icon"/>
+                        </div>
 
+                        <div className="icon-wrap">
+                            <BsThreeDotsVertical className="icon"/>
+                        </div>
                     </div>
                 </div>
 
@@ -90,12 +121,13 @@ justify-content: center;
 
 `
 
-const Container = styled.div`
+const Container = styled.div<ContainerStyleProps>`
 width: 100%;
 height: 100%;
-display: grid;
+display: flex;
 align-items: center;
-grid-template-columns:  5% 55% 20% 20%;;
+gap: 10px;
+/* grid-template-columns:  5% 75% 20%;; */
 
     .wrap-select{
         width: 35px;
@@ -105,17 +137,18 @@ grid-template-columns:  5% 55% 20% 20%;;
         justify-content: center;
         align-items: center;
         border-radius: 10px;
-        transition: all .2s ease-in-out;
-        &:hover{
-            background-color: var(--semi-primary_admin);
-            
-        }
+        transition: all .1s ease-in-out;
+        ${({sidebarOpen}) =>  sidebarOpen ? `background-color: var(--semi-primary_admin);` : `` }
+
+        
         .select {
             font-size: 25px;
             pointer-events: auto;
         }
     }
-    .wrap-search-bar{
+    .header-body{ 
+        flex-grow: 1;
+        .wrap-search-bar{
         position: relative;
         -webkit-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;
@@ -183,21 +216,56 @@ grid-template-columns:  5% 55% 20% 20%;;
                 color: var(--white-color);
             }
     }}
-
-    .contend-end{
+    }
+    .header-end{
         display: flex;
         align-items: center;
-        width: 100%;
+        width: 200px;
         height: 100%;
         justify-content: space-evenly;
         justify-self: flex-end;
 
-        .icon{
+        .icon-box{
+            width: 100%;
             display: flex;
             justify-content: space-evenly;
-            svg{
-                font-size: 25px;
+
+            .icon-wrap{
+                position: relative;
+                transition: all .2s ease-in-out;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                will-change: background-color;
+                
+
+                &.notify {
+                   
+                   &:after{
+                        content: '';
+                        background-color: var(--notify-color);
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        position: absolute;
+                        right: 5px;
+                        top: 4px;
+                        z-index: 99;
+                   }
+               }
+
+               &.notification{
+                ${({notifyModal}) => notifyModal ? 'background-color: var(--semi-primary_admin);': ''}
+               }
+
+                .icon{
+                    font-size: 25px;
+                }
             }
+            
 
         }
 

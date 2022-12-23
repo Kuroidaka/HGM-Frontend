@@ -60,12 +60,14 @@ const AdminOption:FC<AdminOptionProps> = (props) => {
 export default AdminOption;
 
 const Option = styled.div`
-width: 225px;
+max-width: 225px;
+width: 100%;
 background-color: var(--third_admin);
 position: relative;
 overflow: hidden;
 padding: 7px 16px;
 border-radius: 10px;
+
 
     span{
     width: 100%;

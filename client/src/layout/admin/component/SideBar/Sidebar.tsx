@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
 import avatar from '~/assert/img/7969-ew-thinking.png'
 import { AiOutlineHome } from 'react-icons/ai'
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import NavItem from "./NavItem";
 import { img } from "~/assert/img";
 import AdminOption from "./AdminOption";
@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 
 interface SidebarProps {
     sideBarRef: React.RefObject<HTMLDivElement>,
+    sidebarOpen: Boolean
+}
+interface SidebarStyleProps {
     sidebarOpen: Boolean
 }
 
@@ -35,7 +38,7 @@ const Sidebar:FC<SidebarProps> = (props) => {
 
 
     return ( 
-        <SidebarStyle ref={sideBarRef}>
+        <SidebarStyle ref={sideBarRef} sidebarOpen={sidebarOpen}>
             <header >
                 <img src={img.logo} alt="logo"  onClick={handleClickLogo}/>
             </header>
@@ -89,7 +92,7 @@ const Sidebar:FC<SidebarProps> = (props) => {
  
 export default Sidebar;
 
-const SidebarStyle = styled.div`
+const SidebarStyle = styled.div<SidebarStyleProps>`
     max-width: 225px;
     width: 100%;
     height: calc(100% - var(--header-height));
@@ -104,7 +107,7 @@ const SidebarStyle = styled.div`
         background-color: var(--primary_admin);
         height: var(--header-height);
         img{
-            width: 43px;
+            width: ${({ sidebarOpen }) => sidebarOpen ? '68px' : '50px'};
             border-radius: 42px;
             cursor: pointer;
 
