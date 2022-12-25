@@ -45,6 +45,7 @@ const Container = styled.div`
     padding: 8px;
     border-radius: 10px;
     color: var(--side-bar-normal-text);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 
     .title {
         font-weight: 900;

@@ -5,9 +5,9 @@ import Login from '~/page/Admin/Login/Login'
 import Register from '~/page/Admin/Register/Register'
 import HeaderSideBar from '~/layout/admin/HeaderSideBar'
 import Profile from '~/page/Admin/Profile/Profile'
-import AddUser from '~/page/Admin/AddUser/AddUser'
-import ManageTeam from './ManageTeam/ManageTeam'
-import ContactInfo from './ContactInfo/ContactInfo'
+import AddUser from '~/page/Admin/ManageUser/ManageUser'
+import ManageTeam from '~/page/Admin/ManageTeam/ManageTeam'
+import ContactInfo from '~/page/Admin/ContactInfo/ContactInfo'
 
 const AdminRoutes = () => {
     return ( 

@@ -23,8 +23,8 @@ export const NavList = [
     },
     {
         id: 3,
-        title: 'Add user',
-        Icon: AiOutlineUserAdd,
+        title: 'Manage User',
+        Icon: AiOutlineTeam,
         route: config.adminRoutePath.addUser
     },
 

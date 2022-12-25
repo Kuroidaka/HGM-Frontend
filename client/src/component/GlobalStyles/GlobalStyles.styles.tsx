@@ -5,6 +5,8 @@ export const GlobalStyles = createGlobalStyle`
         --primary: #64BBF3;
         --secondary: #469df9;
         --third: #343A40;
+        --text-color-1: #75868F;
+        --border: rgba(0,0,0,.07);
         --primary_admin: #EEEEEE;
         --semi-primary_admin: #d4d4d4;
         --secondary_admin: #5D6C7E;
@@ -18,6 +20,10 @@ export const GlobalStyles = createGlobalStyle`
         --title-color: #f0f0f0;
         --text-color: #333;
         --side-bar-normal-text:#cccdd0;
+        --online: #30A24C;
+        --offline: #747F8D;
+        --role-admin: #3EA589;
+        --light-bg: #f2f2f2;
         --header-height: 45px;
         --overlay-height: 300px;
     }
