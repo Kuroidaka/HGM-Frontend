@@ -6,10 +6,10 @@ import { AiOutlineGooglePlus } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
-import config from "../../config";
-interface RegisterProps {
+import config from '~/config'
+import { img } from "~/assert/img";
 
-}
+
 
 const toastOption = {
     position: toast.POSITION.TOP_RIGHT,
@@ -22,40 +22,46 @@ const toastOption = {
 }
 
 
-const Register:FC<RegisterProps> = () => {
+interface LoginProps {
 
-    const handleRegister = (e:ChangeEvent<HTMLFormElement>) => {
+}
+
+const Login:FC<LoginProps> = () => {
+
+    const handleLogin = (e:ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        toast.error('Error', toastOption)
+        console.log(123);
+        
+        toast.error('Wrong Password or username', toastOption)
     }
 
     return ( 
     <Container>
        <div className="wrapper">
-            <form className="register-form" onSubmit={handleRegister}>
+            <form className="login-form" onSubmit={handleLogin}>
                 <div className="header">
-                    <h1>CREATE ACCOUNT</h1>
+                    <img src={img.logo} alt="" />
                 </div>
 
-                <div className="form-body">
-
+                <div className="form-body" >
                     <div className="input-bar">
-                        <input type="text" placeholder="Your name?"/>
-                    </div>
-
-                    <div className="input-bar">
-                        <input type="email" placeholder="Email or username"/>
+                        <input type="text" placeholder="Email or username"/>
                     </div>
 
                     <div className="input-bar">
                         <input type="password" placeholder="Password"/>
                     </div>
 
-                    <Button>CREATE ACCOUNT</Button>
+                    <div className="keep">
+                        <input type="checkbox" name="" id="keep-me" />
+                        <label htmlFor="keep-me">Keep me logged in</label>
+                    </div>
+
+                    <Button>LOG IN</Button>
 
                     <div className="ask">
-                        <p>Already have account ? </p>
-                        <Link to={config.routePath.login}>LOGIN</Link>
+                        <p>Do not have account already ? </p>
+                        <Link to={config.adminRoutePath.register}>REGISTER</Link>
                     </div>
                 </div>
                 <div className="link">
@@ -72,13 +78,13 @@ const Register:FC<RegisterProps> = () => {
             </form>
        </div>
 
+       <ToastContainer/>
 
-       <ToastContainer />
     </Container>
     );
 }
  
-export default Register;
+export default Login;
 
 const Container = styled.div`
 width: 100vw;
@@ -91,20 +97,23 @@ align-items: center;
     .wrapper{
         max-width: calc(100vw - 20px);
         width: 450px;
-        
-        .register-form {
+        height: auto;
+
+        .login-form {
             
             box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px ;
-            max-width: 450px;
             width: 100%;
-
             padding: 30px;
 
             .header{
-                height: 50px;
+                height: 90px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                img{
+                    height: 100%;
+                }
             }
 
             .form-body{
@@ -155,7 +164,7 @@ align-items: center;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin-top: 25px;
+                margin-top: 40px;
                 gap: 14px;
 
                 .icon{

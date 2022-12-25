@@ -1,12 +1,13 @@
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Tippy from '@tippyjs/react/headless';
-import avatar from '~/assert/img/7969-ew-thinking.png'
-import { AiOutlineHome } from 'react-icons/ai'
 import { FC, useRef, useState } from "react";
-import NavItem from "./NavItem";
+
 import { img } from "~/assert/img";
+import NavItem from "./NavItem";
 import AdminOption from "./AdminOption";
-import { useNavigate } from "react-router-dom";
+import { NavList } from "./NavList";
+import config from "~/config";
 
 interface SidebarProps {
     sideBarRef: React.RefObject<HTMLDivElement>,
@@ -18,22 +19,21 @@ interface SidebarStyleProps {
 
 const Sidebar:FC<SidebarProps> = (props) => {
     const { sideBarRef, sidebarOpen } = props
-    const navigate = useNavigate()
-    // const [info, setInfo] = useState<Boolean>(false)
-    
-    const [activeItem, setActiveBar] = useState<number>()
+    const location = useLocation()
     const adminNavRef = useRef<HTMLDivElement>(null)
+    const navigate = useNavigate()
+    // console.log(location.pathname);
+    // console.log(activeItem);
+    
+    // const { title } = useParams
+
 
     const handleClickAdminInfo = () => {
         adminNavRef.current?.classList.toggle('show')
-        // adminNavRef.current?.setAttribute('style', 'height: 120px')
     }
 
-    const handleClickNavItem = (idx: number) => {
-        setActiveBar(idx)
-    }
     const handleClickLogo = () => {
-        navigate('/')
+        navigate(config.adminRoutePath.home )
     }
 
 
@@ -55,7 +55,7 @@ const Sidebar:FC<SidebarProps> = (props) => {
                 )}>
                     
                     <div className="avatar-wrap" style={{width: sidebarOpen? '62px': '43px'}}>
-                        <img src={avatar} alt="" />
+                        <img src={img.avatar} alt="" />
                     </div>
                 </Tippy>
 
@@ -65,17 +65,20 @@ const Sidebar:FC<SidebarProps> = (props) => {
 
             <Content >
                 <div className="navigation">
+
                    {sidebarOpen && <h6>Navigation</h6>}
 
                     {
-                        [1,2,3].map((item, idx) => {
+                        NavList.map(({title, id, Icon, route}, idx) => {
+
                             return (
-                                <div key={idx} onClick={() => handleClickNavItem(idx)}>
+                                <div key={id}>
                                     <NavItem  
-                                        title='Dashboard' 
-                                        sidebarOpen={sidebarOpen}
-                                        active={activeItem === idx? (true) : (false)}>
-                                        <AiOutlineHome />
+                                        route={route}
+                                        title={title} 
+                                        sidebaropen={sidebarOpen.toString()}
+                                        active={route === location.pathname ? "true" : "false"}>
+                                        <Icon />
                                     </NavItem>
                                 </div>
                             )
@@ -159,6 +162,7 @@ const Content = styled.div `
             margin: 0 0 8px;
             color : var(--title-color) ;
         }
+
     }
 
     div {

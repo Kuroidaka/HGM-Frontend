@@ -1,7 +1,8 @@
-import { routePath } from "./routes";
+import { routePath, adminRoutePath } from "./routes";
 
 const config = {
-    routePath
+    routePath,
+    adminRoutePath
 }
 
 export default config
