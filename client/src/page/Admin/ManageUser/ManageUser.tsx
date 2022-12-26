@@ -3,6 +3,8 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import styled from 'styled-components'
 import { img } from '~/assert/img';
 import { icon } from '~/assert/icon';
+import AddNewUser from '~/component/Modal/AddNewUser/AddNewUser';
+import Button from '~/component/Button/Button';
 
 const listUser = [ 
     {
@@ -147,9 +149,16 @@ const listUser = [
 
 const ManageUser = () => {
     const [userList, setUserList] = useState(listUser)
+    const [isAddNew, setIsAddNew] = useState<boolean>(false)
+
+    const handleOpenAddNew = () => {
+        setIsAddNew(true)
+    }
 
     return ( 
         <Container>
+            { isAddNew && <AddNewUser setIsAddNew={setIsAddNew} />}
+
             <header>
                 <div className="title">
                     Users
@@ -165,10 +174,11 @@ const ManageUser = () => {
                 <div className="content">
 
                     <div className="add">
-                        <button>
+
+                        <Button title='Add New' handleOnClick={handleOpenAddNew}>
                             <AiOutlineUserAdd/>
-                            Add New
-                        </button>
+                        </Button>
+
                     </div>
 
                     <div className="search">

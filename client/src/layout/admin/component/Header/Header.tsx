@@ -149,6 +149,7 @@ gap: 10px;
     .header-body{ 
         flex-grow: 1;
         .wrap-search-bar{
+        font-size:1.4rem;
         position: relative;
         -webkit-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;

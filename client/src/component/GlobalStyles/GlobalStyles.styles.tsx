@@ -20,6 +20,9 @@ export const GlobalStyles = createGlobalStyle`
         --title-color: #f0f0f0;
         --text-color: #333;
         --side-bar-normal-text:#cccdd0;
+        --error: #ff5353;
+        --cancel-button: #aaaaaa;
+
         --online: #30A24C;
         --offline: #747F8D;
         --role-admin: #3EA589;
@@ -56,6 +59,10 @@ export const GlobalStyles = createGlobalStyle`
         &:hover {
             color: var(--hover-icon);
         }
+    }
+
+    label {
+        font-size: 1.2rem;
     }
 
 `
