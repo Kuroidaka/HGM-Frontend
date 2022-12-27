@@ -5,7 +5,7 @@ import { icon } from "~/assert/icon";
 interface ButtonPropTypes {
     icon?: string
     title: string
-    children: ReactNode
+    children?: ReactNode
     cancel?: Boolean
     handleOnClick?: () => void
 }

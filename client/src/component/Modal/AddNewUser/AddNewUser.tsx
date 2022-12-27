@@ -1,5 +1,7 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useRef, useState } from 'react';
 import styled from 'styled-components'
+import { img } from '~/assert/img';
+import Avatar from '~/component/Avatar/Avatar';
 import Button from '~/component/Button/Button';
 import Input from '~/component/Input/Input';
 
@@ -7,42 +9,91 @@ interface addNewUserPropTypes {
     setIsAddNew:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
+
+
 const AddNewUser:FC<addNewUserPropTypes> = (props) => {
     const { setIsAddNew } = props
+    const inputBtnRef = useRef<HTMLInputElement>(null)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordCF, setPasswordCF] = useState('')
+    const [imgUploaded, setImgUploaded] = useState<File>()
+    const [imgPreview, setImgPreview] = useState<string>(img.defaultAvatar)
+    const [uNError, setUserNameError] = useState<string>('')
+    const [mailError, setMailError] = useState<string>('')
     const [pwError, setPwError] = useState<string>('')
+    const [pwCFError, setPwCFError] = useState<string>('')
 
-    const handleSubmitAdd = (e:ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmitAdd = () => {
 
-        if(password !== passwordCF){
-            return setPwError('Confirm password is not correct')
+        if(username === '' || email === '' || password === '' || password !== passwordCF) {
+            if(username === ''){
+                setUserNameError('Username is not empty')
+            }
+                else { setUserNameError('') }
+    
+            if(email === ''){
+                setMailError('Email is not empty')
+            }
+                else { setMailError('') }
+    
+            if(password === ''){
+                setPwError('Password is not empty')
+            }
+                else { setPwError('') }
+            
+            if(password !== passwordCF){
+                return setPwCFError('Confirm password is not correct')
+            }
+                else {setPwCFError('')}
+            return 
         }
         else{
+            setUserNameError('')
+            setMailError('')
+            setPwCFError('')
             setPwError('')
+            
             const data = {
                 username: username,
                 email: email,
                 password: password,
                 passwordCF: passwordCF,
+                avatar: imgUploaded
             }
-
             console.log(data);
-            
         }
-       
+    }
 
-        
+    const handleClickOutSide = () => {
+        setIsAddNew(false)
+    }
+
+    const handleClickInputAvatarBtn = () => {
+        if(inputBtnRef.current){
+            inputBtnRef.current.click()
+        }
+    }
+
+    const handlePostImg = async (e:ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files){
+            const file = e.target.files[0]
+
+            const filePreview = URL.createObjectURL(file)
+
+                // set state for image preview
+                setImgUploaded(file)
+                // console.log(filePreview);
+                setImgPreview(filePreview)
+        }
     }
 
     return ( 
         <Container>
-            <Layout />
+            <Layout onClick={handleClickOutSide}/>
 
-            <form className="modal" onSubmit={handleSubmitAdd}>  
+            <div className="modal" >  
 
                 <div className="header">
                     <h3>Add New User</h3>
@@ -50,30 +101,45 @@ const AddNewUser:FC<addNewUserPropTypes> = (props) => {
 
                 <div className="content">
 
+                <div className="avatar">
+                    <label htmlFor="input-avatar">
+                        <Avatar src={imgPreview} width='100px'/>
+                    </label>
+
+                    <div className="button-box mt-8">
+                        <Button title='Upload' handleOnClick={handleClickInputAvatarBtn} />
+
+                    </div>
+
+                        <p>Upload New Avatar</p>
+
+                    <input ref={inputBtnRef} id='input-avatar' onInput={handlePostImg} type="file" style={{display: 'none' }} />
+                </div>
+
+                <div className="input-info">
                     <Input id='username' 
+                            error={uNError}
                             setValue={setUsername} value={username} type='text' label='UserName' width={'100%'}/>
                     <Input id='email' 
+                            error={mailError}    
                             setValue={setEmail} value={email} type='email' label='Email' width={'100%'}/>
                     <Input id='password' 
+                            error={pwError}
                             setValue={setPassword} value={password} type='password' label='Password' width={'100%'}/>
                     <Input id='password-confirm' 
-                            error={pwError}
+                            error={pwCFError}
                             setValue={setPasswordCF} value={passwordCF} type='password' label='Password Confirm' width={'100%'}/>
+                </div>
                     
 
                 </div>
 
                 <div className="button-box">
-                    <Button title='Cancel' cancel={true} handleOnClick={() => setIsAddNew(false)}>
-
-                    </Button>
-
-                    <Button title='Add New'>
-
-                    </Button>
+                    <Button title='Cancel' cancel={true} handleOnClick={() => setIsAddNew(false)} />
+                    <Button title='Add New' handleOnClick={handleSubmitAdd} />
                 </div>
 
-            </form>
+            </div>
 
         </Container>
      );
@@ -107,12 +173,31 @@ const Container = styled.div`
             width: 100%;
         }
         .content{
-            /* display: flex;
-            justify-content: center;
-            align-items: center; */
-            div + div {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* div + div {
                 margin-top: 20px;
+            } */
+
+            .avatar{
+                align-self: flex-start;
+                
+                div {
+                    display: flex;
+                    margin: auto;
+                }
+
+                p{
+                    margin: 10px;
+                    font-weight: 700;
+                }
+
+                button{
+                    margin: auto;
+                }
             }
+
         }
         .button-box{
             margin-top: 20px;
@@ -125,6 +210,7 @@ const Container = styled.div`
 
 `
 const Layout = styled.div`
+    cursor: pointer;
     height: 100%;
     width: 100%;
     display: flex;

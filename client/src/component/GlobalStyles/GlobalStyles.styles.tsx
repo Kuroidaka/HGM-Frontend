@@ -22,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
         --side-bar-normal-text:#cccdd0;
         --error: #ff5353;
         --cancel-button: #aaaaaa;
-
+        --avatar-wrap: #e7e7e7;
         --online: #30A24C;
         --offline: #747F8D;
         --role-admin: #3EA589;
@@ -65,4 +65,11 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 1.2rem;
     }
 
+    .mt-8{
+        margin-top: 8px!important;
+    }
+
+    .mb-8{
+        margin-bottom: 8px!important;
+    }
 `
