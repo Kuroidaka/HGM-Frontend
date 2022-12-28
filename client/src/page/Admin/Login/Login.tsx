@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaFacebookF } from 'react-icons/fa'
@@ -34,6 +34,10 @@ const Login:FC<LoginProps> = () => {
         
         toast.error('Wrong Password or username', toastOption)
     }
+
+    useEffect(() => {
+
+    }, [])
 
     return ( 
     <Container>

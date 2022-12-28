@@ -21,6 +21,8 @@ export const GlobalStyles = createGlobalStyle`
         --text-color: #333;
         --side-bar-normal-text:#cccdd0;
         --error: #ff5353;
+        --success: #8BC34B;
+        --success-text: #8b978f;
         --cancel-button: #aaaaaa;
         --avatar-wrap: #e7e7e7;
         --online: #30A24C;
