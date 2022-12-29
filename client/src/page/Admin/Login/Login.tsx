@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaFacebookF } from 'react-icons/fa'
@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import config from '~/config'
 import { img } from "~/assert/img";
+import { adminApi } from "~/api/admin/authApi";
 
 
 
@@ -28,11 +29,23 @@ interface LoginProps {
 
 const Login:FC<LoginProps> = () => {
 
+    const [username, setUsername]= useState<string>('')
+    const [password, setPassword]= useState<string>('')
+
     const handleLogin = (e:ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(123);
-        
-        toast.error('Wrong Password or username', toastOption)
+        const data = {
+            User_Account_Name: username,
+            User_Account_Password: password
+        }
+        adminApi.login(data)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(() => {
+            toast.error('Wrong Password or username', toastOption)
+
+        }) 
     }
 
     useEffect(() => {
@@ -49,11 +62,13 @@ const Login:FC<LoginProps> = () => {
 
                 <div className="form-body" >
                     <div className="input-bar">
-                        <input type="text" placeholder="Email or username"/>
+                        <input type="text" placeholder="Email or username"
+                            value={username} onInput={(e:ChangeEvent<HTMLInputElement>) => {setUsername(e.target.value)}}/>
                     </div>
 
                     <div className="input-bar">
-                        <input type="password" placeholder="Password"/>
+                        <input type="password" placeholder="Password"
+                        value={password} onInput={(e:ChangeEvent<HTMLInputElement>) => {setPassword(e.target.value)}}/>
                     </div>
 
                     <div className="keep">

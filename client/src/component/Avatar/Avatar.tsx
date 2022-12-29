@@ -1,10 +1,11 @@
 
-import { FC } from 'react';
+import { FC, forwardRef, RefAttributes } from 'react';
 import styled from 'styled-components'
 
 interface AvatarPropTypes {
     src : string
     width: string
+    ref ?:React.LegacyRef<HTMLImageElement> | undefined
 }
 
 interface AvatarStylePropTypes {
@@ -13,22 +14,22 @@ interface AvatarStylePropTypes {
 
 
 
-const Avatar:FC<AvatarPropTypes> = (props) => {
+const Avatar:FC<AvatarPropTypes & RefAttributes<HTMLImageElement>> = forwardRef((props , ref ) => {
     const {src, width} = props
 
     return ( 
-        <Wrap width={width}>
-            <img src={src} alt="" />
+        <Wrap width={width} >
+            <img src={src} ref={ref} alt="" />
         </Wrap>
      );
-}
+})
  
 export default Avatar;
 
 const Wrap = styled.div<AvatarStylePropTypes>`
 
 cursor: pointer;
-margin: 32px 0 10px;
+flex-shrink: 0;
 border-radius: 50%;
 ${ ({width}) => width && `width: ${width}; height: ${width};`}
 overflow: hidden;
@@ -40,5 +41,6 @@ align-items: center;
 
 img{
     width: 100%;
+    height: 100%;
 }
 `

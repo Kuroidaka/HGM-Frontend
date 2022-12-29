@@ -4,13 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF } from 'react-icons/fa'
 import { AiOutlineGooglePlus } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify';
-import { adminApi } from '~/api/adminApi'
+import { adminApi } from '~/api/admin/authApi'
 
 import "react-toastify/dist/ReactToastify.css";
 
 
 import config from "~/config";
-import Notify from "~/component/Modal/Notify/Notify";
+import Notify from "~/page/Admin/Register/Component/Notify";
+import InputInfo from "./Component/infoUser";
 interface RegisterProps {
 
 }
@@ -28,10 +29,11 @@ const toastOption = {
 
 const Register:FC<RegisterProps> = () => {
 
-    const [name, setName] = useState<string>('')
+    const [username, setUsername] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [passwordCF, setPasswordCF] = useState<string>('')
+    const [inputModal, setInputModal] = useState<Boolean>(false)
     const [successModal, setSuccessModal] = useState<Boolean>(false)
     const navigate = useNavigate()
 
@@ -47,25 +49,25 @@ const Register:FC<RegisterProps> = () => {
         }
         else {
             const data = {
-                User_Account_Name: name,
+                User_Account_Name: username,
                 User_Account_Password: password,
                 User_Account_Permission: 'admin'
             }
 
             adminApi.register(data).then(res => {
                 if(res) {
-                    setSuccessModal(true)
-                    
+                    setInputModal(true)  
                 }
             })
-
         }
-
     }
+
 
     return ( 
     <Container>
-       {successModal && <Notify handleClick={handleClickContinue}/>}
+        {successModal && <Notify handleClick={handleClickContinue}/>}
+        {inputModal && <InputInfo setInputModal={setInputModal} setSuccessModal={setSuccessModal}/>}
+
 
        <div className="wrapper">
             <form className="register-form" onSubmit={handleRegister}>
@@ -76,7 +78,7 @@ const Register:FC<RegisterProps> = () => {
                 <div className="form-body">
 
                     <div className="input-bar">
-                        <input type="text" onInput={(e:ChangeEvent<HTMLInputElement>) => setName(e.target.value)} value={name} placeholder="Your name?"/>
+                        <input type="text" onInput={(e:ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} value={username} placeholder="Username?"/>
                     </div>
 
                     <div className="input-bar">

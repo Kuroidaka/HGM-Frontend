@@ -3,161 +3,45 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import styled from 'styled-components'
 import { img } from '~/assert/img';
 import { icon } from '~/assert/icon';
-import AddNewUser from '~/component/Modal/AddNewUser/AddNewUser';
-import Button from '~/component/Button/Button';
+import AddNewUser from '~/page/Admin/ManageUser/Component/AddNewUser';
+import EditUser from '~/page/Admin/ManageUser/Component/EditUser';
 
-const listUser = [ 
-    {
-        id: 1,
-        username: 'idaka123',
-        name: 'Canh Pham',
-        role: 'admin',
-        phone: '0949764207',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },
-    {
-        id: 2,
-        username: 'Tram',
-        name: 'Tram Huynh',
-        role: 'manager',
-        phone: '0385859098',
-        status: false,
-        createDate: Date.now(),
-        avatar: img.logo
-    },
-    {
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },{
-        id: 3,
-        username: 'tinhmuaha123',
-        name: 'Huynh Minh',
-        role: 'admin',
-        phone: '123456789',
-        status: true,
-        createDate: Date.now(),
-        avatar: img.avatar
-    },
-]
+import Button from '~/component/Button/Button';
+import Avatar from '~/component/Avatar/Avatar';
+import Tippy from '@tippyjs/react/headless';
+
+export interface UserListType {
+    id?: number;
+    username?: string;
+    email?: string;
+    name?: string;
+    role?: string;
+    phone?: string;
+    status?: boolean;
+    createDate?: number;
+    avatar?: any;
+}
 
 const ManageUser = () => {
-    const [userList, setUserList] = useState(listUser)
+    const [userList, setUserList] = useState<UserListType[]>([])
     const [isAddNew, setIsAddNew] = useState<boolean>(false)
+    const [isEditNew, setIsEditNew] = useState<boolean>(false)
+
+    const [isOpenOption, setIsOpenOption] = useState<number>(-1)
 
     const handleOpenAddNew = () => {
         setIsAddNew(true)
     }
 
+    const handleClickEditOption = () => {
+        setIsEditNew(true)
+        setIsOpenOption(-1)
+    }
+
     return ( 
         <Container>
-            { isAddNew && <AddNewUser setIsAddNew={setIsAddNew} />}
+            { isAddNew && <AddNewUser setIsAddNew={setIsAddNew} userList={userList} setUserList={setUserList} />}
+            { isEditNew && <EditUser setIsEditNew={setIsEditNew} userList={userList} setUserList={setUserList} />}
 
             <header>
                 <div className="title">
@@ -196,6 +80,7 @@ const ManageUser = () => {
                                 <th id='status'>Status</th>
                                 <th id='date'>Create Date</th>
                                 <th id='role'>Access Level</th>
+                                <th></th>
                             </tr>
                         </thead>
                         
@@ -206,10 +91,8 @@ const ManageUser = () => {
                                     <td style={{textAlign: 'center'}}>{user.id}</td>
                                     <td>
                                         <div className="user">
-                                            <div className="img-wrap">
-                                                <img src={user.avatar} alt="" />
-                                            </div>
-    
+                                            <Avatar src={user.avatar} width='40px'/>
+
                                             <div className="info">
                                                 <div className="name">{user.name}</div>
                                                 <div className="username">{user.username}</div>
@@ -225,10 +108,38 @@ const ManageUser = () => {
                                     </td>
     
                                     <td>{user.createDate}</td>
-                                    <td><div className='role-btn'>
+                                    <td>
+                                        <div className='role-btn'>
                                         <icon.adminRole />
                                         <span>{user.role}</span>
-                                    </div></td>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='option'>
+                                            <Tippy
+                                            interactive
+                                            visible= {isOpenOption === idx}
+                                            placement='bottom'
+                                            onClickOutside={() => {setIsOpenOption(-1)}}
+                                            render={() => {
+                                                return (
+                                                <PopperOption>
+                                                    <div className="item" onClick={handleClickEditOption}>
+                                                        <span>Edit</span>
+                                                    </div>
+                                                    <div className="item delete">
+                                                        <span>Delete</span>
+                                                    </div>
+                                                </PopperOption>
+                                                )
+                                            }}
+                                            >
+                                                <div className="icon">
+                                                    <icon.option onClick={() => setIsOpenOption(idx)}/>
+                                                </div>
+                                            </Tippy>
+                                        </div>
+                                    </td>
                                 </tr>)
                         })}
                         </tbody>
@@ -362,7 +273,21 @@ const Container = styled.div`
                             td{
                                 color: var(--text-color);
                                 padding: 12px 8px;
+                                
+                                .option{
 
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    .icon{
+                                        cursor: pointer;
+                                        font-size: 15px;
+                                        position: relative;
+                                    }
+                                    
+
+                                }
 
                                 .role-btn{
                                     display: flex;
@@ -412,6 +337,7 @@ const Container = styled.div`
                                 }
 
                                 .info{
+                                    
                                     margin-left: 10px;
                                     text-align: start;
 
@@ -442,4 +368,41 @@ const Container = styled.div`
 
     }
     
+`
+
+const PopperOption = styled.div`
+width: 50px;
+height: auto;
+background-color: white;
+position: absolute;
+border-radius: 10px;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;  
+right: 0;
+overflow: hidden;
+
+.item{
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--semi-primary_admin);
+    }
+
+    &.delete{
+        span{
+            color: var(--notify-color);
+        }
+    }
+    span{
+        font-weight: 900;
+        color: var(--text-color);
+    }
+
+    
+}
+
+
 `

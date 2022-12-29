@@ -4,26 +4,32 @@ import { img } from '~/assert/img';
 import Avatar from '~/component/Avatar/Avatar';
 import Button from '~/component/Button/Button';
 import Input from '~/component/Input/Input';
+import { UserListType } from '../ManageUser';
 
 interface addNewUserPropTypes {
     setIsAddNew:  React.Dispatch<React.SetStateAction<boolean>>
+    setUserList:  React.Dispatch<React.SetStateAction<UserListType[]>>
+    userList: UserListType[]
 }
 
+const permissionList = ['User', 'Manager', 'Admin']
 
 
 const AddNewUser:FC<addNewUserPropTypes> = (props) => {
-    const { setIsAddNew } = props
+    const { setIsAddNew, setUserList, userList } = props
     const inputBtnRef = useRef<HTMLInputElement>(null)
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordCF, setPasswordCF] = useState('')
+    const [permis, setPermis] = useState<string>(permissionList[0])
     const [imgUploaded, setImgUploaded] = useState<File>()
     const [imgPreview, setImgPreview] = useState<string>(img.defaultAvatar)
     const [uNError, setUserNameError] = useState<string>('')
     const [mailError, setMailError] = useState<string>('')
     const [pwError, setPwError] = useState<string>('')
     const [pwCFError, setPwCFError] = useState<string>('')
+    
 
     const handleSubmitAdd = () => {
 
@@ -56,13 +62,22 @@ const AddNewUser:FC<addNewUserPropTypes> = (props) => {
             setPwError('')
             
             const data = {
+                id: 1,    
                 username: username,
                 email: email,
+                role: permis,
+                phone: '',
+                status: true,
                 password: password,
-                passwordCF: passwordCF,
-                avatar: imgUploaded
+                avatar: imgPreview,
+                createDate: Date.now(),
             }
+
             console.log(data);
+            
+
+            setUserList([...userList, data])
+            setIsAddNew(false)
         }
     }
 
@@ -129,6 +144,11 @@ const AddNewUser:FC<addNewUserPropTypes> = (props) => {
                     <Input id='password-confirm' 
                             error={pwCFError}
                             setValue={setPasswordCF} value={passwordCF} type='password' label='Password Confirm' width={'100%'}/>
+
+                    <Input  id='permission' 
+                            value={permis}
+                            setValue={setPermis} type='select' label='Permission' permissionList={permissionList} />
+                   
                 </div>
                     
 

@@ -8,6 +8,7 @@ import NavItem from "./NavItem";
 import AdminOption from "./AdminOption";
 import { NavList } from "./NavList";
 import config from "~/config";
+import Avatar from "~/component/Avatar/Avatar";
 
 interface SidebarProps {
     sideBarRef: React.RefObject<HTMLDivElement>,
@@ -20,6 +21,7 @@ interface SidebarStyleProps {
 const Sidebar:FC<SidebarProps> = (props) => {
     const { sideBarRef, sidebarOpen } = props
     const location = useLocation()
+    const avatarRef = useRef< HTMLImageElement>(null)
     const adminNavRef = useRef<HTMLDivElement>(null)
     const navigate = useNavigate()
     // console.log(location.pathname);
@@ -54,9 +56,7 @@ const Sidebar:FC<SidebarProps> = (props) => {
                     !sidebarOpen && <AdminOption handleClickAdminInfo={handleClickAdminInfo} adminNavRef={adminNavRef} />
                 )}>
                     
-                    <div className="avatar-wrap" style={{width: sidebarOpen? '62px': '43px'}}>
-                        <img src={img.avatar} alt="" />
-                    </div>
+                    <Avatar ref={avatarRef} src={img.defaultAvatar} width={sidebarOpen? '62px': '43px'} />
                 </Tippy>
 
                {sidebarOpen && <AdminOption handleClickAdminInfo={handleClickAdminInfo} adminNavRef={adminNavRef} />}
@@ -118,6 +118,7 @@ const SidebarStyle = styled.div<SidebarStyleProps>`
     }
 
     .info {
+        margin: 32px 0 10px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;

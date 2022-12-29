@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled  from "styled-components";
 import { img } from "~/assert/img";
 import Button from "~/component/Button/Button";
-import ModalTemplate from "../ModalTemplate";
+import ModalTemplate from "../../../../component/Modal/ModalTemplate";
 
 interface NotifyPropType {
     handleClick: () => void
@@ -32,6 +32,7 @@ export default Notify;
 
 const Content = styled.div`
     height: 100%;
+    z-index: 999;
     .top{
         display: flex;
         flex-direction: column;
@@ -58,6 +59,7 @@ const Content = styled.div`
         align-items: center;
         height: 50%;
         p {
+            color: var(--title-color);
             text-align: center;
         }
     }
