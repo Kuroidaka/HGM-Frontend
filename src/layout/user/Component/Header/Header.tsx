@@ -7,54 +7,46 @@ import Popper from "~/component/Popper/Popper";
 import { useState } from "react";
 
 const HeaderCom = () => {
-    
-    const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)    
+
+    const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)
 
     const handleClickAvatar = () => {
         setAvaToggle(!avaToggle)
     }
 
-return ( 
+    return (
         <Header>
-            <div className="wrapper">
-                <Navbar>
-                    <li>
-                    PRODUCT    
-                    <icon.arrowDown2 />
-                    </li>
-                    <li>
-                    SHOP    
-                    <icon.arrowDown2 />
-                    </li>
-                    <li>
-                    SHOP    
-                    <icon.arrowDown2 />
-                    </li>
-                    <li>
-                    SHOP    
-                    <icon.arrowDown2 />
-                    </li>
-                </Navbar>
 
+
+            <div className="wrapper">
+
+                <div className="search-part">
+                    <Search className="search">
+                        <input type="text" spellCheck={false} placeholder="Search product..." />
+                        {/* <icon.search className="icon"/>    */}
+                        <icon.loading className="icon loading" />
+                    </Search>
+
+                    <div className="icon">
+                        <icon.search className="search-icon" />
+                    </div>
+
+                </div>
                 <Logo>
                     <img src={img.logo} alt="" />
                 </Logo>
 
                 <Action>
-                    <div className="search">
-                        <input type="text" spellCheck={false} placeholder="Search product..."/>
-                        {/* <icon.search className="icon"/>    */}
-                        <icon.loading className="icon loading" />                   
-                    </div>
-                    <icon.cart className="cart"/>
-                    <icon.wishList className="wist-list"/>
+
+                    <icon.cart className="cart" />
+                    <icon.wishList className="wist-list" />
                     <Tippy
                         interactive
                         placement="bottom-end"
                         visible={avaToggle}
                         offset={[0, 10]}
                         onClickOutside={() => setAvaToggle(false)}
-                        render={() => 
+                        render={() =>
                         (<Popper>
                             <UserOption className="list">
                                 <li>
@@ -70,16 +62,32 @@ return (
                                     Logout
                                 </li>
                             </UserOption>
-                        </Popper> )}
+                        </Popper>)}
                     >
-                        <Avatar src={img.defaultAvatar} width='30px' handleClick={handleClickAvatar} /> 
+                        <Avatar src={img.defaultAvatar} width='30px' handleClick={handleClickAvatar} />
                     </Tippy>
                 </Action>
             </div>
+
+            <Navbar>
+                <li>
+                    PRODUCT
+                </li>
+                <li>
+                    SHOP
+                </li>
+                <li>
+                    SHOP
+                </li>
+                <li>
+                    SHOP
+                </li>
+            </Navbar>
+
         </Header>
     );
 }
- 
+
 export default HeaderCom;
 
 
@@ -97,14 +105,61 @@ const Header = styled.div`
 height: var(--header-bar-height);
 background-color: #ffffff;
 width: 100vw;
+height: auto;
 display: flex;
 justify-content: center;
+flex-direction: column;
 
+@media screen and (min-width: 992px) {
     .wrapper {
-        width: 1400px;
+       padding: 0 calc((100vw - 1400px)/2);
+       width: 100%;
+
+       .search-part{        
+            .search{
+                
+            }
+            .icon{
+                .search-icon {
+                    display: none;
+                }
+            }
+       }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .wrapper {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        align-self: center;
+        .search-part {
+            .search{
+                display: none;
+            }
+
+            .icon{
+                display: flex;
+                justify-content: flex-start;
+                .search-icon {
+                }
+            }
+        }
+    }
+}
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        align-self: center;
+        width: 100vw;
+        padding: 0 10px;
+        .search-part{
+            flex: 1 0 0;
+        }
+        
     }
 
 `
@@ -112,8 +167,14 @@ justify-content: center;
 const Navbar = styled.ul`
     list-style-type: none;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 30px;
+    background-color: black;
+    padding: 10px;
+
     li {
+        color: white;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -130,16 +191,11 @@ const Logo = styled.div`
 
 `
 
-const Action = styled.div`
-display: flex;
-gap: 30px;
-align-items: center;
-
-.search {
+const Search = styled.div`
     border-bottom: 1px solid #ccc; 
     display: flex;
     align-items: center;
-    height: 46px;
+    height: 35px;
     width: 260px;
     position: relative;
 
@@ -162,7 +218,17 @@ align-items: center;
         }
     }
 
-}
+
+
+`
+
+const Action = styled.div`
+display: flex;
+gap: 30px;
+align-items: center;
+flex: 1 0 0;
+justify-content: flex-end;
+
 
 .cart {
     font-size: 25px;
