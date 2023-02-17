@@ -45,9 +45,6 @@ function* handleLogin(payload: loginPayload) {
             yield put({type: loginSuccess.type, payload:user.data})
             return res
         }
-        
-    
-
     
 }
 
