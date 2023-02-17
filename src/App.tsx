@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { GlobalStyles } from './component/GlobalStyles/GlobalStyles.styles'
 
 const AdminRoutes = React.lazy(() => import('~/page/Admin'))
-const UserRoutes = React.lazy(() => import('./page/User'))
+const UserRoutes = React.lazy(() => import('./page/Landing'))
 
 const App:FC = () => {
   return (

@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900;1000&family=Roboto&display=swap');
     :root {
 
          
@@ -51,7 +52,9 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: 'Trebuchet MS', sans-serif;
+        font-family: 'Nunito', sans-serif;
+        font-family: 'Roboto', sans-serif;
+
     }
     html {
         font-size: 62.5%;

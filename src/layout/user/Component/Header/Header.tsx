@@ -1,9 +1,18 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { img } from "~/assert/img";
 import { icon } from "~/assert/icon";
+import Avatar from "~/component/Avatar/Avatar";
+import Tippy from "@tippyjs/react/headless";
+import Popper from "~/component/Popper/Popper";
+import { useState } from "react";
 
 const HeaderCom = () => {
+    
+    const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)    
 
+    const handleClickAvatar = () => {
+        setAvaToggle(!avaToggle)
+    }
 
 return ( 
         <Header>
@@ -33,12 +42,38 @@ return (
 
                 <Action>
                     <div className="search">
-                        <input type="text" placeholder="Search product..."/>
+                        <input type="text" spellCheck={false} placeholder="Search product..."/>
                         {/* <icon.search className="icon"/>    */}
-                        <icon.loading className="icon" style={{ transform: 'rotate(360)'}}/>                   
+                        <icon.loading className="icon loading" />                   
                     </div>
                     <icon.cart className="cart"/>
                     <icon.wishList className="wist-list"/>
+                    <Tippy
+                        interactive
+                        placement="bottom-end"
+                        visible={avaToggle}
+                        offset={[0, 10]}
+                        onClickOutside={() => setAvaToggle(false)}
+                        render={() => 
+                        (<Popper>
+                            <UserOption className="list">
+                                <li>
+                                    <icon.profile />
+                                    Profile
+                                </li>
+                                <li>
+                                    <icon.setting />
+                                    Setting
+                                </li>
+                                <li>
+                                    <icon.logout />
+                                    Logout
+                                </li>
+                            </UserOption>
+                        </Popper> )}
+                    >
+                        <Avatar src={img.defaultAvatar} width='30px' handleClick={handleClickAvatar} /> 
+                    </Tippy>
                 </Action>
             </div>
         </Header>
@@ -48,9 +83,19 @@ return (
 export default HeaderCom;
 
 
+const rotateAnimation = keyframes`
+    from{
+       
+        transform: rotate(0deg) 
+    }
+    to {
+        transform: rotate(360deg) 
+    }
+`
+
 const Header = styled.div`
 height: var(--header-bar-height);
-background-color: #b3b3e2;
+background-color: #ffffff;
 width: 100vw;
 display: flex;
 justify-content: center;
@@ -96,10 +141,10 @@ align-items: center;
     align-items: center;
     height: 46px;
     width: 260px;
-    padding: 10px;
     position: relative;
 
     input {
+        padding: 10px;
         height: 100%;
         width: 80%;
         outline: none;
@@ -111,6 +156,10 @@ align-items: center;
         position: absolute;
         right: 10px;
         font-size: 21px;
+
+        &.loading{
+            animation: ${rotateAnimation} 2s linear infinite;
+        }
     }
 
 }
@@ -122,5 +171,28 @@ align-items: center;
 .wist-list {
     font-size: 21px;
 }
+
+`
+
+const UserOption = styled.ul`
+    list-style-type: none;
+
+    li{
+        display: flex;
+        align-items: center;
+        padding: 7px 10px;
+        gap: 10px;
+        font-weight: bold;
+        transition: all 2ms linear;
+
+        svg{
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        &:hover{
+            background-color: var(--hover-icon);
+        }
+    }
 
 `

@@ -7,19 +7,21 @@ interface AvatarPropTypes {
     src : string 
     width: string
     ref ?:React.LegacyRef<HTMLImageElement> | undefined
+    handleClick?: () => void
 }
 
 interface AvatarStylePropTypes {
     width: string
+    onClick?: () => void
 }
 
 
 
 const Avatar:FC<AvatarPropTypes & RefAttributes<HTMLImageElement>> = forwardRef((props , ref ) => {
-    const {src, width} = props
+    const {src, width, handleClick} = props
 
     return ( 
-        <Wrap width={width} >
+        <Wrap width={width} onClick={handleClick}>
             <img src={src} ref={ref} alt="" />
         </Wrap>
      );
@@ -42,6 +44,5 @@ align-items: center;
 
 img{
     width: 100%;
-    height: 100%;
 }
 `

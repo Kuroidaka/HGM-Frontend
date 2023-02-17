@@ -12,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 import createSagaMiddleware from 'redux-saga';
-import authReducer from '../page/Admin/Auth/auth.slice'
+import authReducer from './auth.slice'
 import rootSaga from './rootSaga';
 
 const persistConfig = {

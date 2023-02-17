@@ -9,7 +9,7 @@ import AddUser from '~/page/Admin/ManageUser/ManageUser'
 import ManageTeam from '~/page/Admin/Employee/Employee_Add'
 import ContactInfo from '~/page/Admin/ContactInfo/ContactInfo'
 import { useAppSelector } from '~/hook'
-import { selectLoggedIn, selectCurrentUser } from './Auth/auth.slice'
+import { selectLoggedIn, selectCurrentUser } from '../../redux/auth.slice'
 import { Fragment, useEffect } from 'react'
 
 const AdminRoutes = () => {

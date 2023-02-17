@@ -1,6 +1,6 @@
 
 import { all, call, spawn } from 'redux-saga/effects';
-import authSaga from '~/page/Admin/Auth/auth.saga'
+import authSaga from '~/redux/auth.saga'
 
 
 function* rootSaga() {

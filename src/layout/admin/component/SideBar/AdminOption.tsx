@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import config from "~/config";
 import { useAppDispatch, useAppSelector } from "~/hook";
-import { logOut, selectCurrentUser } from "~/page/Admin/Auth/auth.slice";
+import { logOut, selectCurrentUser } from "~/redux/auth.slice";
 
 interface AdminOptionProps {
     handleClickAdminInfo: () => void

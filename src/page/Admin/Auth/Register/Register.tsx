@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { icon } from "~/assert/icon";
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -11,6 +11,9 @@ import InputInfo from "./Component/infoUser";
 import { adminApi } from '~/api/admin/authApi'
 import { AxiosResponse } from "axios";
 import { User } from "~/model/User.model";
+import { useDispatch } from "react-redux";
+import { login, selectCurrentUser, selectLoggedIn } from "~/redux/auth.slice";
+import { useAppSelector } from "~/hook";
 interface RegisterProps {
 
 }
@@ -37,6 +40,11 @@ const Register:FC<RegisterProps> = () => {
     const [passwordCF, setPasswordCF] = useState<string>('')
     const [inputModal, setInputModal] = useState<Boolean>(false)
     const [load, setLoad] = useState<Boolean>(false)
+    const loggedIn = useAppSelector(selectLoggedIn)
+    const currentUser = useAppSelector(selectCurrentUser)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const notify = useRef<any>(null)
     // const dispatch = useDispatch()
     // const navigate = useNavigate()
@@ -55,12 +63,12 @@ const Register:FC<RegisterProps> = () => {
     const handleRegister = (e:ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
         setLoad(true)
+        const cachingPassword = password
         if(password !== passwordCF) {
             setLoad(false)
             return toast.error('Error', toastOption)
         }
         else {
-
             const data = {  
                 User_Account_Name: username,
                 User_Account_Password: password,
@@ -73,7 +81,14 @@ const Register:FC<RegisterProps> = () => {
                 console.log(res)
                 setLoad(false)
                 toastSuccess()
-                setInputModal(true) 
+                console.log(cachingPassword);
+                // setInputModal(true) 
+            })
+            .then(() => {
+                dispatch(login({
+                    User_Account_Name: username,
+                    User_Account_Password: cachingPassword
+                }))
             })
         }
     }
@@ -82,6 +97,15 @@ const Register:FC<RegisterProps> = () => {
         load && toastLoading()
     }, [load])
 
+    useEffect(() => {
+        if(loggedIn) {
+            setTimeout(() => {
+               navigate(config.adminRoutePath.home) 
+            }, 1000)
+            toastSuccess()  
+        }
+
+    },[loggedIn, currentUser])
 
     return ( 
     <Container>
@@ -97,19 +121,19 @@ const Register:FC<RegisterProps> = () => {
                 <div className="form-body">
 
                     <div className="input-bar">
-                        <input type="text" onInput={(e:ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} value={username} placeholder="Username?"/>
+                        <input type="text" autoComplete="off" onInput={(e:ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} value={username} placeholder="Username?"/>
                     </div>
 
                     <div className="input-bar">
-                        <input type="email" onInput={(e:ChangeEvent<HTMLInputElement>) => setEmail(e.target.value) } value={email} placeholder="Email or username"/>
+                        <input type="email" autoComplete="off" onInput={(e:ChangeEvent<HTMLInputElement>) => setEmail(e.target.value) } value={email} placeholder="Email or username"/>
                     </div>
 
                     <div className="input-bar">
-                        <input type="password" onInput={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value) } value={password} placeholder="Password"/>
+                        <input type="password" autoComplete="off" onInput={(e:ChangeEvent<HTMLInputElement>) => setPassword(e.target.value) } value={password} placeholder="Password"/>
                     </div>
 
                     <div className="input-bar">
-                        <input type="password" onInput={(e:ChangeEvent<HTMLInputElement>) => setPasswordCF(e.target.value)} value={passwordCF} placeholder="Password Confirm"/>
+                        <input type="password" autoComplete="off" onInput={(e:ChangeEvent<HTMLInputElement>) => setPasswordCF(e.target.value)} value={passwordCF} placeholder="Password Confirm"/>
                     </div>
 
                     <Button>CREATE ACCOUNT</Button>
