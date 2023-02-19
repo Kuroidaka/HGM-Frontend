@@ -8,8 +8,10 @@ import { VscSearch } from 'react-icons/vsc'
 import { BsCart2 } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout } from 'react-icons/ai'
+import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
+import { RiMenu5Line } from 'react-icons/ri'
+
 
 
 
@@ -30,6 +32,9 @@ export const icon = {
     loading: AiOutlineLoading3Quarters,
     profile: BiUser,
     setting: AiOutlineSetting,
-    logout: AiOutlineLogout
+    logout: AiOutlineLogout,
+    menu: RiMenu5Line,
+    plus: AiOutlinePlus,
+    minus: AiOutlineMinus
 }
 

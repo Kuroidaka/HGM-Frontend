@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { Select } from 'antd';
+import styled from 'styled-components';
 
 interface SelectInputPropType {
     width: string | unknown
     setValue: React.Dispatch<React.SetStateAction<string>> 
-    value?:  {
+    valueList?:  {
         label: string;
         value: string;
     }[]
@@ -12,10 +13,14 @@ interface SelectInputPropType {
     id: string
 }
 
+interface LabelType {
+  htmlFor: string
+  className: string
+}
 
 
 const SelectInput = (props:SelectInputPropType) => {
-    const { width, value, setValue, label, id } = props
+    const { width, valueList, setValue, label, id } = props
 
 
     const handleChange = (value: string) => {
@@ -24,16 +29,16 @@ const SelectInput = (props:SelectInputPropType) => {
 
     return (
     <Fragment>
-      <label htmlFor={id} className='label'>{label}</label>
+      <Label htmlFor={id} className='label'>{label}</Label>
       <Select
         id={id}
-        defaultValue={value && value[0].value}
+        defaultValue={valueList && valueList[0].value}
         style={{ width: `${width}`}}
         onChange={handleChange}
         options={[
           {
             label: `${label}`,
-            options: value,
+            options: valueList,
           }
         ]}
       />
@@ -41,4 +46,10 @@ const SelectInput = (props:SelectInputPropType) => {
     )
 }
 
+
 export default SelectInput;
+
+const Label = styled.span<LabelType>`
+  margin-right: 10px;
+  
+`

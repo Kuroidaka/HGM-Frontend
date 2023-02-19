@@ -48,14 +48,19 @@ export const GlobalStyles = createGlobalStyle`
        
     }
     
-    *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: 'Nunito', sans-serif;
-        font-family: 'Roboto', sans-serif;
-
+    *, *:before, *:after {
+    -webkit-box-sizing: border-box!important;
+    box-sizing: border-box!important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
     }
+
     html {
         font-size: 62.5%;
     }

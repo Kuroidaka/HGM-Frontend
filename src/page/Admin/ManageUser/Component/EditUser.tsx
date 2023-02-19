@@ -116,7 +116,7 @@ const EditUser:FC<EditUserPropTypes> = (props) => {
                                 error={pwCFError}
                                 setValue={setPasswordCF} value={passwordCF} type='password' label='Password Confirm' width={'100%'}/>
                     
-                    <SelectInput label='Permission' id='permission'  width='100px' value={permissionList} setValue={setPermis}/>
+                    <SelectInput label='Permission' id='permission'  width='100px' valueList={permissionList} setValue={setPermis}/>
 
                 </div>
 

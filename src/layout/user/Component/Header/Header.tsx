@@ -19,8 +19,10 @@ const HeaderCom = () => {
 
 
             <div className="wrapper">
-
-                <div className="search-part">
+                <div className="left-part">
+                    <div className="menu">
+                        <icon.menu/>
+                    </div>
                     <Search className="search">
                         <input type="text" spellCheck={false} placeholder="Search product..." />
                         {/* <icon.search className="icon"/>    */}
@@ -38,9 +40,9 @@ const HeaderCom = () => {
 
                 <Action>
 
-                    <icon.cart className="cart" />
-                    <icon.wishList className="wist-list" />
-                    <Tippy
+                    <div className="icon"><icon.cart className="cart" /></div>
+                    <div className="icon"><icon.wishList className="wist-list" /></div>
+                    <div className="icon"> <Tippy
                         interactive
                         placement="bottom-end"
                         visible={avaToggle}
@@ -65,7 +67,10 @@ const HeaderCom = () => {
                         </Popper>)}
                     >
                         <Avatar src={img.defaultAvatar} width='30px' handleClick={handleClickAvatar} />
-                    </Tippy>
+                    </Tippy></div>
+                   
+                    
+                   
                 </Action>
             </div>
 
@@ -112,10 +117,15 @@ flex-direction: column;
 
 @media screen and (min-width: 992px) {
     .wrapper {
-       padding: 0 calc((100vw - 1400px)/2);
-       width: 100%;
+        padding: 0 50px;
+        width: 100%;
+        height: 85px;
 
-       .search-part{        
+        .menu{
+            display: none;
+        }
+
+       .left-part{        
             .search{
                 
             }
@@ -134,7 +144,19 @@ flex-direction: column;
         align-items: center;
         justify-content: space-between;
         align-self: center;
-        .search-part {
+        padding: 20px 30px;
+
+        
+        .left-part {
+
+            .menu{
+            display: block;
+            font-size: 28px;
+                svg {
+                    height: 100%;
+                }
+            }
+
             .search{
                 display: none;
             }
@@ -142,7 +164,9 @@ flex-direction: column;
             .icon{
                 display: flex;
                 justify-content: flex-start;
+                font-size: 22px;
                 .search-icon {
+                    height: 100% ;
                 }
             }
         }
@@ -155,9 +179,10 @@ flex-direction: column;
         justify-content: space-between;
         align-self: center;
         width: 100vw;
-        padding: 0 10px;
-        .search-part{
+        
+        .left-part{
             flex: 1 0 0;
+            display: flex;
         }
         
     }
@@ -229,14 +254,27 @@ align-items: center;
 flex: 1 0 0;
 justify-content: flex-end;
 
+@media screen and (max-width: 991px) { 
 
-.cart {
-    font-size: 25px;
+    .icon {
+        
+        &:nth-child(2), &:nth-child(3), [dir=rtl] & {
+            display: none;
+        }
+    }
 }
 
-.wist-list {
-    font-size: 21px;
-}
+
+    .icon {
+        .cart {
+            font-size: 25px;
+        }
+        .wist-list {
+            font-size: 21px;      
+        }
+    }
+
+
 
 `
 

@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import config from '~/config'
 
-import { Fragment } from 'react'
 import Home from './Home/Home'
 import HeaderOnly from '~/layout/user/HeaderOnly/HeaderOnly'
+import Collection from './Collection/Collection'
 
 const UserRoutes = () => {
 
@@ -12,6 +12,8 @@ const UserRoutes = () => {
         <Routes>
 
             <Route path={config.routePath.home} element={<HeaderOnly><Home /></HeaderOnly>}/>
+            <Route path={config.routePath.collection} element={<HeaderOnly><Collection/></HeaderOnly>}/>
+
             {/* <Route path={config.adminRoutePath.register} element={<Register />}/>
             <Fragment>
                 
