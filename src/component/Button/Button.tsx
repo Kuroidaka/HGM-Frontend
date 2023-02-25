@@ -13,6 +13,7 @@ interface ButtonPropTypes {
     color?: string
     upperCase?: Boolean
     outline?: Boolean
+    className?: string
 }
 
 interface ButtonStylePropTypes {
@@ -27,7 +28,7 @@ interface ButtonStylePropTypes {
 }
 
 const Button:FC<ButtonPropTypes> = (props)  => {
-    const { children, title, cancel, handleOnClick, width, height, radius, color, upperCase, outline } = props
+    const { children, title, cancel, className, handleOnClick, width, height, radius, color, upperCase, outline } = props
 
     if(outline) {
          return (
@@ -39,6 +40,7 @@ const Button:FC<ButtonPropTypes> = (props)  => {
                         icon={children}
                         color={color}
                         upperCase={upperCase}
+                        className={className}
                         >
                 {children}
                 {title}
@@ -55,6 +57,7 @@ const Button:FC<ButtonPropTypes> = (props)  => {
                         icon={children}
                         color={color}
                         upperCase={upperCase}
+                        className={className}
                         >
                 {children}
                 {title}

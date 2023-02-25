@@ -4,6 +4,7 @@ import config from '~/config'
 import Home from './Home/Home'
 import HeaderOnly from '~/layout/user/HeaderOnly/HeaderOnly'
 import Collection from './Collection/Collection'
+import PDP from './Pdp/Pdp'
 
 const UserRoutes = () => {
 
@@ -13,6 +14,7 @@ const UserRoutes = () => {
 
             <Route path={config.routePath.home} element={<HeaderOnly><Home /></HeaderOnly>}/>
             <Route path={config.routePath.collection} element={<HeaderOnly><Collection/></HeaderOnly>}/>
+            <Route path={config.routePath.product} element={<HeaderOnly><PDP/></HeaderOnly>}/>
 
             {/* <Route path={config.adminRoutePath.register} element={<Register />}/>
             <Fragment>

@@ -5,7 +5,8 @@ export const routePath = {
     login: '/login',
     register: '/register',
     profile: '/profile',
-    collection: '/collection'
+    collection: '/collection',
+    product: '/product'
 }
 
 // admin

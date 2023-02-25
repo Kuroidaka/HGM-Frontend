@@ -9,8 +9,9 @@ interface SelectInputPropType {
         label: string;
         value: string;
     }[]
-    label:string
-    id: string
+    label?:string
+    id?: string
+    noLabel?: Boolean
 }
 
 interface LabelType {
@@ -28,8 +29,7 @@ const SelectInput = (props:SelectInputPropType) => {
     };
 
     return (
-    <Fragment>
-      <Label htmlFor={id} className='label'>{label}</Label>
+    <Fragment>     
       <Select
         id={id}
         defaultValue={valueList && valueList[0].value}
