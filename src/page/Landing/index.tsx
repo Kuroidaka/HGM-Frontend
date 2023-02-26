@@ -2,9 +2,9 @@ import { Routes, Route } from 'react-router-dom'
 import config from '~/config'
 
 import Home from './Home/Home'
-import HeaderOnly from '~/layout/user/HeaderOnly/HeaderOnly'
 import Collection from './Collection/Collection'
 import PDP from './Pdp/Pdp'
+import HeaderFooter from '~/layout/user/HeaderFooter/HeaderFooter'
 
 const UserRoutes = () => {
 
@@ -12,9 +12,9 @@ const UserRoutes = () => {
     return ( 
         <Routes>
 
-            <Route path={config.routePath.home} element={<HeaderOnly><Home /></HeaderOnly>}/>
-            <Route path={config.routePath.collection} element={<HeaderOnly><Collection/></HeaderOnly>}/>
-            <Route path={config.routePath.product} element={<HeaderOnly><PDP/></HeaderOnly>}/>
+            <Route path={config.routePath.home} element={<HeaderFooter><Home /></HeaderFooter>}/>
+            <Route path={config.routePath.collection} element={<HeaderFooter><Collection/></HeaderFooter>}/>
+            <Route path={config.routePath.product} element={<HeaderFooter><PDP/></HeaderFooter>}/>
 
             {/* <Route path={config.adminRoutePath.register} element={<Register />}/>
             <Fragment>

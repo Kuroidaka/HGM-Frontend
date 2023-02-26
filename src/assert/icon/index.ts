@@ -2,7 +2,7 @@ import { AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai';
 import { MdSecurity, MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { FiUser } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
-import { IoIosArrowDown } from 'react-icons/io'
+import { IoIosArrowDown, IoMdMail } from 'react-icons/io'
 import { FaFacebookF } from 'react-icons/fa'
 import { VscSearch } from 'react-icons/vsc'
 import { BsCart2 } from 'react-icons/bs'
@@ -11,6 +11,11 @@ import { MdKeyboardArrowDown } from 'react-icons/md'
 import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
 import { RiMenu5Line } from 'react-icons/ri'
+import { BsTelephoneFill, BsTwitter, BsInstagram, BsYoutube } from 'react-icons/bs'
+import { TfiPinterest } from 'react-icons/tfi'
+// import {  } from 'react-icons/tfi'
+
+
 
 
 
@@ -35,6 +40,12 @@ export const icon = {
     logout: AiOutlineLogout,
     menu: RiMenu5Line,
     plus: AiOutlinePlus,
-    minus: AiOutlineMinus
+    minus: AiOutlineMinus,
+    phone: BsTelephoneFill,
+    mail: IoMdMail,
+    twitter: BsTwitter,
+    pinterest: TfiPinterest,
+    instagram: BsInstagram,
+    youtube: BsYoutube
 }
 

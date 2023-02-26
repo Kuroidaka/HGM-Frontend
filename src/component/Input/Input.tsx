@@ -18,7 +18,7 @@ interface InputStylePropTypes {
 }
 
 const Input:FC<InputPropTypes> = (props) => {
-    const { label, id, type, width, value, setValue, error} = props
+    const { label, id, type, width, value, setValue, error, placeHD} = props
 
     const handleInput = (e:ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
@@ -27,7 +27,7 @@ const Input:FC<InputPropTypes> = (props) => {
     return ( 
     <Container width={width}>
         <label htmlFor={id} className='label'>{label}</label>
-        <InputField autoComplete="new-password" id={id} type={type} value={value} onInput={handleInput} width={width}/>
+        <InputField placeholder={placeHD} autoComplete="new-password" id={id} type={type} value={value} onInput={handleInput} width={width} />
        {error && <div className="error">{error}</div>}
     </Container>
     );
@@ -65,6 +65,7 @@ const InputField = styled.input<InputStylePropTypes>`
     border-radius: 0.4375rem;
     box-shadow: inset 0 1px 2px rgb(55 60 67 / 8%);
     transition: border-color .35s ease-in-out,box-shadow .35s ease-in-out;
+    position: relative;
 
     &:focus{
         color: #75868f;
