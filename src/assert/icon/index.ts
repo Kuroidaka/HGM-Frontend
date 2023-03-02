@@ -13,7 +13,7 @@ import { BiUser } from 'react-icons/bi'
 import { RiMenu5Line } from 'react-icons/ri'
 import { BsTelephoneFill, BsTwitter, BsInstagram, BsYoutube } from 'react-icons/bs'
 import { TfiPinterest } from 'react-icons/tfi'
-// import {  } from 'react-icons/tfi'
+import { ImPlus, ImMinus } from 'react-icons/im'
 
 
 
@@ -40,7 +40,9 @@ export const icon = {
     logout: AiOutlineLogout,
     menu: RiMenu5Line,
     plus: AiOutlinePlus,
+    bothPlush: ImPlus,
     minus: AiOutlineMinus,
+    bothMinus: ImMinus,
     phone: BsTelephoneFill,
     mail: IoMdMail,
     twitter: BsTwitter,

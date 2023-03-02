@@ -1,23 +1,56 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { icon } from "~/assert/icon";
 import Input from "~/component/Input/Input";
 import Button from "~/component/Button/Button";
 import { img } from "~/assert/img";
+import { UseMedia } from "~/hook";
+
+
+interface sectionNameType  {
+    [key: string]: boolean
+}
 
 const Footer = () => {
-    const [inputEmail, setInputEmail] = useState<string>('') 
+    const [inputEmail, setInputEmail] = useState<string>('')
+    const [sectionOpen, setSectionOpen] = useState<sectionNameType>({
+        customerService: false,
+        company: false,
+        contact: false
+    })
+    const [displayIconItem, setDisplayIconItem] = useState(false)
+    const screenWidth = UseMedia()
+
+    useEffect(() => {
+        if(screenWidth > 768){
+            setDisplayIconItem(false)
+        }
+        else {
+            setDisplayIconItem(true)
+        }
+    }, [screenWidth])
+    
+
+    const handleOpenItemSection = (e:any) => {
+        const sectionName = e.target.closest('.block-link').getAttribute('data-name') as string        
+        setSectionOpen({...sectionOpen, [sectionName]: !sectionOpen[sectionName] })
+    }
+    
     return (
         <Fragment>
             <Container className="Footer">
                 <LinkContentWrapper className="link-content-wrapper">
                     <div className="link-content">
                         {/* customer service */}
-                        <div className="block-link">
-                            <div className="block-link-head">
+                        <div className="block-link" data-name="customerService" >
+                            <div className="block-link-head" onClick={handleOpenItemSection}>
                                 <h3>Customer Service</h3>
+                                <span className={`icon ${!displayIconItem && 'none'}`}>
+                                {sectionOpen.customerService ? <icon.bothMinus/> : <icon.bothPlush/>}   
+                                </span>
+                                
                             </div>
-                            <ul className="link-list">
+                            <ul className="link-list" style={sectionOpen.customerService ? {display: 'block', height: 'auto'} : {}}>
                                 <li className="link-list-item">
                                     <a href="##">Shipping</a>
                                 </li>
@@ -42,11 +75,14 @@ const Footer = () => {
                             </ul>
                         </div>
                         {/* company */}
-                        <div className="block-link">
-                            <div className="block-link-head">
+                        <div className="block-link" data-name='company' >
+                            <div className="block-link-head" onClick={handleOpenItemSection}>
                                 <h3>Company</h3>
+                                <span className={`icon ${!displayIconItem && 'none'}`}>
+                                {sectionOpen.company ? <icon.bothMinus/> : <icon.bothPlush/>}
+                                </span>
                             </div>
-                            <ul className="link-list">
+                            <ul className="link-list" style={sectionOpen.company ? {display: 'block', height: 'auto'} : {}}>
                                 <li className="link-list-item">
                                     <a href="##">Company Information</a>
                                 </li>
@@ -71,11 +107,14 @@ const Footer = () => {
                             </ul>
                         </div>
                         {/* contact */}
-                        <div className="block-link">
-                            <div className="block-link-head">
+                        <div className="block-link" data-name='contact' >
+                            <div className="block-link-head" onClick={handleOpenItemSection}>
                                 <h3>Contact us</h3>
+                                <span className={`icon ${!displayIconItem && 'none'}`}>
+                                {sectionOpen.contact ? <icon.bothMinus/> : <icon.bothPlush/>}
+                                </span>
                             </div>
-                            <ul className="link-list">
+                            <ul className="link-list" style={sectionOpen.contact ? {display: 'block', height: 'auto'} : {}}>
                                 <li className="link-list-item">
                                     <a href="##" className="contact-phone">
                                         <icon.phone/><span>+84949764207</span>
@@ -161,24 +200,70 @@ const Container = styled.div`
     height: auto;
     background-color: #DDDDDD;
     display: flex;
+
+    @media screen and (max-width: 1200px) {
+        flex-direction: column;
+    }
 `
 
 const LinkContentWrapper = styled.div`
-    flex: 2;
-    padding: 43px 10px;
+    flex: 2; 
     border-right: 1px solid white;
+    @media screen and (min-width: 768px){
+        padding: 43px 10px;
+    }
 
     .link-content {
         display: flex;
         justify-content: space-evenly;
         align-items: flex-start;
 
-        .block-link{
-            padding: 10px;
+        @media screen and (min-width: 768px) {
             
+            .block-link{
+                .block-link-head{
+                    text-transform: uppercase;
+                    padding: 10px 0;
+
+                    .icon {
+
+                        &.none {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            .block-link{
+                cursor: pointer;
+                width: 100%;
+                overflow: hidden;
+                border-bottom: 1px solid white;
+                .block-link-head{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 20px 28px;
+                }
+            }
+
+            .link-list{ 
+                height: 0;
+                padding: 0px 28px 20px;
+                display: none;
+            }
+
+        }
+
+        .block-link{
+
             .block-link-head{
-                margin-bottom: 20px;
                 text-transform: uppercase;
+
             }
             .link-list{
                 list-style-type: none;
@@ -208,14 +293,42 @@ const LinkContentWrapper = styled.div`
 const MoreInformaitonContent = styled.div`
     flex: 1;
 
+    @media screen and (max-width: 1200px) and (min-width: 768px)  {
+        display: flex;
+
+        .follow-us{ 
+            width: 50vw;
+            border-right: 1px solid white;
+        }
+
+        .subscribe-info { 
+            width: 50vw;
+        }
+    }
 
     .follow-us{
 
+        @media screen and (min-width: 768px) {
+            .follow-content{
+                padding: 40px 0;
+            }
+        }
+
+        @media screen and (max-width: 1200px) and (min-width: 768px)  {
+            border-top: 1px solid white;
+        }
+        @media screen and (max-width: 768px)  {
+            .follow-content{
+                padding: 20px 28px;
+
+                .follow-content-inner {
+                    justify-content: space-between;
+                }
+            }
+        }
         .follow-content{
-            padding: 40px 0;
             .follow-content-inner {
                 display: flex;
-                padding: 0 0 0 calc(30px + 2vw);
                 align-items: center;
                 .title {
                     text-transform: uppercase;
@@ -231,6 +344,13 @@ const MoreInformaitonContent = styled.div`
                             font-size: 24px;
                         }
                     }
+                }
+                @media screen and (min-width: 1200px) {
+                    padding: 0 0 0 calc(30px + 2vw);
+                }
+
+                @media screen and (max-width: 1200px) and (min-width: 768px) {
+                    justify-content: center;
                 }
             }
         }
@@ -260,13 +380,30 @@ const FooterBottomContent = styled.div`
     height: 60px;
     width: 100vw;
 
+    @media screen and (max-width : 768px) {
+        .content {
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (min-width : 768px) {
+        .content {
+        padding: 12px 0;
+        .logo-wrapper {
+                margin-left: 44px;
+            }
+        }
+        .copy-right {
+            margin-right: 10px;
+        }
+    }
+
     .content {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 22px 0;
         .logo-wrapper {
-            margin-left: 44px;
             .logo{
                 width: 60px;
             }
@@ -283,7 +420,6 @@ const FooterBottomContent = styled.div`
                 -moz-osx-font-smoothing: grayscale;
                 -webkit-text-size-adjust: 100%;
             }
-            margin-right: 10px;
         }
     }
 `

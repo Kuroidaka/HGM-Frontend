@@ -4,6 +4,7 @@ import SelectInput from '~/component/Select/Select';
 import { icon } from '~/assert/icon';
 import Button from '~/component/Button/Button';
 import { img } from '~/assert/img';
+import { UseMedia } from '~/hook';
 
 interface Product {
   id: number;
@@ -342,19 +343,11 @@ const sizeList = [
 
 const PDP: React.FC = () => {
     const [size, setSize] = useState<string>('')
-    const [quantity, setQuanity] = useState<number>(0)
-    const [screenWidth, setSreenWidth] = useState(window.innerWidth)
+    const [quantity, setQuanity] = useState<number>(1)
+    const screenWidth = UseMedia()
     // const [addToCartWidth, setAddToCartWidth] = useState<string>('200px')
     const [descriptionView, setDescriptionView] = useState<string>('product-detail')
     // catch the screen width change event
-    useEffect(() => {
-      const setScreenSize = () => {
-        setSreenWidth(window.innerWidth)
-      }
-      window.addEventListener('resize', setScreenSize)
-    },[])
-    
-    // responsive
     useEffect(() => {
       if(screenWidth < 768){
       // setAddToCartWidth('100%')
@@ -366,13 +359,13 @@ const PDP: React.FC = () => {
   
 
     const handleDecrease = (e:any) => {
-      if(quantity > 0){
+      if(quantity > 1){
         setQuanity(quantity - 1)
       }
     }
 
     const handleIncrease = (e:any) => {
-      if(quantity >= 0){
+      if(quantity >= 1){
         setQuanity(quantity + 1)
         // const inputElm = e.target.closest('data-quantity')
         // console.log(inputElm);
