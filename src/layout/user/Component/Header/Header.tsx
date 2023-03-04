@@ -1,27 +1,49 @@
 import styled, { keyframes } from "styled-components";
+import Tippy from "@tippyjs/react/headless";
 import { img } from "~/assert/img";
 import { icon } from "~/assert/icon";
 import Avatar from "~/component/Avatar/Avatar";
-import Tippy from "@tippyjs/react/headless";
 import Popper from "~/component/Popper/Popper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UseMedia } from "~/hook";
+import { NavItem } from "../../HeaderFooter/HeaderFooter";
+interface PropType {
+    handleOpenSideBar: () => void
+    isSideBarOpen: boolean
+    navList: NavItem[]
+}
 
-const HeaderCom = () => {
+
+const HeaderCom = (props:PropType) => {
+    const {handleOpenSideBar, isSideBarOpen, navList} = props
 
     const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)
-
+    const [nav, setNav] = useState<boolean | undefined>()
+    const screenWidth = UseMedia()
+    
     const handleClickAvatar = () => {
         setAvaToggle(!avaToggle)
     }
 
+    useEffect(() => {
+        if(screenWidth < 992) {
+            setNav(false)
+        }
+        else {
+            setNav(true)
+        }
+    }, [screenWidth]) 
+
+    const handleClickMenuIcon = () => {
+        handleOpenSideBar()
+    }
+
     return (
         <Header>
-
-
             <div className="wrapper">
                 <div className="left-part">
-                    <div className="menu">
-                        <icon.menu/>
+                    <div className="menu-icon" onClick={handleClickMenuIcon}>
+                        {isSideBarOpen ? <icon.close/>: <icon.menu/>}
                     </div>
                     <Search className="search">
                         <input type="text" spellCheck={false} placeholder="Search product..." />
@@ -38,7 +60,7 @@ const HeaderCom = () => {
                     <img src={img.logo} alt="" />
                 </Logo>
 
-                <Action>
+                <Action >
 
                     <div className="icon"><icon.cart className="cart" /></div>
                     <div className="icon"><icon.wishList className="wist-list" /></div>
@@ -74,19 +96,23 @@ const HeaderCom = () => {
                 </Action>
             </div>
 
-            <Navbar>
-                <li>
-                    PRODUCT
-                </li>
-                <li>
-                    SHOP
-                </li>
-                <li>
-                    SHOP
-                </li>
-                <li>
-                    SHOP
-                </li>
+            <Navbar className="nav-list" style={nav ? {} : {display: 'none'}}>
+                {navList.map((nav: NavItem, idx) => {
+                    return (
+                        <Tippy
+                        interactive
+                        placement="bottom-end"
+                        visible={avaToggle}
+                        offset={[0, 10]}
+                        render={() =>
+                        (<Popper>
+                           <>hello</>
+                        </Popper>)}
+                        >
+                            <li key={idx} className='nav-item'>{nav.title}</li>
+                        </Tippy>
+                    )
+                    })}
             </Navbar>
 
         </Header>
@@ -107,21 +133,26 @@ const rotateAnimation = keyframes`
 `
 
 const Header = styled.div`
-height: var(--header-bar-height);
+position: fixed;
+top: 0;
+right: 0;
+z-index: 999;
 background-color: #ffffff;
 width: 100vw;
 height: auto;
 display: flex;
 justify-content: center;
 flex-direction: column;
+border-bottom: 1px solid #E0E0E0;
 
 @media screen and (min-width: 992px) {
-    .wrapper {
+    
+    .wrapper {   
         padding: 0 50px;
         width: 100%;
-        height: 85px;
+        height: var(--header-bar-height);
 
-        .menu{
+        .menu-icon{
             display: none;
         }
 
@@ -139,21 +170,21 @@ flex-direction: column;
 }
 
 @media screen and (max-width: 991px) {
+    height: var(--header-bar-height-mb);
     .wrapper {
         display: flex;
         align-items: center;
         justify-content: space-between;
         align-self: center;
-        padding: 20px 30px;
-
-        
+        padding: 0 30px;
         .left-part {
 
-            .menu{
+            .menu-icon{
             display: block;
             font-size: 28px;
                 svg {
                     height: 100%;
+                    width: 23px;
                 }
             }
 
@@ -166,7 +197,8 @@ flex-direction: column;
                 justify-content: flex-start;
                 font-size: 22px;
                 .search-icon {
-                    height: 100% ;
+                    height: 100%;
+                    width: 21px;
                 }
             }
         }
@@ -180,9 +212,11 @@ flex-direction: column;
         align-self: center;
         width: 100vw;
         
+        
         .left-part{
             flex: 1 0 0;
             display: flex;
+            gap: 15px;
         }
         
     }
@@ -197,13 +231,15 @@ const Navbar = styled.ul`
     gap: 30px;
     background-color: black;
     padding: 10px;
-
-    li {
+    height: var(--header-nav-height);
+    
+    .nav-item {
         color: white;
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 5px;
+        text-transform: uppercase;
     }
 
 `

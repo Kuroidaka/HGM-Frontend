@@ -10,8 +10,9 @@ export const GlobalStyles = createGlobalStyle`
         --third: #343A40;
         
         /* user */
-        --header-bar-height: 96px;
-
+        --header-bar-height: 85px;
+        --header-bar-height-mb: 55px;
+        --header-nav-height: 35px;
 
         /* admin */
         --primary_admin: #EEEEEE;

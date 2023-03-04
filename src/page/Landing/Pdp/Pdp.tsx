@@ -293,7 +293,7 @@ const QuantityAdjust = styled.div`
     
 `
 
-const ProductDescription = styled.p`
+const ProductDescription = styled.div`
   font-size: 16px;
   margin-bottom: 20px;
   text-align: center;
