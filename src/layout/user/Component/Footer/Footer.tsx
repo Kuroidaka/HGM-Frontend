@@ -19,7 +19,7 @@ const Footer = () => {
         contact: false
     })
     const [displayIconItem, setDisplayIconItem] = useState(false)
-    const screenWidth = UseMedia()
+    const screenWidth  = UseMedia()
 
     useEffect(() => {
         if(screenWidth > 768){

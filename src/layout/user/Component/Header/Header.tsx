@@ -6,7 +6,7 @@ import Avatar from "~/component/Avatar/Avatar";
 import Popper from "~/component/Popper/Popper";
 import { useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
-import { NavItem } from "../../HeaderFooter/HeaderFooter";
+import { NavItem } from "~/layout/user/HeaderFooter/HeaderFooter";
 interface PropType {
     handleToggle: () => void
     isSideBarOpen: boolean

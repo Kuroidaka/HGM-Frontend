@@ -9,7 +9,7 @@ import { icon } from "~/assert/icon";
 import { img } from "~/assert/img";
 import { selectLogError, selectLoggedIn, selectLogMsg, selectCurrentUser, selectLogging } from "../../../../redux/auth.slice";
 import { useAppDispatch, useAppSelector } from "~/hook";
-import { login } from "../../../../redux/auth.slice";
+import { login } from "~/redux/auth.slice";
 
 const toastOption = {
     position: toast.POSITION.TOP_RIGHT,
