@@ -3,10 +3,11 @@ import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 import FlyOutModal from "~/component/FlyoutModal/FlyOutModal";
 import { UseMedia } from "~/hook";
+import AddToCartFlyOut from "../Component/AddToCartFlyOut/AddToCartFlyOut";
 import Footer from "../Component/Footer/Footer";
 import HamburgerMenu from "../Component/HamburgerMenu/HamburgerMenu";
 import HeaderCom from "../Component/Header/Header";
-
+import { CartContext, CartContextValue } from "~/context";
 interface propsType {
     children: ReactNode
 }
@@ -54,7 +55,7 @@ const HeaderFooter = (props:propsType) => {
     const [headerHeight, setHeaderHeight] = useState<string>('')
     const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false)
     const [isOverlayOpen, setIsOverlayOpen] = useState<boolean>(false)
-
+    const [isFlyoutCartOpen, setIsFlyoutCartOpen] = useState<boolean>(false)
     // move down the app as the header height change
     useEffect(() => {
         if(screenWidth < 992) {
@@ -65,6 +66,11 @@ const HeaderFooter = (props:propsType) => {
         }
         
     },[screenWidth])
+
+    const handleClickOverlay = () => {
+        if(isSideBarOpen && isOverlayOpen) handleOpenSideBar()
+        else if(isFlyoutCartOpen && isOverlayOpen) handleOpenFlyoutCart()
+    }
 
     const openOverlay = () => {
         const body = document.querySelector('body');
@@ -86,33 +92,41 @@ const HeaderFooter = (props:propsType) => {
 
     // function handle open sidebar
     const handleOpenSideBar = () => {
-        setIsSideBarOpen(!isSideBarOpen)
-        setIsOverlayOpen(!isOverlayOpen)
+        setIsSideBarOpen(!isSideBarOpen);
+        setIsOverlayOpen(!isOverlayOpen);
 
-        if(isSideBarOpen && isOverlayOpen) {
-            closeOverlay()
-
-        }
-        else {
-            openOverlay()
-        }        
+        (isSideBarOpen && isOverlayOpen) ?closeOverlay():openOverlay();        
     }
 
-    const handleClickOverlay = () => {
-        if(isSideBarOpen && isOverlayOpen) handleOpenSideBar()
+    // function handle open flyout cart
+    const handleOpenFlyoutCart = () => {
+        setIsOverlayOpen(!isOverlayOpen);
+        setIsFlyoutCartOpen(!isFlyoutCartOpen);
+        
+        (isOverlayOpen && isFlyoutCartOpen) ? closeOverlay() : openOverlay()
+    }
+
+    const cartContextValue:CartContextValue = {
+        handleOpen: handleOpenFlyoutCart
     }
 
     return ( 
-        <Container>
-            <HeaderCom handleOpenSideBar={handleOpenSideBar} isSideBarOpen={isSideBarOpen} navList={navList}/>
-            <Overlay className="overlay" onClick={handleClickOverlay}/>
-            <HamburgerMenu isSideBarOpen={isSideBarOpen} navList={navList}/>
-            <FlyOutModal> </FlyOutModal>
-            <div style={{marginTop : headerHeight}}>
-                {children}
-            </div>
-            <Footer />
-        </Container>
+        <CartContext.Provider value={cartContextValue}>
+            <Container>
+                <HeaderCom handleToggle={handleOpenSideBar} isSideBarOpen={isSideBarOpen} navList={navList}/>
+                {/* <Button title="test" height="500px" handleOnClick={handleOpenFlyoutCart}></Button> */}
+                <Overlay className="overlay" onClick={handleClickOverlay}/>
+                <HamburgerMenu isSideBarOpen={isSideBarOpen} navList={navList}/>
+                <FlyOutModal isOpen={isFlyoutCartOpen} handleToggle={handleOpenFlyoutCart}>
+                    <AddToCartFlyOut/>
+                </FlyOutModal>
+                <div style={{marginTop : headerHeight}}>
+                    {children}
+                </div>
+                <Footer />
+            </Container>
+        </CartContext.Provider>
+       
      );
 }
  

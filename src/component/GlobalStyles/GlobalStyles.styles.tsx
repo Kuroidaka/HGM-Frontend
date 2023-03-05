@@ -13,6 +13,11 @@ export const GlobalStyles = createGlobalStyle`
         --header-bar-height: 85px;
         --header-bar-height-mb: 55px;
         --header-nav-height: 35px;
+        --header-cart-flyout-height: 6vh;
+        --light-text: #5C5C5C;
+        --middle-both-text: #5F5F5F;
+        --flyout-footer-height: 100px;
+        --border-menu: #E0E0E0;
 
         /* admin */
         --primary_admin: #EEEEEE;

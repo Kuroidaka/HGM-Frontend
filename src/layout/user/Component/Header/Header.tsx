@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
 import { NavItem } from "../../HeaderFooter/HeaderFooter";
 interface PropType {
-    handleOpenSideBar: () => void
+    handleToggle: () => void
     isSideBarOpen: boolean
     navList: NavItem[]
 }
 
 
 const HeaderCom = (props:PropType) => {
-    const {handleOpenSideBar, isSideBarOpen, navList} = props
+    const {handleToggle, isSideBarOpen, navList} = props
 
     const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)
     const [nav, setNav] = useState<boolean | undefined>()
@@ -35,7 +35,7 @@ const HeaderCom = (props:PropType) => {
     }, [screenWidth]) 
 
     const handleClickMenuIcon = () => {
-        handleOpenSideBar()
+        handleToggle()
     }
 
     return (
