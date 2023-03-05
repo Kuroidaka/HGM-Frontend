@@ -153,7 +153,7 @@ const ListNav = styled.ul`
             }
         }
        & + li.first-parent-item {
-        border-top: 1px solid #E0E0E0;
+        border-top: 1px solid var(--border-menu);
        }
 
        .second-children-list {
