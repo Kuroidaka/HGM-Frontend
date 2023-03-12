@@ -2,11 +2,11 @@ import styled, { keyframes } from "styled-components";
 import Tippy from "@tippyjs/react/headless";
 import { img } from "~/assert/img";
 import { icon } from "~/assert/icon";
-import Avatar from "~/component/Avatar/Avatar";
-import Popper from "~/component/Popper/Popper";
+import Avatar from "~/component/Avatar";
+import Popper from "~/component/Popper";
 import { useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
-import { NavItem } from "~/layout/user/HeaderFooter/HeaderFooter";
+import { NavItem } from "~/layout/user/HeaderFooter";
 interface PropType {
     handleToggle: () => void
     isSideBarOpen: boolean
@@ -100,6 +100,7 @@ const HeaderCom = (props:PropType) => {
                 {navList.map((nav: NavItem, idx) => {
                     return (
                         <Tippy
+                        key={idx}
                         interactive
                         placement="bottom-end"
                         visible={avaToggle}

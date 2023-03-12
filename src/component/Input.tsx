@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, ReactNode, useState } from 'react';
 import styled from 'styled-components'
-import SelectInput from '../Select/Select';
+import SelectInput from './Select';
 
 interface InputPropTypes {
     placeHD?: string

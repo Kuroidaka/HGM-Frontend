@@ -1,13 +1,13 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
-import FlyOutModal from "~/component/FlyoutModal/FlyOutModal";
+import FlyOutModal from "~/component/FlyOutModal";
 import { UseMedia } from "~/hook";
-import AddToCartFlyOut from "../Component/AddToCartFlyOut/AddToCartFlyOut";
-import Footer from "../Component/Footer/Footer";
-import HamburgerMenu from "../Component/HamburgerMenu/HamburgerMenu";
-import HeaderCom from "../Component/Header/Header";
-import { CartContext, CartContextValue } from "~/context";
+import AddToCartFlyOut from "./Component/AddToCartFlyOut";
+import Footer from "./Component/Footer";
+import HamburgerMenu from "./Component/HamburgerMenu";
+import HeaderCom from "./Component/Header";
+import { CartContext, CartContextValue } from "~/context/Context";
 interface propsType {
     children: ReactNode
 }

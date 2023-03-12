@@ -1,8 +1,8 @@
 import { FC, Fragment, ReactNode, useRef, useState } from "react";
 import styled from 'styled-components'
 
-import Header from '../component/Header/Header'
-import Sidebar from "../component/SideBar/Sidebar";
+import Header from './component/Header/Header'
+import Sidebar from "./component/SideBar/Sidebar";
 
 interface HeaderSideBarProps {
     children: ReactNode

@@ -1,27 +1,16 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Button from '~/component/Button/Button'
-import QuantityChange from '~/component/QuantityChange/QuantityChange'
+import Button from '~/component/Button'
+import QuantityChange from '~/component/QuantityChange'
+import { ProductType } from '~/model/Product.model'
 import { formatMoney } from '~/utils'
 
 interface Props {}
 
-interface Product {
-    id: number
-    title: string
-    description: string,
-    price: number,
-    discountPercentage: number,
-    rating: number,
-    stock: number,
-    brand: string,
-    category: string,
-    thumbnail: string,
-    images: string[]
-}
+
 
 interface ListProduct {
-    products: Product[]
+    products: ProductType[]
     total: number,
     skip: number,
     limit: number
@@ -31,7 +20,7 @@ interface ListProduct {
 function AddToCartFlyOut(props: Props) {
     const {} = props
 
-    const [listProduct, setListProduct] = useState<Product[]>([])
+    const [listProduct, setListProduct] = useState<ProductType[]>([])
     const [totalPrice, setTotalPrice] = useState<string>('0')
     const [load, setLoad] = useState<boolean>(true)
 
@@ -44,7 +33,7 @@ function AddToCartFlyOut(props: Props) {
             setLoad(false)
             let totalPrice = 0
             
-            data.products.forEach((product:Product) => {
+            data.products.forEach((product:ProductType) => {
                 totalPrice+= product.price
             })
 

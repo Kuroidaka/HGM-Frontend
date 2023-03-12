@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { icon } from "~/assert/icon";
-import Input from "~/component/Input/Input";
-import Button from "~/component/Button/Button";
+import Input from "~/component/Input";
+import Button from "~/component/Button";
 import { img } from "~/assert/img";
 import { UseMedia } from "~/hook";
 
