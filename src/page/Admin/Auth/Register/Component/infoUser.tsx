@@ -3,9 +3,9 @@ import styled  from "styled-components";
 import { MdUpload } from 'react-icons/md'
 
 import { img } from "~/assert/img";
-import Avatar from "~/component/Avatar/Avatar";
-import Button from "~/component/Button/Button";
-import Input from "~/component/Input/Input";
+import Avatar from "~/component/Avatar";
+import Button from "~/component/Button";
+import Input from "~/component/Input";
 import ModalTemplate from "../../../../../component/Modal/ModalTemplate";
 import { useNavigate } from "react-router-dom";
 import config from "~/config";

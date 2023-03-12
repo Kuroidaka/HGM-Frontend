@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { Modal } from 'antd';
-import Button from '~/component/Button/Button';
+import Button from '~/component/Button';
 
 interface AndModalPropType {
     // onClick: () => void

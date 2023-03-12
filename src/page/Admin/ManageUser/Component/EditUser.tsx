@@ -2,10 +2,10 @@ import { ChangeEvent, FC, useRef, useState } from 'react';
 import styled from 'styled-components'
 import { userApi } from '~/api/admin/userApi';
 import { img } from '~/assert/img';
-import Avatar from '~/component/Avatar/Avatar';
-import Button from '~/component/Button/Button';
-import Input from '~/component/Input/Input';
-import SelectInput from '~/component/Select/Select';
+import Avatar from '~/component/Avatar';
+import Button from '~/component/Button';
+import Input from '~/component/Input';
+import SelectInput from '~/component/Select';
 import { User } from '~/model/User.model';
 import { UserPropType } from '../ManageUser';
 

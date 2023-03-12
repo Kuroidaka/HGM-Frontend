@@ -1,24 +1,15 @@
 import React, { ChangeEvent, MouseEvent, MouseEventHandler, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SelectInput from '~/component/Select/Select';
+import SelectInput from '~/component/Select';
 
-import Button from '~/component/Button/Button';
+import Button from '~/component/Button';
 import { img } from '~/assert/img';
 import { UseMedia } from '~/hook';
-import QuantityChange from '~/component/QuantityChange/QuantityChange';
-import { CartContext, CartContextValue } from '~/context';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-}
-
-interface PDPProps {
-  product: Product;
-}
+import QuantityChange from '~/component/QuantityChange';
+import { CartContext, CartContextValue, ProductContext, ProductContextValue } from '~/context/Context';
+import { ProductType } from '~/model/Product.model';
+import { useParams } from 'react-router-dom';
+import { formatMoney } from '~/utils';
 
 const sizeList = [
     {
@@ -31,36 +22,31 @@ const sizeList = [
     },
 ]
 
-const PDP: React.FC = () => {
-    const [size, setSize] = useState<string>('')
-    const screenWidth = UseMedia()
-    // const [addToCartWidth, setAddToCartWidth] = useState<string>('200px')
-    const [descriptionView, setDescriptionView] = useState<string>('product-detail')
-    const Cart = useContext<CartContextValue>(CartContext)
+const PDP = () => {
 
-    // catch the screen width change event
+    const [size, setSize] = useState<string>('')
+    const [descriptionView, setDescriptionView] = useState<string>('product-detail')
+    
+    const [product, setProduct] = useState<ProductType>()
+    const {id} = useParams()
+    const {productList} = useContext<ProductContextValue>(ProductContext)
+    const Cart = useContext<CartContextValue>(CartContext)
+    
+
     useEffect(() => {
-      if(screenWidth < 768){
-      // setAddToCartWidth('100%')
-    }
-      else {
-      // setAddToCartWidth('200px')
-    }
-    }, [screenWidth])
+      const result = productList.find(product => product.id === Number(id))
+      setProduct(result)
+    }, [id])
   
     const handleBuy =() => {
       Cart.handleOpen()
     }
-
-
- 
 
     const changeDescriptionView = (e:any) => {
       setDescriptionView(e.target.getAttribute('data-name'))
       
     }
 
-    // git remote set-url origin https://github.com/idaka123/HGM-Frontend
 
   return (
     <ProductDetail className='product-detail'>
@@ -68,20 +54,20 @@ const PDP: React.FC = () => {
           <li className="breadcrumb-item">Backpacks</li>
           <li className="breadcrumb-item">Expedition Flap Backpack</li>
         </BreadCrumb>
-
+      {product &&
         <Container className='container'>
             <ProductImageWrapper className='product-image-wrapper'>
-              <ProductImage className='product-image' src={img.logo} alt="Product Image" />
+              <ProductImage className='product-image' src={product.images[0]} alt="Product Image" />
 
             </ProductImageWrapper>
             <ProductInfo className='product-info'>
-                <ProductTitle className='product-title'>Apple Watch series 8</ProductTitle>
-                <ProductVendor className='product-vendor'>Alpha Bravo</ProductVendor>
+                <ProductTitle className='product-title'>{product.title}</ProductTitle>
+                <ProductVendor className='product-vendor'>{product.brand}</ProductVendor>
                 <ProductPrice className='product-price'>
                     {/* <span className="new-price">${product.price.toFixed(2)}</span>
                     <span className="old-price">${product.price.toFixed(2)}</span> */}
-                    <span className="new-price">999.0000</span>
-                    <span className="old-price">999.0000</span>
+                    <span className="new-price">{formatMoney(product.price)}</span>
+                    {/* <span className="old-price">999.0000</span> */}
                 </ProductPrice>
 
                 <SelectOption>
@@ -150,34 +136,13 @@ const PDP: React.FC = () => {
                   </DescriptionNav> 
 
                   <DescriptionContent>
-                  These ankle Savvy Barre Grip Socks give your feet a touch of sport and sassy style while offering superior grip. From yoga to barre, these socks are the perfect addition to your practice.
-                  Features
-                  Ankle socks.
-                  Contrasting triangle silicone grippers on bottom.
-                  High-density silicone grip.
-                  Soft and breathable fabric.
-                  BPA-free silicone.
-                  Silicone won’t peel off.
-                  Arch compression to support and comfort mid-foot.
-                  The heel tab supports the Achilles.
-                  Fitted heel to eliminate twisting during movements.
-                  Made with organic materials.
-                  Details
-                  Fabrics: - Sock: 70% Organic Cotton, 16% Nylon, 9% Polyester, 3% Elastane, 2% Elastodiene - Grippers: 100% Silicone
-                  Colors: Grey, Purple, Lavender, Magenta, Pink, Teal, Blue, White, Black, Charcoal, 
-                  Style Features: Solid, Grip, Embroidery, Specks, Ruched
-                  Grip: Yes – Silicone Triangles
-                  Fit: Ankle
-                  Arch Support Band: Yes
-                  Style: Closed Toe
-                  Country of Origin
-                  Imported.
+                    {product.description}
                   </DescriptionContent>
                 </ProductDescription>
 
             </ProductInfo>
         </Container>
-          
+          }
     </ProductDetail>
     
   );

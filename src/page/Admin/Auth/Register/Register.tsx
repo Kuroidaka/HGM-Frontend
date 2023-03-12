@@ -100,7 +100,7 @@ const Register:FC<RegisterProps> = () => {
     useEffect(() => {
         if(loggedIn) {
             setTimeout(() => {
-               navigate(config.adminRoutePath.home) 
+               navigate('/admin/'+config.adminRoutePath.dashboard) 
             }, 1000)
             toastSuccess()  
         }

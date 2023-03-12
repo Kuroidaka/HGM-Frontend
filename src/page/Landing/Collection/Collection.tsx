@@ -1,25 +1,35 @@
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Navbar from "./Component/Navbar/NavBar";
-import ProductSection from "./Component/Product/Product";
+import Load from "~/component/Load";
+import { ProductType } from "~/model/Product.model";
+import Navbar from "./Component/NavBar";
+import ProductSection from "./Component/Category";
+import { ProductContext, ProductContextValue } from "~/context/Context";
 
 const Collection = () => {
+    
+    const {productList} = useContext<ProductContextValue>(ProductContext)
+    console.log('product list in collection page', productList);
+    
+    
     return ( 
-
-        <Container>
-            <div className="slide-show"></div>
+        <Container className="collection-container">
+            {/* <div className="slide-show"></div> */}
 
             <div className="header">
 
             </div>
 
-            <Content>
+            <Content className="main-content">
                 
-                <nav>
+                <nav className="side-bar-nav">
                     <Navbar />
                 </nav>
 
                 <div className="collection">
+                    {productList && 
                     <ProductSection />
+                    }
                 </div>
 
             </Content>
@@ -41,12 +51,14 @@ const Container = styled.div `
 const Content = styled.div `
     display: flex;
     max-width: 1200px;
-    padding-left: 60px;
-    padding-right: 60px;
     margin: auto;
     padding-top: 20px;
 
-   
+@media screen and (max-width: 992px) {
+    nav {
+        display: none;
+    }
+}
 
     nav {
         flex: 22%;

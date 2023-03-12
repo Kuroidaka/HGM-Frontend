@@ -8,7 +8,7 @@ import NavItem from "./NavItem";
 import AdminOption from "./AdminOption";
 import { NavList } from "./NavList";
 import config from "~/config";
-import Avatar from "~/component/Avatar/Avatar";
+import Avatar from "~/component/Avatar";
 
 
 interface SidebarProps {
@@ -36,7 +36,7 @@ const Sidebar:FC<SidebarProps> = (props) => {
     }
 
     const handleClickLogo = () => {
-        navigate(config.adminRoutePath.home )
+        navigate('/admin/' + config.adminRoutePath.dashboard )
     }
 
 

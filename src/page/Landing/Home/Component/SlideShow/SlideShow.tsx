@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { img } from "~/assert/img";
-import Button from "~/component/Button/Button";
+import Button from "~/component/Button";
 
 
 const SlideShow = () => {

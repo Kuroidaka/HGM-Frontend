@@ -6,8 +6,8 @@ import { icon } from '~/assert/icon';
 import AddNewUser from '~/page/Admin/ManageUser/Component/AddNewUser';
 import EditUser from '~/page/Admin/ManageUser/Component/EditUser';
 
-import Button from '~/component/Button/Button';
-import Avatar from '~/component/Avatar/Avatar';
+import Button from '~/component/Button';
+import Avatar from '~/component/Avatar';
 import Tippy from '@tippyjs/react/headless';
 import { userApi } from '~/api/admin/userApi';
 import { User } from '~/model/User.model';

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styled  from "styled-components";
 import { img } from "~/assert/img";
-import Button from "~/component/Button/Button";
+import Button from "~/component/Button";
 import ModalTemplate from "../../../../../component/Modal/ModalTemplate";
 
 interface NotifyPropType {
