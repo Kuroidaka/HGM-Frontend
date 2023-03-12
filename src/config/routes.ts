@@ -1,7 +1,7 @@
 
 // user
 export const routePath = {
-    home: '',
+    home: '/',
     login: 'login',
     register: 'register',
     profile: 'profile',

@@ -22,8 +22,18 @@ import AddUser from '~/page/Admin/ManageUser/ManageUser'
 import ManageTeam from './page/Admin/Employee/Employee_Add'
 import ContactInfo from './page/Admin/ContactInfo/ContactInfo'
 import Dashboard from './page/Admin/Dashboard/Dashboard'
-// const AdminRoutes = React.lazy(() => import('~/page/Admin'))
-// const UserRoutes = React.lazy(() => import('./page/Landing'))
+
+function ScrollToTopOnLocationChange() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+
 const App:FC = () => {
   const [productList, setProductList] = useState<ProductType[]>([])
   const productContextValue:ProductContextValue = {
@@ -53,6 +63,7 @@ const App:FC = () => {
   return (
    <Container>
   <GlobalStyles />
+  <ScrollToTopOnLocationChange />
   <ProductContext.Provider value={productContextValue}>
     <Suspense fallback={<Load/>}>
       <Routes>

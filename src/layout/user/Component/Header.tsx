@@ -7,6 +7,8 @@ import Popper from "~/component/Popper";
 import { useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
 import { NavItem } from "~/layout/user/HeaderFooter";
+import { Link } from "react-router-dom";
+import config from "~/config";
 interface PropType {
     handleToggle: () => void
     isSideBarOpen: boolean
@@ -56,7 +58,7 @@ const HeaderCom = (props:PropType) => {
                     </div>
 
                 </div>
-                <Logo>
+                <Logo to={config.routePath.home}>
                     <img src={img.logo} alt="" />
                 </Logo>
 
@@ -245,7 +247,7 @@ const Navbar = styled.ul`
 
 `
 
-const Logo = styled.div`
+const Logo = styled(Link)`
     cursor: pointer;
     img {
         width: 88px;
