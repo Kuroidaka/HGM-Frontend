@@ -1,14 +1,11 @@
 import React, { ChangeEvent, MouseEvent, MouseEventHandler, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import SelectInput from '~/component/Select';
-
 import Button from '~/component/Button';
-import { img } from '~/assert/img';
-import { UseMedia } from '~/hook';
 import QuantityChange from '~/component/QuantityChange';
 import { CartContext, CartContextValue, ProductContext, ProductContextValue } from '~/context/Context';
 import { ProductType } from '~/model/Product.model';
-import { useParams } from 'react-router-dom';
 import { formatMoney } from '~/utils';
 
 const sizeList = [
@@ -22,20 +19,32 @@ const sizeList = [
     },
 ]
 
+
+
 const PDP = () => {
 
     const [size, setSize] = useState<string>('')
     const [descriptionView, setDescriptionView] = useState<string>('product-detail')
-    
     const [product, setProduct] = useState<ProductType>()
     const {id} = useParams()
     const {productList} = useContext<ProductContextValue>(ProductContext)
-    const Cart = useContext<CartContextValue>(CartContext)
+    const [currentImg, setCurrentImg] = useState<string>('')
     
+    const Cart = useContext<CartContextValue>(CartContext)
+
+    // useEffect(() => {
+    //   setInterval(() => {
+    //     console.log(123);
+
+    //   },1000)
+    // }, []);
 
     useEffect(() => {
       const result = productList.find(product => product.id === Number(id))
-      setProduct(result)
+      if(result) {
+        setProduct(result)
+        setCurrentImg(result.images[0])
+      }
     }, [id])
   
     const handleBuy =() => {
@@ -44,7 +53,9 @@ const PDP = () => {
 
     const changeDescriptionView = (e:any) => {
       setDescriptionView(e.target.getAttribute('data-name'))
-      
+    }
+    
+    const handleClickCurrentImg = (product:ProductType) => { 
     }
 
 
@@ -57,7 +68,22 @@ const PDP = () => {
       {product &&
         <Container className='container'>
             <ProductImageWrapper className='product-image-wrapper'>
-              <ProductImage className='product-image' src={product.images[0]} alt="Product Image" />
+              <div className="product-image-children-list-wrapper">
+              <div className="product-image-children-list">
+                {product.images.map((img) => {
+                    return <img 
+                            src={img} 
+                            data-name={img} 
+                            style={img === currentImg? {opacity: 1} : {opacity: .2}}
+                            onMouseOver={() => setCurrentImg(img)} className='product-image-children' alt="" />
+                })}
+                
+              </div>
+              </div>
+
+            <ProductImage >
+              <img src={currentImg} alt="Product" onClick={() =>handleClickCurrentImg(product)}/>
+            </ProductImage>
 
             </ProductImageWrapper>
             <ProductInfo className='product-info'>
@@ -153,13 +179,13 @@ export default PDP;
 
 
 const ProductDetail = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
   width: 100vw;
   margin: auto;
-  
+  padding-bottom: 30px;
 
   @media (min-width: 769px) {
     max-width: 1000px;
@@ -174,7 +200,7 @@ const BreadCrumb = styled.ul`
   align-self: flex-start;
   display: flex;
   flex-direction: row;
-  padding: 7px;
+  padding: 20px 7px 33px;
 
   .breadcrumb-item {
 
@@ -203,17 +229,39 @@ const Container = styled.div`
 
 const ProductImageWrapper = styled.div`
   flex: 1;
+  display: flex;
+  gap: 10px;
   @media (min-width: 768px) {
     align-self: flex-start;
     max-width: 50%;
     width: 45%;
   }
+
+  .product-image-children-list-wrapper{
+    --image-children-width : 100px;
+
+
+    .product-image-children-list{ 
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      gap: 10px;
+      .product-image-children{
+        cursor: pointer;
+        width: var(--image-children-width);
+      }
+    }
+  }
 `
 
 
-const ProductImage = styled.img`
-  width: 100%;
-  height: auto;
+const ProductImage = styled.div`
+  height: 460px;
+  cursor: pointer;
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
 `;
 
 const ProductInfo = styled.div`

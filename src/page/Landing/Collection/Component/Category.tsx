@@ -1,5 +1,5 @@
 import Button from "~/component/Button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import SelectInput from "~/component/Select";
 import Product from "./Product";
@@ -14,10 +14,21 @@ const Category = () => {
     const {productList} = useContext<ProductContextValue>(ProductContext)
     const [sortType, setSortType] = useState<string>(sortList[0].value)
 
+    useEffect(() => {
+        switch (sortType) {
+            case 'Price low to high':
+                productList.sort((a,b) => { return b.price - a.price})
+                break
+            case 'Price high to low':
+                productList.sort((a,b) => { return a.price - b.price})
+                break
+        } 
+    }, [sortType]);
+
     return ( 
      <Container>
         <div className="header-nav">
-            <span>10 items</span>
+            <span>{productList.length} items</span>
             <span className="sort-section">
                 <SelectInput label='Sort' id='Sort' width='150px' valueList={sortList} setValue={setSortType}/>
             </span>

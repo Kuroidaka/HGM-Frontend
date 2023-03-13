@@ -78,7 +78,7 @@ const Nav = styled.div`
         .card-line-wrapper{
             cursor: pointer;
             position: relative;
-            border-bottom: 1px solid ;
+            border-bottom: 1px solid #b9b5b5;
            
             .card-line{
                 display: flex;
