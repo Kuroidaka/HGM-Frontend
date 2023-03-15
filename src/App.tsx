@@ -22,6 +22,7 @@ import AddUser from '~/page/Admin/ManageUser/ManageUser'
 import ManageTeam from './page/Admin/Employee/Employee_Add'
 import ContactInfo from './page/Admin/ContactInfo/ContactInfo'
 import Dashboard from './page/Admin/Dashboard/Dashboard'
+import UserProfile from './page/Landing/Profile/UserProfile'
 
 function ScrollToTopOnLocationChange() {
   const { pathname } = useLocation();
@@ -85,6 +86,7 @@ const App:FC = () => {
           <Route path={config.routePath.home} element={ <HeaderFooter> <Home /></HeaderFooter> } />
           <Route path={config.routePath.collection} element={<HeaderFooter> <Collection/> </HeaderFooter>}/>
           <Route path={config.routePath.product} element={ <HeaderFooter><PDP/></HeaderFooter>}/>
+          <Route path={config.routePath.profile} element={ <HeaderFooter><UserProfile/></HeaderFooter>}/>
         </Route>
            
       </Routes>
