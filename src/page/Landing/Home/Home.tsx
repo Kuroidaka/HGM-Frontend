@@ -1,6 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import SlideShow from "./Component/SlideShow/SlideShow";
+import About from "./Component/About";
+import Branch from "./Component/Branch";
+import CurratedPick from "./Component/CuratedPick";
+import SlideShow from "./Component/SlideShow";
 
 interface backgroundType {
     src?: string 
@@ -13,16 +16,20 @@ const Home = () => {
             {/* slide show */}
             <SlideShow/>
 
-            <Title>
-                <h1>TITLE</h1>
-            </Title>
+            <div className="grid">
+                <Title>
+                    <h1></h1>
+                </Title>
 
-        {/* home page main content */}
+                {/* home page main content */}
 
-        <section>
+                <section>
+                    <Branch />
+                    <About />
+                    <CurratedPick />
+                </section>
 
-
-        </section>
+            </div>
             
         </Container>
      );
@@ -32,7 +39,7 @@ export default Home;
 
 const Container = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: auto;
 
 
     .slide-show{
@@ -41,6 +48,11 @@ const Container = styled.div`
         img {
             width: 100%;
         }
+    }
+
+    .grid {
+        max-width: 1400px;
+        margin: auto
     }
 `
 

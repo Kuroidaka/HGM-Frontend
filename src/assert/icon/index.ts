@@ -3,17 +3,18 @@ import { MdSecurity, MdOutlineAdminPanelSettings } from 'react-icons/md'
 import { FiUser } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown, IoMdMail, IoIosArrowForward } from 'react-icons/io'
-import { FaFacebookF } from 'react-icons/fa'
+import { FaFacebookF, FaShippingFast } from 'react-icons/fa'
 import { VscSearch, VscChromeClose } from 'react-icons/vsc'
 import { BsCart2 } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
-import { MdKeyboardArrowDown } from 'react-icons/md'
-import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus, AiOutlineLogin } from 'react-icons/ai'
+import { MdKeyboardArrowDown, MdOutlineSentimentVerySatisfied } from 'react-icons/md'
+import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus, AiOutlineLogin, AiOutlineFileProtect } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
 import { RiMenu5Line } from 'react-icons/ri'
 import { BsTelephoneFill, BsTwitter, BsInstagram, BsYoutube, BsSuitHeartFill } from 'react-icons/bs'
 import { TfiPinterest } from 'react-icons/tfi'
 import { ImPlus, ImMinus } from 'react-icons/im'
+import { GiNewShoot } from 'react-icons/gi'
 
 
 
@@ -48,6 +49,10 @@ export const icon = {
     instagram: BsInstagram,
     youtube: BsYoutube,
     close: VscChromeClose,
-    login: AiOutlineLogin
+    login: AiOutlineLogin,
+    satisfy: MdOutlineSentimentVerySatisfied,
+    shipping: FaShippingFast,
+    newArrival: GiNewShoot,
+    protect: AiOutlineFileProtect
 }
 
