@@ -67,7 +67,6 @@ function AddToCartFlyOut(props: Props) {
             }
         })
         selectModel.Product_List = cartDetailArray;
-        selectModel.Cart_Code = 'test-produc1t'
         selectModel.Status = 'New'
         const result = await CartApi.create(selectModel);
         
@@ -94,7 +93,7 @@ function AddToCartFlyOut(props: Props) {
                             return (<ProductItem key={idx} className='product-item'>
                                 <ProductItemInner className='product-inner'>
                                     <ProductImg className='product-img'>
-                                        <img src={process.env.REACT_APP_SERVER_IMG+'/product'+`/${product.Product_Images}`} alt="" />
+                                        <img src={process.env.REACT_APP_SERVER_IMG+'/product'+`/${product.Product_Images_Arr[0]}`} alt="" />
                                     </ProductImg>
 
                                     <ProductInformation className='product-information'>

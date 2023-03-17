@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { img } from '~/assert/img'
@@ -12,14 +12,18 @@ interface Props {
 
 function Product(props: Props) {
     const { product } = props
-
+    const [listImg,setlistImg] = useState<string[]>([]);
+    useEffect(() => {
+        const list: string[] = product.Product_Images.split(",");
+        setlistImg(list)
+    },[props])
 
     return (
     <ProductItem>
         <div className="product-item-inner">
             <Link to={`/product/${product.id}`} className="product-img">
                 <img 
-                    src={`http://localhost:4000/product/${product.Product_Images}`} 
+                    src={`http://localhost:4000/product/${listImg[0]}`} 
                     alt="" />
             </Link>
 

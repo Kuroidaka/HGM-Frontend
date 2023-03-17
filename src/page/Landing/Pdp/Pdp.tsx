@@ -33,8 +33,14 @@ const PDP = () => {
     useEffect(() => {
       const result = productList.find(product => product.id === Number(id))
       if(result) {
-        setProduct(result)
-        setCurrentImg(`http://localhost:4000/product/${result.Product_Images}`)
+        const list = result.Product_Images.split(",");
+        result.Product_Images_Arr =  list
+
+        setProduct({
+          ...result
+        })
+        console.log(result)
+        setCurrentImg(`http://localhost:4000/product/${result?.Product_Images_Arr?.[0]}`)
       }
     }, [id])
     const setQuantity = (data: number) => {
@@ -66,18 +72,15 @@ const PDP = () => {
             <ProductImageWrapper className='product-image-wrapper'>
               <div className="product-image-children-list-wrapper">
               <div className="product-image-children-list">
-                {/* {product.Product_Images?.map((img) => {
-                    return <img 
-                            src={img} 
-                            data-name={img} 
-                            style={img === currentImg? {opacity: 1} : {opacity: .2}}
-                            onMouseOver={() => setCurrentImg(img)} className='product-image-children' alt="" />
-                })} */}
-                <img 
-                            src={`http://localhost:4000/product/${product.Product_Images}`} 
-                            data-name={product.Product_Images} 
-                            style={product.Product_Images === currentImg? {opacity: 1} : {opacity: .2}}
-                            onMouseOver={() => setCurrentImg(`http://localhost:4000/product/${product.Product_Images}`)} className='product-image-children' alt="" />
+                {product.Product_Images_Arr?.map((img) => {
+                  console.log(img)
+                    return   <img 
+                    src={`http://localhost:4000/product/${img}`} 
+                    data-name={img} 
+                    style={img === currentImg? {opacity: 1} : {opacity: .2}}
+                    onMouseOver={() => setCurrentImg(`http://localhost:4000/product/${img}`)} className='product-image-children' alt="" />
+                })}
+              
               </div>
               </div>
 

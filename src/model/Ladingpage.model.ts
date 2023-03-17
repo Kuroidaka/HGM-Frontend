@@ -21,6 +21,7 @@ export interface ProductType2 {
     Product_Detail: string,
     Product_Price: number,
     Product_Images: string,
+    Product_Images_Arr: string[],
     Product_Number: number,
 
 }
