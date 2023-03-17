@@ -1,11 +1,11 @@
-import React, { ChangeEvent, MouseEvent, MouseEventHandler, useContext, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import SelectInput from '~/component/Select';
+import styled from 'styled-components';
 import Button from '~/component/Button';
 import QuantityChange from '~/component/QuantityChange';
+import SelectInput from '~/component/Select';
 import { CartContext, CartContextValue, ProductContext, ProductContextValue } from '~/context/Context';
-import { ProductType } from '~/model/Product.model';
+import { ProductType2 } from '~/model/Ladingpage.model';
 import { formatMoney } from '~/utils';
 
 const sizeList = [
@@ -25,13 +25,11 @@ const PDP = () => {
 
     const [size, setSize] = useState<string>('')
     const [descriptionView, setDescriptionView] = useState<string>('product-detail')
-    const [product, setProduct] = useState<ProductType>()
+    const [product, setProduct] = useState<ProductType2>()
     const {id} = useParams()
-    const {productList} = useContext<ProductContextValue>(ProductContext)
+    let {productList} = useContext<ProductContextValue>(ProductContext)
     const [currentImg, setCurrentImg] = useState<string>('')
-    
     const Cart = useContext<CartContextValue>(CartContext)
-
     // useEffect(() => {
     //   setInterval(() => {
     //     console.log(123);
@@ -43,11 +41,11 @@ const PDP = () => {
       const result = productList.find(product => product.id === Number(id))
       if(result) {
         setProduct(result)
-        setCurrentImg(result.images[0])
+        setCurrentImg(`http://localhost:4000/product/${result.Product_Images}`)
       }
     }, [id])
-  
     const handleBuy =() => {
+      Cart.handleAddProduct(product)
       Cart.handleOpen()
     }
 
@@ -55,29 +53,33 @@ const PDP = () => {
       setDescriptionView(e.target.getAttribute('data-name'))
     }
     
-    const handleClickCurrentImg = (product:ProductType) => { 
+    const handleClickCurrentImg = (product:ProductType2) => { 
     }
 
 
   return (
     <ProductDetail className='product-detail'>
         <BreadCrumb className='bread-crumb'>
-          <li className="breadcrumb-item">Backpacks</li>
-          <li className="breadcrumb-item">Expedition Flap Backpack</li>
+          <li className="breadcrumb-item">Collection</li>
+          <li className="breadcrumb-item">{product?.Product_Name}</li>
         </BreadCrumb>
       {product &&
         <Container className='container'>
             <ProductImageWrapper className='product-image-wrapper'>
               <div className="product-image-children-list-wrapper">
               <div className="product-image-children-list">
-                {product.images.map((img) => {
+                {/* {product.Product_Images?.map((img) => {
                     return <img 
                             src={img} 
                             data-name={img} 
                             style={img === currentImg? {opacity: 1} : {opacity: .2}}
                             onMouseOver={() => setCurrentImg(img)} className='product-image-children' alt="" />
-                })}
-                
+                })} */}
+                <img 
+                            src={`http://localhost:4000/product/${product.Product_Images}`} 
+                            data-name={product.Product_Images} 
+                            style={product.Product_Images === currentImg? {opacity: 1} : {opacity: .2}}
+                            onMouseOver={() => setCurrentImg(`http://localhost:4000/product/${product.Product_Images}`)} className='product-image-children' alt="" />
               </div>
               </div>
 
@@ -87,12 +89,12 @@ const PDP = () => {
 
             </ProductImageWrapper>
             <ProductInfo className='product-info'>
-                <ProductTitle className='product-title'>{product.title}</ProductTitle>
-                <ProductVendor className='product-vendor'>{product.brand}</ProductVendor>
+                <ProductTitle className='product-title'>{product.Product_Detail}</ProductTitle>
+                <ProductVendor className='product-vendor'>{product.Product_Group_Code}</ProductVendor>
                 <ProductPrice className='product-price'>
                     {/* <span className="new-price">${product.price.toFixed(2)}</span>
                     <span className="old-price">${product.price.toFixed(2)}</span> */}
-                    <span className="new-price">{formatMoney(product.price)}</span>
+                    <span className="new-price">{formatMoney(product.Product_Price)}</span>
                     {/* <span className="old-price">999.0000</span> */}
                 </ProductPrice>
 
@@ -162,7 +164,7 @@ const PDP = () => {
                   </DescriptionNav> 
 
                   <DescriptionContent>
-                    {product.description}
+                    {product.Product_Description}
                   </DescriptionContent>
                 </ProductDescription>
 

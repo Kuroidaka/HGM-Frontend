@@ -1,15 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import Load from "~/component/Load";
-import { ProductType } from "~/model/Product.model";
-import Navbar from "./Component/NavBar";
-import ProductSection from "./Component/Category";
 import { ProductContext, ProductContextValue } from "~/context/Context";
+import ProductSection from "./Component/Category";
+import Navbar from "./Component/NavBar";
 
 const Collection = () => {
     
     const {productList} = useContext<ProductContextValue>(ProductContext)
-    console.log('product list in collection page', productList);
+
     
     
     return ( 

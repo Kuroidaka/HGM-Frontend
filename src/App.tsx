@@ -11,7 +11,7 @@ import Login from './page/Admin/Auth/Login/Login'
 import Register from './page/Admin/Auth/Register/Register'
 import HeaderFooter from './layout/user/HeaderFooter'
 import PDP from './page/Landing/Pdp/Pdp'
-import { ProductType } from './model/Product.model'
+import { ProductType, ProductType2 } from './model/Ladingpage.model'
 import { ProductContext, ProductContextValue } from './context/Context'
 import { productApi } from './api/product/productApi'
 import { useAppSelector } from './hook'
@@ -35,7 +35,7 @@ function ScrollToTopOnLocationChange() {
 
 
 const App:FC = () => {
-  const [productList, setProductList] = useState<ProductType[]>([])
+  const [productList, setProductList] = useState<ProductType2[]>([])
   const productContextValue:ProductContextValue = {
       productList: productList
   }
@@ -51,13 +51,7 @@ const App:FC = () => {
   }, [LoggedIn])
 
   useEffect(() => {
-      productApi.getListProduct()
-      .then((data:any) => {
-          setProductList(data.products)
-      })
-      .catch(err => {
-          console.log('fail to get API');
-      })
+      productApi.search({}).then(result =>  setProductList(result?.data?.results))
   }, []);
 
   return (

@@ -8,6 +8,7 @@ import Footer from "./Component/Footer";
 import HamburgerMenu from "./Component/HamburgerMenu";
 import HeaderCom from "./Component/Header";
 import { CartContext, CartContextValue } from "~/context/Context";
+import { ProductType2 } from "~/model/Ladingpage.model";
 interface propsType {
     children: ReactNode
 }
@@ -53,6 +54,8 @@ const HeaderFooter = (props:propsType) => {
     const { children } = props
     const screenWidth = UseMedia()
     const [headerHeight, setHeaderHeight] = useState<string>('')
+    const [productList, setProductList] = useState<ProductType2[]>([])
+
     const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false)
     const [isOverlayOpen, setIsOverlayOpen] = useState<boolean>(false)
     const [isFlyoutCartOpen, setIsFlyoutCartOpen] = useState<boolean>(false)
@@ -102,13 +105,19 @@ const HeaderFooter = (props:propsType) => {
     const handleOpenFlyoutCart = () => {
         setIsOverlayOpen(!isOverlayOpen);
         setIsFlyoutCartOpen(!isFlyoutCartOpen);
-        
         (isOverlayOpen && isFlyoutCartOpen) ? closeOverlay() : openOverlay()
     }
+// function add product
 
-    const cartContextValue:CartContextValue = {
-        handleOpen: handleOpenFlyoutCart
+    const handleAddProducts = (value : ProductType2 | undefined) => {
+       if(!!value) productList.push(value);
     }
+    const cartContextValue:CartContextValue = {
+        handleOpen: handleOpenFlyoutCart,
+        productList: productList,
+        handleAddProduct: handleAddProducts
+    }
+   
 
     return ( 
         <CartContext.Provider value={cartContextValue}>
@@ -117,8 +126,8 @@ const HeaderFooter = (props:propsType) => {
                 {/* <Button title="test" height="500px" handleOnClick={handleOpenFlyoutCart}></Button> */}
                 <Overlay className="overlay" onClick={handleClickOverlay}/>
                 <HamburgerMenu isSideBarOpen={isSideBarOpen} navList={navList}/>
-                <FlyOutModal isOpen={isFlyoutCartOpen} handleToggle={handleOpenFlyoutCart}>
-                    <AddToCartFlyOut/>
+                <FlyOutModal isOpen={isFlyoutCartOpen} handleAddProduct={handleAddProducts} handleToggle={handleOpenFlyoutCart}>
+                    <AddToCartFlyOut  handleAddProduct={handleAddProducts}/>
                 </FlyOutModal>
                 <div style={{marginTop : headerHeight}}>
                     {children}

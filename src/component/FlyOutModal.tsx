@@ -1,11 +1,14 @@
 import React, { ReactNode, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { icon } from '~/assert/icon'
+import { ProductType2 } from '~/model/Ladingpage.model'
 
 interface Props {
     children: ReactNode
     isOpen: boolean
     handleToggle : () => void
+    handleAddProduct : (data: ProductType2) => void
+
 }
 
 function FlyOutModal(props: Props) {
