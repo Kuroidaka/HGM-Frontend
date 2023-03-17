@@ -1,6 +1,7 @@
 import { Col, Input, Row, Select } from 'antd'
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { CartApi } from '~/api/cartApi/cartApi'
 import Button from '~/component/Button'
 import QuantityChange from '~/component/QuantityChange'
 import { CartContext, CartContextValue } from '~/context/Context'
@@ -43,10 +44,10 @@ function AddToCartFlyOut(props: Props) {
         setSelectModel(selectModel);
     }
 
-    const handleAddressChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-        selectModel.Cart_Address = e.target.value;
-        setSelectModel(selectModel);
-    }
+    // const handleAddressChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    //     selectModel.Cart_Address = e.target.value;
+    //     setSelectModel(selectModel);
+    // }
 
     const handlePhoneNumberChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         selectModel.Cart_PhoneNumber = e.target.value;
@@ -58,15 +59,28 @@ function AddToCartFlyOut(props: Props) {
         setSelectModel(selectModel);
     }
     // Handler checkout
-    const handleOk = () => {
+    const handleOk = async () => {
+        const cartDetailArray = listProduct.map((item:ProductType2) => {
+            return {
+                Cart_Detail_Product: item.Product_Code,
+                Cart_Detail_Quantity: item.Product_Number
+            }
+        })
+        selectModel.Product_List = cartDetailArray;
+        selectModel.Cart_Code = 'test-produc1t'
+        selectModel.Status = 'New'
+        const result = await CartApi.create(selectModel);
+        
         // e.preventDefaul();
-        console.log(selectModel)
+        // const 
+        // console.log(selectModel)
+        
 
     }
     // useEffect
     useEffect(() => {
         setLoad(true)
-        const totalPrice = listProduct.reduce((preValue,curValue) => preValue+curValue.Product_Price,0)
+        const totalPrice = listProduct.reduce((preValue,curValue) => preValue+curValue.Product_Price * curValue?.Product_Number,0)
         selectModel.Cart_MethodPay = listMethod[0].value;
         setSelectModel(selectModel)
         setTotalPrice(`${totalPrice}`)
@@ -89,7 +103,7 @@ function AddToCartFlyOut(props: Props) {
                                             <div className="product-name">{product.Product_Detail}</div>
                                             <div className="price">{formatMoney(product.Product_Price)}</div>
                                         </div>
-                                        <QuantityChange small={true} />
+                                        <QuantityChange value={product?.Product_Number} small={true} />
                                     </ProductInformation>
                                 </ProductItemInner>
                             </ProductItem>)
@@ -104,7 +118,7 @@ function AddToCartFlyOut(props: Props) {
                             Address
                         </Col>
                         <Col span={18}>
-                            <Input name="Address" onChange={handleAddressChange}></Input>
+                            <Input name="Address" onChange={() => {}}></Input>
                         </Col>
                     </Row>
                     <Row style={style} >

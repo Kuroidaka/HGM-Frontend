@@ -1,23 +1,27 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { icon } from '~/assert/icon';
 
 interface Props {
     small?: boolean 
     middle?: boolean 
-    large?: boolean 
+    large?: boolean ,
+    onChange?: (data: number) => void
+    value?: number | undefined,
 
 }
 
 interface QuantityAdjustProp {
     small?: boolean 
     middle?: boolean 
-    large?: boolean 
+    large?: boolean,
+    onChange?: (data: any) => void
+  value?: number | undefined,
 }
 
-const QuantityChange:FC<Props> = (props) => {
-    const {small, middle, large} = props
-    const [quantity, setQuantity] = useState<number>(1)
+const QuantityChange  = (props: Props) => {
+    const {small, middle, large, onChange} = props
+    const [quantity, setQuantity] = useState<number>(props.value || 1)
 
     const handleDecrease = (e:any) => {
         if(quantity > 1){
@@ -33,15 +37,20 @@ const QuantityChange:FC<Props> = (props) => {
             
         }
     }
-
-    const handleInputQuantity = (e:any) => {
+    
+    const handleInputQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuantity(Number(e.target.value))
     }
+    useEffect(() => {
+      if(props.onChange){
+          props.onChange(quantity);
+      }
 
+    },[quantity])
     return (
         <QuantityAdjust small={small} middle={middle} large={large}>
             <button className='minus-btn' onClick={handleDecrease} ><icon.minus/></button>
-                <input type="number" data-quantity={quantity} value={quantity} onInput={handleInputQuantity}/>
+                <input type="number" data-quantity={quantity} value={quantity} onChange={handleInputQuantity}/>
             <button className='plus-btn' onClick={handleIncrease}><icon.plus/></button>
         </QuantityAdjust>
     )

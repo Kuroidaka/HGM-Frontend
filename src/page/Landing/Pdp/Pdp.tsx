@@ -30,13 +30,6 @@ const PDP = () => {
     let {productList} = useContext<ProductContextValue>(ProductContext)
     const [currentImg, setCurrentImg] = useState<string>('')
     const Cart = useContext<CartContextValue>(CartContext)
-    // useEffect(() => {
-    //   setInterval(() => {
-    //     console.log(123);
-
-    //   },1000)
-    // }, []);
-
     useEffect(() => {
       const result = productList.find(product => product.id === Number(id))
       if(result) {
@@ -44,11 +37,16 @@ const PDP = () => {
         setCurrentImg(`http://localhost:4000/product/${result.Product_Images}`)
       }
     }, [id])
+    const setQuantity = (data: number) => {
+      if (product){
+        product.Product_Number = data;
+      }
+  }
     const handleBuy =() => {
       Cart.handleAddProduct(product)
       Cart.handleOpen()
     }
-
+   
     const changeDescriptionView = (e:any) => {
       setDescriptionView(e.target.getAttribute('data-name'))
     }
@@ -145,7 +143,7 @@ const PDP = () => {
                         <label>Quantity:</label>
                       </div>
                       {/* change quantity */}
-                      <QuantityChange middle={true}/>
+                      <QuantityChange onChange={setQuantity} middle={true}/>
                   </SelectOption>
                   <Button handleOnClick={handleBuy} title='Add to cart' className='add-to-cart-btn' upperCase={true} width='100%' height='45px' />
                 </ProductAction>

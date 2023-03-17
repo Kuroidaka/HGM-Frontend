@@ -21,14 +21,30 @@ export interface ProductType2 {
     Product_Detail: string,
     Product_Price: number,
     Product_Images: string,
+    Product_Number: number,
+
 }
 
 export interface CartType {
-    id?: number
-    Cart_Name?: string,
+    id?: number,
     Cart_Code?: string,
-    Cart_Address?: string,
-    Cart_Note?: string,
+    Cart_Name?: string,
     Cart_PhoneNumber?: string,
-    Cart_MethodPay?: string
+    Cart_Email?: string,
+    Cart_Note?: string,
+    Customer_Code?: string,
+    Cart_MethodPay? :string,
+    Cart_Amount?: number,
+    Product_List?: CartDetailType[],
+    CartDetails? :CartDetailType[],
+    Status?: string,
+}
+
+export interface CartDetailType {
+    id?: number,
+    Cart_Detail_Product?: string,
+    Cart_Detail_Amount?: string,
+    Cart_Detail_Price?: string,
+    Cart_Detail_Quantity?: number | null,
+
 }

@@ -1,11 +1,16 @@
 
 import axios from "axios"
-import { ProductType } from "~/model/Ladingpage.model"
+import { CartType, ProductType } from "~/model/Ladingpage.model"
 import axiosClient, { axiosClientTest } from "../axiosClient"
 
 
-export const CartApi = {
 
+export const CartApi = {
+    create: (data: CartType) => {
+        const url = '/Cart/create'
+
+        return axiosClient.post<CartType>(url, data)
+    },
     getListProduct: () => {
         const url = `/products`
         
