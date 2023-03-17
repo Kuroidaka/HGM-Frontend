@@ -3,6 +3,7 @@ import styled from "styled-components";
 import About from "./Component/About";
 import Branch from "./Component/Branch";
 import CurratedPick from "./Component/CuratedPick";
+import NewArrival from "./Component/NewArrival";
 import SlideShow from "./Component/SlideShow";
 
 interface backgroundType {
@@ -27,6 +28,7 @@ const Home = () => {
                     <Branch />
                     <About />
                     <CurratedPick />
+                    <NewArrival />
                 </section>
 
             </div>

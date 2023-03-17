@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { icon } from '~/assert/icon'
 
 interface Props {}
 
@@ -14,12 +15,10 @@ function CurratedPick(props: Props) {
                 return (
                     <li className="pick-item-wrapper">
                         <div className="pick-item">
-                            <div className="pick-btn">
-                                <div className="pick-btn-title"></div>
-                                <div className="pick-icon-wrapper">
-
-                                </div>
-                            </div>
+                            <button className="pick-btn">
+                                <div className="pick-btn-title">{pickItem.title}</div>
+                                <icon.arrowLineRight />
+                            </button>
                         </div>
                     </li>
                     )
@@ -63,17 +62,38 @@ const Container = styled.div`
     .pick-list{
         display: flex;
         justify-content: space-between;
+        list-style-type: none;
         .pick-item-wrapper {
+            height: 266px;
+            width: 20%;
+            border-radius: 14px;
+            background-color: grey;
 
             .pick-item {
-                
+                width: 100%;
+                height: 100%;
+                position: relative;
+
                 .pick-btn{
+                    position: absolute;
+                    width: 60%;
+                    height: 18%;
+                    bottom: 20px;
+                    left: 0;
+                    right: 0px;
+                    margin: 0 auto;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
 
                     .pick-btn-title {
-
+                        font-size: 16px;
                     }
-                    .pick-icon-wrapper {
-
+                    svg {
+                        font-size: 21px;
                     }
                 }
             }

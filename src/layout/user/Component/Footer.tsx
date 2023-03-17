@@ -196,6 +196,7 @@ export default Footer;
 
 
 const Container = styled.div`
+    margin-top: 100px;
     width: 100vw;
     height: auto;
     background-color: #DDDDDD;

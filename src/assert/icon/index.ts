@@ -1,6 +1,6 @@
 import { AiOutlineUserAdd, AiOutlineGooglePlus } from 'react-icons/ai';
 import { MdSecurity, MdOutlineAdminPanelSettings } from 'react-icons/md'
-import { FiUser } from 'react-icons/fi'
+import { FiUser, FiArrowRight } from 'react-icons/fi'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { IoIosArrowDown, IoMdMail, IoIosArrowForward } from 'react-icons/io'
 import { FaFacebookF, FaShippingFast } from 'react-icons/fa'
@@ -53,6 +53,7 @@ export const icon = {
     satisfy: MdOutlineSentimentVerySatisfied,
     shipping: FaShippingFast,
     newArrival: GiNewShoot,
-    protect: AiOutlineFileProtect
+    protect: AiOutlineFileProtect,
+    arrowLineRight: FiArrowRight
 }
 
