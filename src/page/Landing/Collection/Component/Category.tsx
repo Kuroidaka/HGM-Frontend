@@ -17,10 +17,10 @@ const Category = () => {
     useEffect(() => {
         switch (sortType) {
             case 'Price low to high':
-                productList.sort((a,b) => { return b.price - a.price})
+                productList.sort((a,b) => { return b.Product_Price - a.Product_Price})
                 break
             case 'Price high to low':
-                productList.sort((a,b) => { return a.price - b.price})
+                productList.sort((a,b) => { return a.Product_Price - b.Product_Price})
                 break
         } 
     }, [sortType]);

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { img } from '~/assert/img'
 import Button from '~/component/Button'
-import { ProductType } from '~/model/Product.model'
+import { ProductType2 } from '~/model/Ladingpage.model'
 import { formatMoney } from '~/utils'
 
 interface Props {
-    product: ProductType
+    product: ProductType2
 }
 
 function Product(props: Props) {
@@ -19,7 +19,7 @@ function Product(props: Props) {
         <div className="product-item-inner">
             <Link to={`/product/${product.id}`} className="product-img">
                 <img 
-                    src={product.images? product.images[0] : img.noProductImg} 
+                    src={`http://localhost:4000/product/${product.Product_Images}`} 
                     alt="" />
             </Link>
 
@@ -51,16 +51,16 @@ function Product(props: Props) {
             </div> */}
 
             <div className="pdp-link">
-                <Link to={`/product/${product.id}`}>{product.title}</Link>
+                <Link to={`/product/${product.id}`}>{product.Product_Name}</Link>
             </div>
 
             <span className="vendor"> 
-                <a href="##">{product.brand}</a>
+                <a href="##">{product.Product_Group_Code}</a>
             </span>
 
             <div className="price">
                 {/* <span className="old-price">$1,150.00</span> */}
-                <span className="current-price">{formatMoney(product.price)}</span>
+                <span className="current-price">{formatMoney(product.Product_Price)}</span>
             </div>
 
             <div className="action">

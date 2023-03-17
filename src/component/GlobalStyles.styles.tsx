@@ -16,7 +16,7 @@ export const GlobalStyles = createGlobalStyle`
         --header-cart-flyout-height: 6vh;
         --light-text: #5C5C5C;
         --middle-both-text: #5F5F5F;
-        --flyout-footer-height: 100px;
+        --flyout-footer-height: 260px;
         --border-menu: #E0E0E0;
 
         /* admin */
