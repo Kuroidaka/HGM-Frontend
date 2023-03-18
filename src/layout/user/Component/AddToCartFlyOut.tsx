@@ -44,11 +44,6 @@ function AddToCartFlyOut(props: Props) {
         setSelectModel(selectModel);
     }
 
-    // const handleAddressChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    //     selectModel.Cart_Address = e.target.value;
-    //     setSelectModel(selectModel);
-    // }
-
     const handlePhoneNumberChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         selectModel.Cart_PhoneNumber = e.target.value;
         setSelectModel(selectModel);
@@ -56,6 +51,10 @@ function AddToCartFlyOut(props: Props) {
 
     const handleNoteChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         selectModel.Cart_Note = e.target.value;
+        setSelectModel(selectModel);
+    }
+    const handleAddressChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        selectModel.Address = e.target.value;
         setSelectModel(selectModel);
     }
     // Handler checkout
@@ -69,10 +68,6 @@ function AddToCartFlyOut(props: Props) {
         selectModel.Product_List = cartDetailArray;
         selectModel.Status = 'New'
         const result = await CartApi.create(selectModel);
-        
-        // e.preventDefaul();
-        // const 
-        // console.log(selectModel)
         
 
     }
@@ -117,7 +112,7 @@ function AddToCartFlyOut(props: Props) {
                             Address
                         </Col>
                         <Col span={18}>
-                            <Input name="Address" onChange={() => {}}></Input>
+                            <Input name="Address" onChange={handleAddressChange}></Input>
                         </Col>
                     </Row>
                     <Row style={style} >

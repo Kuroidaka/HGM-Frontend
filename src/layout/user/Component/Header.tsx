@@ -4,11 +4,12 @@ import { img } from "~/assert/img";
 import { icon } from "~/assert/icon";
 import Avatar from "~/component/Avatar";
 import Popper from "~/component/Popper";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
 import { NavItem } from "~/layout/user/HeaderFooter";
 import { Link } from "react-router-dom";
 import config from "~/config";
+import { CartContext, CartContextValue } from "~/context/Context";
 interface PropType {
     handleToggle: () => void
     isSideBarOpen: boolean
@@ -22,6 +23,7 @@ const HeaderCom = (props:PropType) => {
     const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)
     const [nav, setNav] = useState<boolean | undefined>()
     const screenWidth = UseMedia()
+    const Cart = useContext<CartContextValue>(CartContext)
     
     const handleClickAvatar = () => {
         setAvaToggle(!avaToggle)
@@ -38,6 +40,10 @@ const HeaderCom = (props:PropType) => {
 
     const handleClickMenuIcon = () => {
         handleToggle()
+    }
+
+    const handleOpen = (e: any) => {
+        Cart.handleOpen()
     }
 
     return (
@@ -64,7 +70,7 @@ const HeaderCom = (props:PropType) => {
 
                 <Action >
 
-                    <div className="icon"><icon.cart className="cart" /></div>
+                    <div className="icon"><icon.cart onClick={handleOpen} className="cart" /></div>
                     <div className="icon"><icon.wishList className="wist-list" /></div>
                     <div className="icon"> <Tippy
                         interactive

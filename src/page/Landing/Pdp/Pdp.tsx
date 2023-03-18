@@ -39,7 +39,6 @@ const PDP = () => {
         setProduct({
           ...result
         })
-        console.log(result)
         setCurrentImg(`http://localhost:4000/product/${result?.Product_Images_Arr?.[0]}`)
       }
     }, [id])
@@ -73,7 +72,6 @@ const PDP = () => {
               <div className="product-image-children-list-wrapper">
               <div className="product-image-children-list">
                 {product.Product_Images_Arr?.map((img) => {
-                  console.log(img)
                     return   <img 
                     src={`http://localhost:4000/product/${img}`} 
                     data-name={img} 
@@ -90,7 +88,7 @@ const PDP = () => {
 
             </ProductImageWrapper>
             <ProductInfo className='product-info'>
-                <ProductTitle className='product-title'>{product.Product_Detail}</ProductTitle>
+                <ProductTitle className='product-title'>{product.Product_Name}</ProductTitle>
                 <ProductVendor className='product-vendor'>{product.Product_Group_Code}</ProductVendor>
                 <ProductPrice className='product-price'>
                     {/* <span className="new-price">${product.price.toFixed(2)}</span>

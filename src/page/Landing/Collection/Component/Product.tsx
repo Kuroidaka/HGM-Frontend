@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { img } from '~/assert/img'
 import Button from '~/component/Button'
 import { ProductType2 } from '~/model/Ladingpage.model'
 import { formatMoney } from '~/utils'
@@ -13,11 +12,14 @@ interface Props {
 function Product(props: Props) {
     const { product } = props
     const [listImg,setlistImg] = useState<string[]>([]);
+    const navigate = useNavigate();
     useEffect(() => {
         const list: string[] = product.Product_Images.split(",");
         setlistImg(list)
     },[props])
-
+    const handleNavigate = () => {
+        navigate(`/product/${product.id}`)
+    }
     return (
     <ProductItem>
         <div className="product-item-inner">
@@ -68,7 +70,7 @@ function Product(props: Props) {
             </div>
 
             <div className="action">
-                <Button title='Quick Buy' outline={true} width='150px' />
+                <Button handleOnClick={handleNavigate} title='Quick Buy' outline={true} width='150px' />
             </div>
         </div>
     </ProductItem>

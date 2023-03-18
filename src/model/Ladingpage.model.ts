@@ -33,6 +33,7 @@ export interface CartType {
     Cart_PhoneNumber?: string,
     Cart_Email?: string,
     Cart_Note?: string,
+    Address?: string,
     Customer_Code?: string,
     Cart_MethodPay? :string,
     Cart_Amount?: number,
