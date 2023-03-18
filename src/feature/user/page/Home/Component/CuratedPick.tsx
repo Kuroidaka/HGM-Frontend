@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { ChangeEvent, MouseEvent } from 'react'
 import styled from 'styled-components'
 import { icon } from '~/assert/icon'
 import { img } from '~/assert/img'
 
-interface Props {}
+interface PickItemPropType {
+    pickItem: {
+        
+        title: string,
+        img: string,
+        hover: string
+    }
+}
 
-function CurratedPick(props: Props) {
-    const {} = props
+
+
+function CurratedPick() {
 
     return (
         <Container>
@@ -14,14 +22,8 @@ function CurratedPick(props: Props) {
             <ul className="pick-list">{
                 data.pickList.map((pickItem) => {
                 return (
-                    <li className="pick-item-wrapper">
-                        <div className="pick-item">
-                            <img src={pickItem.img} className="pick-item-img" alt='' />
-                            <button className="pick-btn">
-                                <div className="pick-btn-title">{pickItem.title}</div>
-                                <icon.arrowLineRight />
-                            </button>
-                        </div>
+                    <li className="pick-item-wrapper" >
+                       <PickItem pickItem={pickItem} />
                     </li>
                     )
                 })
@@ -33,21 +35,52 @@ function CurratedPick(props: Props) {
     )
 }
 
+const PickItem = (props:PickItemPropType) => {
+    const {pickItem} = props
+
+    const handleMouseOver = (e: MouseEvent<HTMLImageElement>): void => {
+    e.currentTarget.src = pickItem.hover;
+    }
+
+    const handleMouseOut = (e: MouseEvent<HTMLImageElement>): void => {
+    e.currentTarget.src = pickItem.img;
+    }
+
+    return (
+        <div className="pick-item">
+            <img src={pickItem.img} 
+                className="pick-item-img"
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                alt=''
+            />
+            <button className="pick-btn">
+                <div className="pick-btn-title">{pickItem.title}</div>
+                <icon.arrowLineRight />
+            </button>
+        </div>
+    )
+}
+
 const data = {
     title: "Currated picks",
     pickList: [
         {
             title: "Best Seller",
-            img: img.appleWatch
+            img: img.appleWatch,
+            hover: img.watchHover
         }, {
             title: "Phone",
-            img: img.phone
+            img: img.phone,
+            hover: img.iphoneHover
         },{
             title: "Laptop",
-            img: img.macbook
+            img: img.macbook,
+            hover: img.macbookHover
         },{
             title: "Gaming gear",
-            img: img.gaming
+            img: img.gaming,
+            hover: img.gtxHover
         },
     ]
 }
