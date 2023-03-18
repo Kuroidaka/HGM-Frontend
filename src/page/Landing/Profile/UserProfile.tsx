@@ -1,7 +1,7 @@
 import React from 'react';
 import './user.css';
-import avatar from './image/avatar.jpg';
-import banner from './image/banner.jpg';
+import avatar from 'src/assert/img/user/avatar.jpg';
+import banner from 'src/assert/img/user/banner.jpg';
 import { AiOutlineMail } from 'react-icons/ai';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { BiSearchAlt } from 'react-icons/bi';
