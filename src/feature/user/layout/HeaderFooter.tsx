@@ -10,6 +10,7 @@ import HeaderCom from "./Component/Header";
 import { CartContext, CartContextValue } from "~/context/Context";
 import { ProductType2 } from "~/model/Ladingpage.model";
 import config from "~/config";
+import { useLocation, useNavigate } from "react-router-dom";
 interface propsType {
     children: ReactNode
 }
@@ -53,7 +54,7 @@ const navList = [
     
     {
         title: 'About',
-        link: `${config.routePath.collection}` ,
+        link: `${config.routePath.about}` ,
         children: [
             {
                 item1: 'item1'
@@ -66,7 +67,7 @@ const navList = [
     },
     {
         title: 'Blog',
-        link: config.routePath.collection,
+        link: config.routePath.blog,
         children: [
             {
                 item1: 'item1'
@@ -87,7 +88,6 @@ const HeaderFooter = (props:propsType) => {
     const screenWidth = UseMedia()
     const [headerHeight, setHeaderHeight] = useState<string>('')
     const [productList, setProductList] = useState<ProductType2[]>([])
-
     const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false)
     const [isOverlayOpen, setIsOverlayOpen] = useState<boolean>(false)
     const [isFlyoutCartOpen, setIsFlyoutCartOpen] = useState<boolean>(false)
@@ -154,13 +154,13 @@ const HeaderFooter = (props:propsType) => {
     return ( 
         <CartContext.Provider value={cartContextValue}>
             <Container>
-                <HeaderCom handleToggle={handleOpenSideBar} isSideBarOpen={isSideBarOpen} navList={navList}/>
+                <HeaderCom handleToggle={handleOpenSideBar} isSideBarOpen={isSideBarOpen} navList={navList} />
                 {/* <Button title="test" height="500px" handleOnClick={handleOpenFlyoutCart}></Button> */}
                 <Overlay className="overlay" onClick={handleClickOverlay}/>
                 <HamburgerMenu isSideBarOpen={isSideBarOpen} navList={navList}/>
                 <FlyOutModal isOpen={isFlyoutCartOpen} handleAddProduct={handleAddProducts} handleToggle={handleOpenFlyoutCart}>
                     <AddToCartFlyOut  handleAddProduct={handleAddProducts}/>
-                </FlyOutModal>
+                </FlyOutModal>  
                 <div style={{marginTop : headerHeight}}>
                     {children}
                 </div>

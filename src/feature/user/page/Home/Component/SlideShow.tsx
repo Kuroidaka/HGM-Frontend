@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { img } from "~/assert/img";
 import Button from "~/component/Button";
+import config from "~/config";
 
 
 const SlideShow = () => {
@@ -28,7 +29,7 @@ const SlideShow = () => {
 
 
                 <div className="btn-wrapper">
-                <Link to={'##'} className="btn-slice">
+                <Link to={`${config.routePath.collection}`} className="btn-slice">
                     <div className="top"><span>shop now</span></div>
                     <div className="bottom"><span>shop now</span></div>
                 </Link>
@@ -49,11 +50,21 @@ const Container = styled.div `
     .slide-show{
         position: relative;
 
+        @media screen and (max-width : 768px) {
+            .video-progress-container{
+                height: 212px;
+            }
+        }
+        @media screen and (min-width : 769px) {
+             .video-progress-container{
+                height: 450px;
+            }
+        }
+
         .video-progress-container{
             overflow: hidden;
             position: relative;
             width: 100vw;
-            height: 450px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -66,7 +77,6 @@ const Container = styled.div `
         }
 
         .btn-wrapper{
-            width: 400px;
             height: 50px;
             position: absolute;
             margin-left: auto;

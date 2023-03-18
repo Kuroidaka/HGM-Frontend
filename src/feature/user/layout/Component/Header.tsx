@@ -7,12 +7,13 @@ import Popper from "~/component/Popper";
 import { useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
 import { NavItem } from "~/feature/user/layout/HeaderFooter";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import config from "~/config";
 interface PropType {
     handleToggle: () => void
     isSideBarOpen: boolean
     navList: NavItem[]
+
 }
 
 
@@ -21,8 +22,10 @@ const HeaderCom = (props:PropType) => {
 
     const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)
     const [nav, setNav] = useState<boolean | undefined>()
+    const location = useLocation()
     const screenWidth = UseMedia()
     
+
     const handleClickAvatar = () => {
         setAvaToggle(!avaToggle)
     }
@@ -36,10 +39,13 @@ const HeaderCom = (props:PropType) => {
         }
     }, [screenWidth]) 
 
+   
     const handleClickMenuIcon = () => {
         handleToggle()
     }
+    
 
+   
     return (
         <Header>
             <div className="wrapper">
@@ -48,9 +54,9 @@ const HeaderCom = (props:PropType) => {
                 </Logo>
                
                 <Navbar  style={nav ? {} : {display: 'none'}}>{
-                    navList.map(nav => {
+                    navList.map((nav, idx) => {
                     return (
-                        <li className='nav-item'> 
+                        <li className={`nav-item ${location.pathname === nav.link ? 'active': ''}`} key={idx} > 
                             <Link to={nav.link}>{nav.title}</Link>
                         </li>
                     )})}
@@ -266,6 +272,12 @@ const Navbar = styled.ul`
             color: #5B5F62;
             font-size: 15px;
             font-weight: 700;
+        }
+
+        &.active {
+            a {
+                color: black;
+            }
         }
     }
 

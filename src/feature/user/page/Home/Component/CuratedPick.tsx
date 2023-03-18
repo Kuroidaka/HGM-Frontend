@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { icon } from '~/assert/icon'
+import { img } from '~/assert/img'
 
 interface Props {}
 
@@ -15,6 +16,7 @@ function CurratedPick(props: Props) {
                 return (
                     <li className="pick-item-wrapper">
                         <div className="pick-item">
+                            <img src={pickItem.img} className="pick-item-img" alt='' />
                             <button className="pick-btn">
                                 <div className="pick-btn-title">{pickItem.title}</div>
                                 <icon.arrowLineRight />
@@ -37,7 +39,8 @@ const data = {
         {
             title: "Best Seller"
         }, {
-            title: "Phone"
+            title: "Phone",
+            img: img.phone
         },{
             title: "Laptop"
         },{
@@ -68,11 +71,39 @@ const Container = styled.div`
             width: 20%;
             border-radius: 14px;
             background-color: grey;
+            overflow: hidden;
 
             .pick-item {
                 width: 100%;
                 height: 100%;
                 position: relative;
+
+                &:hover {
+
+                    .pick-item-img{ 
+                        opacity: 1;
+                    }
+
+                    .pick-btn{
+
+                        .pick-btn-title {
+                            transform: translateX(20px);
+                            font-size: 19px;
+                        }
+                        svg {
+                            transform: translateX(60px)
+                        }
+                    }
+                    
+                }
+
+                .pick-item-img{
+                    width: 100%;
+                    height: 100%;
+                    opacity: .6;
+                    cursor: pointer;
+                    transition: all linear .2s;
+                }
 
                 .pick-btn{
                     position: absolute;
@@ -88,12 +119,15 @@ const Container = styled.div`
                     display: flex;
                     align-items: center;
                     justify-content: space-evenly;
+                    overflow: hidden;
 
                     .pick-btn-title {
                         font-size: 16px;
+                        transition: all ease-in-out .1s;
                     }
                     svg {
                         font-size: 21px;
+                        transition: all ease-in-out .1s;
                     }
                 }
             }

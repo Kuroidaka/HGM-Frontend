@@ -125,9 +125,27 @@ const Container = styled.div`
             justify-content: space-between;
             list-style-type: none;
 
+            @media screen and (max-width: 768px) {
+                flex-direction: column;
+                align-items: center;
+                gap: 41px;
+                .value-item{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            @media screen and (min-width: 769px) {
+                .value-item{
+                    width: 15%;
+                }
+            }
 
             .value-item{
-                width: 15%;
+                
                 height: auto;
                 
                 .value-icon-wrapper{

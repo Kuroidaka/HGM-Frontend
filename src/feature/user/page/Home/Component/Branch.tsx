@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { icon } from '~/assert/icon'
 
 interface Props {}
 
@@ -10,42 +11,38 @@ function Branch(props: Props) {
         <Container>
             <div className="branch-list-title"> <h2>Branch</h2> </div>
 
-            <ul className="branch-list">
-                <li className='branch'>
-                    <div className="img-wrapper">
-                        {/* <img src="" alt="" /> */}
-                    </div>
-                </li>
-                <li className='branch'>
-                    <div className="img-wrapper">
-                        {/* <img src="" alt="" /> */}
-                    </div>
-                </li>
-                <li className='branch'>
-                    <div className="img-wrapper">
-                        {/* <img src="" alt="" /> */}
-                    </div>
-                </li>
-                <li className='branch'>
-                    <div className="img-wrapper">
-                        {/* <img src="" alt="" /> */}
-                    </div>
-                </li>
-                <li className='branch'>
-                    <div className="img-wrapper">
-                        {/* <img src="" alt="" /> */}
-                    </div>
-                </li>
-                <li className='branch'>
-                    <div className="img-wrapper">
-                        {/* <img src="" alt="" /> */}
-                    </div>
-                </li>
-
+            <ul className="branch-list">{
+                listBranch.map((branch) => {
+                return (
+                    <li className='branch'>
+                        <div className="img-wrapper">
+                            {branch.icon}
+                        </div>
+                    </li>
+                )
+                })
+            }
             </ul>
         </Container>
     )
 }
+
+const listBranch = [
+    {
+        icon: <icon.apple style={{color: '#959595'}}/> 
+    },{
+        icon: <icon.samsung style={{color: '#132798'}} /> 
+    },{
+        icon: <icon.xiaomi style={{color: '#EA5C06'}}/> 
+    },{
+        icon: <icon.nokia style={{color: '#1B4291'}}/> 
+    },{
+        icon: <icon.sony style={{color: '#1B4291'}}/> 
+    },{
+        icon: <icon.hp style={{color: '#298ECB'}}/> 
+    },
+
+]
 
 export default Branch
 
@@ -66,6 +63,8 @@ const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
 
         .branch {
             height: 100px;
@@ -73,10 +72,22 @@ const Container = styled.div`
             .img-wrapper{
                 width: 100%;
                 height: 100%;
-                background-color: grey;
-                img {
 
+                @media screen and (min-width: 769px) {
+                    svg {
+                        font-size: 100px;
+                    }
                 }
+                @media screen and (max-width: 768px) {
+                    svg {
+                        font-size: 86px;
+                    }
+                }
+
+                svg {
+                    color: gray;
+                }
+                
             }
         }
     }
