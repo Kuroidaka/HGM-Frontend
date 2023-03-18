@@ -9,7 +9,7 @@ import { BsCart2 } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus, AiOutlineLogin } from 'react-icons/ai'
-import { BiUser } from 'react-icons/bi'
+import { BiUser, BiEditAlt } from 'react-icons/bi'
 import { RiMenu5Line } from 'react-icons/ri'
 import { BsTelephoneFill, BsTwitter, BsInstagram, BsYoutube, BsSuitHeartFill } from 'react-icons/bs'
 import { TfiPinterest } from 'react-icons/tfi'
@@ -48,6 +48,7 @@ export const icon = {
     instagram: BsInstagram,
     youtube: BsYoutube,
     close: VscChromeClose,
-    login: AiOutlineLogin
+    login: AiOutlineLogin,
+    edit: BiEditAlt
 }
 

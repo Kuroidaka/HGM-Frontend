@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { icon } from "~/assert/icon";
+import { icon } from "~/assert/icon/icon";
 import { NavItem } from "../HeaderFooter";
 
 interface PropType { 

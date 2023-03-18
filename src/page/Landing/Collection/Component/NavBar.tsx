@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { icon } from "~/assert/icon";
+import { icon } from "~/assert/icon/icon";
 
 const cardLine = [
     {

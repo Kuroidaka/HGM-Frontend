@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Tippy from "@tippyjs/react/headless";
 import { img } from "~/assert/img";
-import { icon } from "~/assert/icon";
+import { icon } from "~/assert/icon/icon";
 import Avatar from "~/component/Avatar";
 import Popper from "~/component/Popper";
 import { useEffect, useState } from "react";

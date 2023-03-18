@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { icon } from "~/assert/icon";
+import { icon } from "~/assert/icon/icon";
 import { ToastContainer, toast } from 'react-toastify';
 
 import "react-toastify/dist/ReactToastify.css";
