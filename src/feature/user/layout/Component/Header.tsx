@@ -43,26 +43,36 @@ const HeaderCom = (props:PropType) => {
     return (
         <Header>
             <div className="wrapper">
-                <div className="left-part">
-                    <div className="menu-icon" onClick={handleClickMenuIcon}>
-                        {isSideBarOpen ? <icon.close/>: <icon.menu/>}
-                    </div>
-                    <Search className="search">
-                        <input type="text" spellCheck={false} placeholder="Search product..." />
-                        {/* <icon.search className="icon"/>    */}
-                        <icon.loading className="icon loading" />
-                    </Search>
-
-                    <div className="icon">
-                        <icon.search className="search-icon" />
-                    </div>
-
-                </div>
                 <Logo to={config.routePath.home}>
                     <img src={img.logo} alt="" />
                 </Logo>
+               
+                <Navbar  style={nav ? {} : {display: 'none'}}>{
+                    navList.map(nav => {
+                    return (
+                        <li className='nav-item'> 
+                            <Link to={nav.link}>{nav.title}</Link>
+                        </li>
+                    )})}
+                </Navbar>
+                
 
                 <Action >
+                    <div className="left-part">
+                        <div className="menu-icon" onClick={handleClickMenuIcon}>
+                            {isSideBarOpen ? <icon.close/>: <icon.menu/>}
+                        </div>
+                        <Search className="search">
+                            <input type="text" spellCheck={false} placeholder="Search product..." />
+                            {/* <icon.search className="icon"/>    */}
+                            <icon.loading className="icon loading" />
+                        </Search>
+
+                        <div className="icon">
+                            <icon.search className="search-icon" />
+                        </div>
+
+                    </div>
 
                     <div className="icon"><icon.cart className="cart" /></div>
                     <div className="icon"><icon.wishList className="wist-list" /></div>
@@ -98,7 +108,7 @@ const HeaderCom = (props:PropType) => {
                 </Action>
             </div>
 
-            <Navbar className="nav-list" style={nav ? {} : {display: 'none'}}>
+            {/* <Navbar className="nav-list" style={nav ? {} : {display: 'none'}}>
                 {navList.map((nav: NavItem, idx) => {
                     return (
                         <Tippy
@@ -116,11 +126,27 @@ const HeaderCom = (props:PropType) => {
                         </Tippy>
                     )
                     })}
-            </Navbar>
+            </Navbar> */}
 
         </Header>
     );
 }
+
+const navList =[
+    {
+        title: 'Home',
+        link: config.routePath.home
+    },{
+        title: 'Product',
+        link: config.routePath.collection
+    },{
+        title: 'About',
+        link: '/'
+    },{
+        title: 'Blog',
+        link: '/'
+    },
+]
 
 export default HeaderCom;
 
@@ -151,7 +177,7 @@ border-bottom: 1px solid #E0E0E0;
 @media screen and (min-width: 992px) {
     
     .wrapper {   
-        padding: 0 50px;
+        max-width: 1400px;
         width: 100%;
         height: var(--header-bar-height);
 
@@ -232,17 +258,15 @@ const Navbar = styled.ul`
     justify-content: center;
     align-items: center;
     gap: 30px;
-    background-color: black;
     padding: 10px;
-    height: var(--header-nav-height);
+    height: 100%;
     
     .nav-item {
-        color: white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        text-transform: uppercase;
+        a {
+            color: #5B5F62;
+            font-size: 15px;
+            font-weight: 700;
+        }
     }
 
 `
@@ -290,8 +314,9 @@ const Action = styled.div`
 display: flex;
 gap: 30px;
 align-items: center;
-flex: 1 0 0;
+
 justify-content: flex-end;
+
 
 @media screen and (max-width: 991px) { 
 

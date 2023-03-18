@@ -5,19 +5,19 @@ import styled from 'styled-components'
 import { GlobalStyles } from './component/GlobalStyles.styles'
 import Load from './component/Load'
 import config from './config'
-import Home from './feature/user/page/Home/Home'
-import Collection from './feature/user/page/Collection/Collection'
+import Home from './feature/user/page/Landing/Home/Home'
+import Collection from './feature/user/page/Landing/Collection/Collection'
 import Login from './feature/admin/page/Auth/Login/Login'
 import Register from './feature/admin/page/Auth/Register/Register'
 import HeaderFooter from './feature/user/layout/HeaderFooter'
-import PDP from './feature/user/page/Pdp/Pdp'
+import PDP from './feature/user/page/Landing/Pdp/Pdp'
 import { ProductType, ProductType2 } from './model/Ladingpage.model'
 import { ProductContext, ProductContextValue } from './context/Context'
 import { productApi } from './api/product/productApi'
 import { useAppSelector } from './hook'
 import { selectCurrentUser, selectLoggedIn } from './redux/auth.slice'
 import HeaderSideBar from './feature/admin/layout/HeaderSideBar'
-import Profile from './feature/user/page/Profile/Profile'
+// import Profile from './feature/user/page/Landing/Profile/Profile'
 import AddUser from '~/feature/admin/page/ManageUser/ManageUser'
 import ManageTeam from './feature/admin/page/Employee/Employee_Add'
 import ContactInfo from './feature/admin/page/ContactInfo/ContactInfo'
@@ -67,7 +67,6 @@ const App:FC = () => {
           {currentUser &&
           <Fragment>
           <Route path={config.adminRoutePath.dashboard} element={<HeaderSideBar><Dashboard /></HeaderSideBar>}/>
-          <Route path={config.adminRoutePath.profile} element={<HeaderSideBar><Profile /></HeaderSideBar>}/>
           <Route path={config.adminRoutePath.addUser} element={<HeaderSideBar><AddUser /></HeaderSideBar>}/>
           <Route path={config.adminRoutePath.manageTeam} element={<HeaderSideBar><ManageTeam /></HeaderSideBar>}/>
           <Route path={config.adminRoutePath.userContact} element={<HeaderSideBar><ContactInfo /></HeaderSideBar>}/>

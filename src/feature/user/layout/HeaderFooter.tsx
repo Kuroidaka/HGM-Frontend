@@ -9,6 +9,7 @@ import HamburgerMenu from "./Component/HamburgerMenu";
 import HeaderCom from "./Component/Header";
 import { CartContext, CartContextValue } from "~/context/Context";
 import { ProductType2 } from "~/model/Ladingpage.model";
+import config from "~/config";
 interface propsType {
     children: ReactNode
 }
@@ -18,12 +19,14 @@ export interface NavItem  {
     children: {
         item1: string
     }[]
+    link: string
     show: boolean
 }
 
 const navList = [
     {
-        title: 'new arrivals',
+        title: 'Home',
+        link: config.routePath.home,
         children: [
             {
                 item1: 'Male'
@@ -35,7 +38,8 @@ const navList = [
         show: false
     },
     {
-        title: 'collection',
+        title: 'Product',
+        link: config.routePath.collection,
         children: [
             {
                 item1: 'item1'
@@ -46,6 +50,34 @@ const navList = [
         ],
         show: false
     },
+    
+    {
+        title: 'About',
+        link: `${config.routePath.collection}` ,
+        children: [
+            {
+                item1: 'item1'
+            },
+            {
+                item1: 'item1'
+            },
+        ],
+        show: false
+    },
+    {
+        title: 'Blog',
+        link: config.routePath.collection,
+        children: [
+            {
+                item1: 'item1'
+            },
+            {
+                item1: 'item1'
+            },
+        ],
+        show: false
+    },
+
   
 
 ]

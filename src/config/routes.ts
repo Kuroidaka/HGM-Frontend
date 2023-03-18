@@ -2,11 +2,11 @@
 // user
 export const routePath = {
     home: '/',
-    login: 'login',
-    register: 'register',
-    profile: 'profile',
-    collection: 'collection',
-    product: 'product/:id'
+    login: '/login',
+    register: '/register',
+    profile: '/profile',
+    collection: '/collection',
+    product: '/product/:id'
 }
 
 // admin

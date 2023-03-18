@@ -15,6 +15,7 @@ import { BsTelephoneFill, BsTwitter, BsInstagram, BsYoutube, BsSuitHeartFill } f
 import { TfiPinterest } from 'react-icons/tfi'
 import { ImPlus, ImMinus } from 'react-icons/im'
 import { GiNewShoot } from 'react-icons/gi'
+import { SiApple, SiSamsung, SiXiaomi, SiNokia, SiHp, SiSnyk } from 'react-icons/si'
 
 
 
@@ -54,6 +55,12 @@ export const icon = {
     shipping: FaShippingFast,
     newArrival: GiNewShoot,
     protect: AiOutlineFileProtect,
-    arrowLineRight: FiArrowRight
+    arrowLineRight: FiArrowRight,
+    apple: SiApple,
+    samsung: SiSamsung,
+    xiaomi: SiXiaomi,
+    nokia: SiNokia,
+    hp: SiHp,
+    sony: SiSnyk
 }
 
