@@ -37,14 +37,17 @@ const data = {
     title: "Currated picks",
     pickList: [
         {
-            title: "Best Seller"
+            title: "Best Seller",
+            img: img.appleWatch
         }, {
             title: "Phone",
             img: img.phone
         },{
-            title: "Laptop"
+            title: "Laptop",
+            img: img.macbook
         },{
-            title: "Gaming gear"
+            title: "Gaming gear",
+            img: img.gaming
         },
     ]
 }

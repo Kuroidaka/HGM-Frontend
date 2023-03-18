@@ -6,7 +6,11 @@ const img = {
     defaultAvatar: require('~/assert/img/default-avatar.png'),
     background: require('~/assert/img/background/Fuji_Vday_LP1_en.jpg'),
     noProductImg: require('~/assert/img/no-product-img.jpeg'),
-    phone: require('~/assert/img/currapick/phone.webp')
+    phone: require('~/assert/img/currapick/phone.webp'),
+    appleWatch: require('~/assert/img/currapick/applewatch.webp'),
+    macbook: require('~/assert/img/currapick/macbook.webp'),
+    gaming: require('~/assert/img/currapick/gaming.webp'),
+
 }
 
 export { img }
