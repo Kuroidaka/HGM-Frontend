@@ -100,7 +100,7 @@ const Login:FC<LoginProps> = () => {
 
                     <div className="ask">
                         <p>Do not have account already ? </p>
-                        <Link to={config.adminRoutePath.register}>REGISTER</Link>
+                        <Link to={ "/admin/" + config.adminRoutePath.register}>REGISTER</Link>
                     </div>
                 </div>
                 <div className="link">

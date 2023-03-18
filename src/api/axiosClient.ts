@@ -31,7 +31,7 @@ axiosClientTest.interceptors.response.use((res:AxiosResponse<any, any>) => {
 // api
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:8888/api/v1',
+    baseURL: 'http://localhost:4000/api/v1',
     headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`

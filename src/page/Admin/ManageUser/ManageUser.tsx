@@ -22,6 +22,12 @@ export interface UserPropType extends User {
 
 }
 
+interface Response extends AxiosResponse {
+   data :  {
+        data: User[]
+   }
+}
+
 interface optionsType {
     year: string
     month: string
@@ -67,9 +73,10 @@ const ManageUser = () => {
         }
 
         userApi.search(data)
-        .then((res:AxiosResponse<User[]>) => {
-            console.log('get all user',res.data);
-            setUserList(res.data.reverse())
+        .then((res:Response) => {
+            console.log('get all user',res.data.data);
+            const response = res.data.data
+            setUserList(response)
         })
     }, [])
 

@@ -34,10 +34,10 @@ function* handleLogin(payload: loginPayload) {
 
             yield put({type: loginFail.type, payload: res.msg})
         }
-        else if(res.data.token){
+        else if(res.data.accessToken.token){
             // yield fork(storeToken, res.token)
 
-            const token = res.data.token
+            const token = res.data.accessToken.token
             localStorage.setItem('token', token)
             const decode = jwt_decode<UserToken>(token)
             const user:ResponseGenerator = yield call(userApi.getUserById, decode.id, token)

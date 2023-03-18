@@ -140,7 +140,7 @@ const Register:FC<RegisterProps> = () => {
 
                     <div className="ask">
                         <p>Already have account ? </p>
-                        <Link to={config.adminRoutePath.login}>LOGIN</Link>
+                        <Link to={"/admin/" + config.adminRoutePath.login}>LOGIN</Link>
                     </div>
                 </div>
                 <div className="link">
