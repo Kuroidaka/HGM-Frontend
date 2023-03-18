@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import config from '~/config'
 import { icon } from "~/assert/icon";
 import { img } from "~/assert/img";
-import { selectLogError, selectLoggedIn, selectLogMsg, selectCurrentUser, selectLogging } from "../../../../redux/auth.slice";
+import { selectLogError, selectLoggedIn, selectLogMsg, selectCurrentUser, selectLogging } from "../../../../../redux/auth.slice";
 import { useAppDispatch, useAppSelector } from "~/hook";
 import { login } from "~/redux/auth.slice";
 

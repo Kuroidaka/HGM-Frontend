@@ -6,7 +6,7 @@ import Avatar from "~/component/Avatar";
 import Popper from "~/component/Popper";
 import { useEffect, useState } from "react";
 import { UseMedia } from "~/hook";
-import { NavItem } from "~/layout/user/HeaderFooter";
+import { NavItem } from "~/feature/user/layout/HeaderFooter";
 import { Link } from "react-router-dom";
 import config from "~/config";
 interface PropType {

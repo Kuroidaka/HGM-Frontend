@@ -2,7 +2,7 @@ import { Button, DatePicker, Form, Input, Modal, Space, Table } from 'antd';
 import styled from 'styled-components';
 import { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
-import { employeeApi } from '../../../api/employee/employee.api';
+import { employeeApi } from '../../../../api/employee/employee.api';
 import DeleteComponent from './Employee_Delete'
 import EmployeeUpdate from './Employee_Update'
 import './css/Employee.css';

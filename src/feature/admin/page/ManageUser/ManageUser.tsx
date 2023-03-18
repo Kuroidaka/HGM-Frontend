@@ -3,8 +3,8 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import styled from 'styled-components'
 import { img } from '~/assert/img';
 import { icon } from '~/assert/icon';
-import AddNewUser from '~/page/Admin/ManageUser/Component/AddNewUser';
-import EditUser from '~/page/Admin/ManageUser/Component/EditUser';
+import AddNewUser from '~/feature/admin/page/ManageUser/Component/AddNewUser';
+import EditUser from '~/feature/admin/page/ManageUser/Component/EditUser';
 
 import Button from '~/component/Button';
 import Avatar from '~/component/Avatar';

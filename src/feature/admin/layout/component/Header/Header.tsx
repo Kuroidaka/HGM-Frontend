@@ -5,7 +5,7 @@ import { RiNotification4Line } from 'react-icons/ri'
 import { BiUser } from 'react-icons/bi'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
-import { inputWrapRefProps } from "~/layout/admin/HeaderSideBar";
+import { inputWrapRefProps } from "~/feature/admin/layout/HeaderSideBar";
 import Tippy from "@tippyjs/react/headless";
 import NotifyPopper from "./NotifyPopper";
 

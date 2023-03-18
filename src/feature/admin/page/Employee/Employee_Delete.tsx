@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
-import { employeeApi } from '../../../api/employee/employee.api';
+import { employeeApi } from '../../../../api/employee/employee.api';
 interface id {
     firstName: string;
     lastName: string;
