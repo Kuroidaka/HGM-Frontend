@@ -37,11 +37,11 @@ const data = {
         {
             title: "Best Seller"
         }, {
-            title: "Shop Men"
+            title: "Phone"
         },{
-            title: "Shop Women"
+            title: "Laptop"
         },{
-            title: "Shop Cassual"
+            title: "Gaming gear"
         },
     ]
 }

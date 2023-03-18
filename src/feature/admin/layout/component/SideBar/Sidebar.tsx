@@ -45,7 +45,7 @@ const Sidebar:FC<SidebarProps> = (props) => {
             <header >
                 <img src={img.logo} alt="logo"  onClick={handleClickLogo}/>
             </header>
-        <Container>
+        <Container sidebarOpen={sidebarOpen}>
             <div className="info">
 
             {/* just active when sidebar's width is being shrunk */}
@@ -97,8 +97,8 @@ const Sidebar:FC<SidebarProps> = (props) => {
 export default Sidebar;
 
 const SidebarStyle = styled.div<SidebarStyleProps>`
-    max-width: 225px;
-    width: 100%;
+    max-width: 240px;
+    width: ${({ sidebarOpen }) => sidebarOpen ? 'inherit' : '68px'};
     height: calc(100% - var(--header-height));
     background-color: var(--primary_admin);
     transition: width .2s ease-in-out;
@@ -125,6 +125,7 @@ const SidebarStyle = styled.div<SidebarStyleProps>`
         justify-content: flex-start;
         align-items: center;
         gap: 5px;
+        
 
         .avatar-wrap {
             cursor: pointer;
@@ -143,9 +144,11 @@ const SidebarStyle = styled.div<SidebarStyleProps>`
     }   
 `
 
-const Container = styled.div`
+const Container = styled.div<SidebarStyleProps>`
     height: 100%;
-    width: 100%;
+    transition: width .2s ease-in-out;
+    width: ${({ sidebarOpen }) => sidebarOpen ? '235px' : '68px'};
+    position: fixed;
     background-color: var(--third_admin);
     border-top-right-radius: 20px;
     padding: 0 12px;
