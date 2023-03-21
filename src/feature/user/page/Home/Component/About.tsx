@@ -26,9 +26,9 @@ function About(props: Props) {
             <section className='we-provide-value'>
 
                 <ul className='value-list'>{
-                    data.provide.map((valueItem) => {
+                    data.provide.map((valueItem, idx) => {
                         return (
-                            <li className='value-item'>
+                            <li className='value-item' key={idx}>
                                 <div className="value-icon-wrapper">
                                     {valueItem.icon}
                                 </div>

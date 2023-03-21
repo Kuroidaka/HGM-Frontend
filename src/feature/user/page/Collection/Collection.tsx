@@ -19,17 +19,11 @@ const Collection = () => {
             </div>
 
             <Content className="main-content">
-                
-                <nav className="side-bar-nav">
-                    <Navbar />
-                </nav>
-
+                <Navbar />
                 <div className="collection">
-                    {productList && 
-                    <ProductSection />
-                    }
+                {productList && 
+                    <ProductSection />}
                 </div>
-
             </Content>
         </Container>
      );
@@ -48,22 +42,12 @@ const Container = styled.div `
 
 const Content = styled.div `
     display: flex;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: auto;
     padding-top: 20px;
 
-@media screen and (max-width: 992px) {
-    nav {
-        display: none;
-    }
-}
-
-    nav {
-        flex: 22%;
-    }
-
     .collection {
-        flex: 88%;
+        flex: 1 0 80%;
     }
 
 `

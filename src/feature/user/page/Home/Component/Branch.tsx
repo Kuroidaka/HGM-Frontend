@@ -12,9 +12,9 @@ function Branch(props: Props) {
             <div className="branch-list-title"> <h2>Branch</h2> </div>
 
             <ul className="branch-list">{
-                listBranch.map((branch) => {
+                listBranch.map((branch, idx) => {
                 return (
-                    <li className='branch'>
+                    <li className='branch' key={idx}>
                         <div className="img-wrapper">
                             {branch.icon}
                         </div>

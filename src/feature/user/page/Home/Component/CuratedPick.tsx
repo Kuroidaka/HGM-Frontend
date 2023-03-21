@@ -20,9 +20,9 @@ function CurratedPick() {
         <Container>
             <div className="pick-list-title"> <h2>Currated Picks</h2> </div>
             <ul className="pick-list">{
-                data.pickList.map((pickItem) => {
+                data.pickList.map((pickItem, idx) => {
                 return (
-                    <li className="pick-item-wrapper" >
+                    <li className="pick-item-wrapper" key={idx} >
                        <PickItem pickItem={pickItem} />
                     </li>
                     )

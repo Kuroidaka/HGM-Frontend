@@ -7,21 +7,15 @@ import Load from './component/Load'
 import config from './config'
 import Home from './feature/user/page//Home/Home'
 import Collection from './feature/user/page//Collection/Collection'
-import Login from './feature/admin/page/Auth/Login/Login'
-import Register from './feature/admin/page/Auth/Register/Register'
+
 import HeaderFooter from './feature/user/layout/HeaderFooter'
 import PDP from './feature/user/page//Pdp/Pdp'
 import { ProductType, ProductType2 } from './model/Ladingpage.model'
 import { ProductContext, ProductContextValue } from './context/Context'
-import { productApi } from './api/product/productApi'
+import { productApi, productApiTest } from './api/product/productApi'
 import { useAppSelector } from './hook'
 import { selectCurrentUser, selectLoggedIn } from './redux/auth.slice'
-import HeaderSideBar from './feature/admin/layout/HeaderSideBar'
-// import Profile from './feature/user/page//Profile/Profile'
-import AddUser from '~/feature/admin/page/ManageUser/ManageUser'
-import ManageTeam from './feature/admin/page/Employee/Employee_Add'
-import ContactInfo from './feature/admin/page/ContactInfo/ContactInfo'
-import Dashboard from './feature/admin/page/Dashboard/Dashboard'
+
 
 function ScrollToTopOnLocationChange() {
   const { pathname } = useLocation();
@@ -34,6 +28,7 @@ function ScrollToTopOnLocationChange() {
 }
 
 
+
 const App:FC = () => {
   const [productList, setProductList] = useState<ProductType2[]>([])
   const productContextValue:ProductContextValue = {
@@ -43,47 +38,40 @@ const App:FC = () => {
   const LoggedIn = useAppSelector(selectLoggedIn)
   const navigate = useNavigate()
   const location = useLocation()
-
+  const { home, collection} = config.routePath
   useEffect(() => {
       if(!LoggedIn && location.pathname.split('/')[1] === 'admin') {
           navigate(`admin/${config.adminRoutePath.login}`)
       }
   }, [LoggedIn])
 
+  // useEffect(() => {
+  //     productApi.search({}).then(result =>  setProductList(result?.data?.results))
+  // }, []);
+
+
   useEffect(() => {
-      productApi.search({}).then(result =>  setProductList(result?.data?.results))
+      productApiTest.getListProduct()
+      .then((res:any) => {
+          setProductList(res.products)
+      })
   }, []);
 
+
   return (
-   <Container>
-  <GlobalStyles />
-  <ScrollToTopOnLocationChange />
-  <ProductContext.Provider value={productContextValue}>
     <Suspense fallback={<Load/>}>
-      <Routes>
-        <Route path='/admin/*' >
-          <Route path={config.adminRoutePath.login} element={<Login />}/>
-          <Route path={config.adminRoutePath.register} element={<Register />}/>
-          {currentUser &&
-          <Fragment>
-          <Route path={config.adminRoutePath.dashboard} element={<HeaderSideBar><Dashboard /></HeaderSideBar>}/>
-          <Route path={config.adminRoutePath.addUser} element={<HeaderSideBar><AddUser /></HeaderSideBar>}/>
-          <Route path={config.adminRoutePath.manageTeam} element={<HeaderSideBar><ManageTeam /></HeaderSideBar>}/>
-          <Route path={config.adminRoutePath.userContact} element={<HeaderSideBar><ContactInfo /></HeaderSideBar>}/>
-          </Fragment> 
-          }
-        </Route>
-      
-        <Route path='/' >
-          <Route path={config.routePath.home} element={ <HeaderFooter> <Home /></HeaderFooter> } />
-          <Route path={config.routePath.collection} element={<HeaderFooter> <Collection/> </HeaderFooter>}/>
-          <Route path={config.routePath.product} element={ <HeaderFooter><PDP/></HeaderFooter>}/>
-        </Route>
-           
-      </Routes>
+      <Container>
+        <GlobalStyles />
+        <ScrollToTopOnLocationChange />
+        <ProductContext.Provider value={productContextValue}>
+          <Routes>
+              <Route path={home} element={ <HeaderFooter> <Home /></HeaderFooter> } />
+              <Route path={collection} element={<HeaderFooter> <Collection/> </HeaderFooter>}/>
+              <Route path='/product/:id' element={ <HeaderFooter><PDP/></HeaderFooter>}/>
+          </Routes>
+        </ProductContext.Provider>
+      </Container>
     </Suspense>
-  </ProductContext.Provider>
-   </Container>
   );
 }
 

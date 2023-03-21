@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { img } from '~/assert/img'
 import Button from '~/component/Button'
+import config from '~/config'
 import { ProductType2 } from '~/model/Ladingpage.model'
 import { formatMoney } from '~/utils'
 
@@ -18,33 +19,12 @@ function Product(props: Props) {
     <ProductItem>
         <div className="product-item-inner">
             <Link to={`/product/${product.id}`} className="product-img">
-                <img 
+                {/* <img 
                     src={`http://localhost:4000/product/${product.Product_Images}`} 
-                    alt="" />
+                    alt="" /> */}
             </Link>
 
             {/* <div className="color-selector"> 
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
-                <div className="color-wrapper">
-                    <div className="color"></div>
-                </div>
                 <div className="color-wrapper">
                     <div className="color"></div>
                 </div>

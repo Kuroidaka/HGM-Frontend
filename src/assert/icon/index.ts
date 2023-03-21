@@ -8,7 +8,7 @@ import { VscSearch, VscChromeClose } from 'react-icons/vsc'
 import { BsCart2 } from 'react-icons/bs'
 import { BsHeart } from 'react-icons/bs'
 import { MdKeyboardArrowDown, MdOutlineSentimentVerySatisfied } from 'react-icons/md'
-import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus, AiOutlineLogin, AiOutlineFileProtect } from 'react-icons/ai'
+import { AiOutlineLoading3Quarters, AiOutlineSetting, AiOutlineLogout, AiOutlinePlus, AiOutlineMinus, AiOutlineLogin, AiOutlineFileProtect, AiFillMessage } from 'react-icons/ai'
 import { BiUser } from 'react-icons/bi'
 import { RiMenu5Line } from 'react-icons/ri'
 import { BsTelephoneFill, BsTwitter, BsInstagram, BsYoutube, BsSuitHeartFill } from 'react-icons/bs'
@@ -61,6 +61,7 @@ export const icon = {
     xiaomi: SiXiaomi,
     nokia: SiNokia,
     hp: SiHp,
-    sony: SiSnyk
+    sony: SiSnyk,
+    chatBox: AiFillMessage
 }
 

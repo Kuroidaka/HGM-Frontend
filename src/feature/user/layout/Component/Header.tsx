@@ -53,15 +53,21 @@ const HeaderCom = (props:PropType) => {
                     <img src={img.logo} alt="" />
                 </Logo>
                
-                <Navbar  style={nav ? {} : {display: 'none'}}>{
-                    navList.map((nav, idx) => {
-                    return (
-                        <li className={`nav-item ${location.pathname === nav.link ? 'active': ''}`} key={idx} > 
-                            <Link to={nav.link}>{nav.title}</Link>
-                        </li>
-                    )})}
+                <Navbar  style={nav ? {} : {display: 'none'}}>
+                    <li className={`nav-item ${location.pathname === config.routePath.home? 'active': ''}`}> 
+                        <Link to={config.routePath.home}>Home</Link>
+                    </li>
+                    <li className={`nav-item ${location.pathname === config.routePath.collection? 'active': ''}`}> 
+                        <Link to={config.routePath.collection}>Product</Link>
+                    </li>
+                    <li className={`nav-item ${location.pathname === config.routePath.about? 'active': ''}`}> 
+                        <Link to={config.routePath.about}>About</Link>
+                    </li>
+                    <li className={`nav-item ${location.pathname === config.routePath.blog? 'active': ''}`}> 
+                        <Link to={config.routePath.blog}>Blog</Link>
+                    </li>
+
                 </Navbar>
-                
 
                 <Action >
                     <div className="left-part">
@@ -137,22 +143,6 @@ const HeaderCom = (props:PropType) => {
         </Header>
     );
 }
-
-const navList =[
-    {
-        title: 'Home',
-        link: config.routePath.home
-    },{
-        title: 'Product',
-        link: config.routePath.collection
-    },{
-        title: 'About',
-        link: '/'
-    },{
-        title: 'Blog',
-        link: '/'
-    },
-]
 
 export default HeaderCom;
 
