@@ -102,4 +102,9 @@ export const GlobalStyles = createGlobalStyle`
     .mb-8{
         margin-bottom: 8px!important;
     }
+
+    //Turn Off GPX video on Opera GX
+    #detach-button-host {
+        display: none;
+    }
 `

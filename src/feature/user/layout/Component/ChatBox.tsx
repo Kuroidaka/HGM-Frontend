@@ -16,7 +16,7 @@ interface ChatHoverType {
 }
 
 export default function ChatBox() {
-    const [isHoverChat, setIsHoverChat] = useState<Number>()
+    const [isHoverChat, setIsHoverChat] = useState<Number>(-1)
 
 
     const handleOpenChat = () => {
@@ -57,7 +57,9 @@ export default function ChatBox() {
                 <ChatList className='list-chat'>{
                   data.user &&  data.user.map((user) => {
                     return (
-                    <Tippy
+                    
+                    <ChatItem className='chat-item' onMouseOver={() => handleHoverChat(user)}>
+                        <Tippy
                         interactive
                         visible={user.id === isHoverChat}
                         placement="auto"
@@ -67,13 +69,12 @@ export default function ChatBox() {
                             <PopperPVMess user={user}/>
                             )
                         }}
-                    >
-                        <ChatItem className='chat-item' onMouseOver={() => handleHoverChat(user)}>
+                        >        
                             <div className="chat-user">
                                 <img src={user.img} alt="" />
                             </div>
-                        </ChatItem>
-                    </Tippy>
+                        </Tippy>
+                    </ChatItem>
                     )
                     })
                 }
@@ -193,10 +194,10 @@ const ChatList = styled.ul`
     align-items: center;
     transition: all linear 200ms;
     transition-delay: 0 1s;
+    opacity: 0;
 `
 
 const ChatItem = styled.li`
-
     .chat-user {
         z-index: 9999;
         width: 50px;

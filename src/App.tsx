@@ -15,6 +15,7 @@ import { ProductContext, ProductContextValue } from './context/Context'
 import { productApi, productApiTest } from './api/product/productApi'
 import { useAppSelector } from './hook'
 import { selectCurrentUser, selectLoggedIn } from './redux/auth.slice'
+import AboutUs from './feature/user/page/AboutUs/AboutUs'
 
 
 function ScrollToTopOnLocationChange() {
@@ -38,7 +39,7 @@ const App:FC = () => {
   const LoggedIn = useAppSelector(selectLoggedIn)
   const navigate = useNavigate()
   const location = useLocation()
-  const { home, collection} = config.routePath
+  const { home, collection, productId, about} = config.routePath
   useEffect(() => {
       if(!LoggedIn && location.pathname.split('/')[1] === 'admin') {
           navigate(`admin/${config.adminRoutePath.login}`)
@@ -67,7 +68,9 @@ const App:FC = () => {
           <Routes>
               <Route path={home} element={ <HeaderFooter> <Home /></HeaderFooter> } />
               <Route path={collection} element={<HeaderFooter> <Collection/> </HeaderFooter>}/>
-              <Route path='/product/:id' element={ <HeaderFooter><PDP/></HeaderFooter>}/>
+              <Route path={productId} element={ <HeaderFooter><PDP/></HeaderFooter>}/>
+              <Route path={about} element={ <HeaderFooter><AboutUs/></HeaderFooter>}/>
+              
           </Routes>
         </ProductContext.Provider>
       </Container>
