@@ -1,4 +1,3 @@
-
 const img = {
     logo : require('~/assert/img/logo.svg').default,
     correct: require('~/assert/img/correct.svg').default,
@@ -14,7 +13,8 @@ const img = {
     macbookHover: require('~/assert/img/currapick/macbook-hover.webp'),
     gaming: require('~/assert/img/currapick/gaming.webp'),
     gtxHover: require('~/assert/img/currapick/GTX-hover.webp'),
-
+    macBook: require('~/assert/img/macbook.png'),
+    appleWatchAboutUs: require('~/assert/img/AboutUs/appWatch.png'),
 }
 
 export { img }

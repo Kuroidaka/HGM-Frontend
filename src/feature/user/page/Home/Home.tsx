@@ -52,9 +52,20 @@ const Container = styled.div`
         }
     }
 
-    .grid {
-        max-width: 1400px;
-        margin: auto
+    @media screen and (min-width: 1200px) {
+        .grid {
+            padding: 0 120px;
+        }
+    }
+    @media screen and (max-width: 1200px) and (min-width: 768px) {
+        .grid {
+            padding: 0 50px;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .grid {
+            padding: 0 20px;
+        }
     }
 `
 

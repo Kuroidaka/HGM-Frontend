@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900;1000&family=Roboto&display=swap');
@@ -6,7 +6,7 @@ export const GlobalStyles = createGlobalStyle`
 
          
         --primary: #64BBF3;
-        --secondary: #469df9;
+        --secondary: #FF572D;
         --third: #343A40;
         
         /* user */
@@ -107,4 +107,46 @@ export const GlobalStyles = createGlobalStyle`
     #detach-button-host {
         display: none;
     }
+`
+export const Row = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100%;
+`
+
+export const Col1 = styled.div`
+    flex: 0 0 10%;
+    width: 10%;
+`
+export const Col2 = styled.div`
+    flex: 0 0 20%;
+    width: 20%;
+`
+export const Col3 = styled.div`
+    flex: 0 0 30%;
+    width: 30%;
+`
+export const Col4 = styled.div`
+    flex: 0 0 40%;
+    width: 40%;
+`
+export const Col5 = styled.div`
+    flex: 0 0 50%;
+    width: 50%;
+`
+export const Col6 = styled.div`
+    flex: 0 0 60%;
+    width: 60%;
+`
+export const Col7 = styled.div`
+    flex: 0 0 70%;
+    width: 70%;
+`
+export const Col8 = styled.div`
+    flex: 0 0 80%;
+    width: 80%;
+`
+export const Col9 = styled.div`
+    flex: 0 0 90%;
+    width: 90%;
 `

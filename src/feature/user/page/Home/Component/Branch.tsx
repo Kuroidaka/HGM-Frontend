@@ -1,22 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 import { icon } from '~/assert/icon'
+import config from '~/config'
 
-interface Props {}
+interface Props {
+    currentPage?: string
+}
 
 function Branch(props: Props) {
-    const {} = props
+    const {currentPage} = props
+    const { about } = config.routePath
 
     return (
         <Container>
-            <div className="branch-list-title"> <h2>Branch</h2> </div>
+        { currentPage !== about && <div className="branch-list-title"> <h2>Branch</h2> </div>}
 
             <ul className="branch-list">{
                 listBranch.map((branch, idx) => {
                 return (
                     <li className='branch' key={idx}>
-                        <div className="img-wrapper">
-                            {branch.icon}
+                        <div className="img-wrapper" style={{color: branch.color}}>
+                            {currentPage === about ? branch.name : branch.icon}
                         </div>
                     </li>
                 )
@@ -29,17 +33,29 @@ function Branch(props: Props) {
 
 const listBranch = [
     {
-        icon: <icon.apple style={{color: '#959595'}}/> 
+        name: 'Apple',
+        icon: <icon.apple style={{color: '#959595'}}/> ,
+        color: '#959595'
     },{
-        icon: <icon.samsung style={{color: '#132798'}} /> 
+        name: 'Samsung',
+        icon: <icon.samsung style={{color: '#132798'}} /> ,
+        color: '#132798'
     },{
-        icon: <icon.xiaomi style={{color: '#EA5C06'}}/> 
+        name: 'Xiaomi',
+        icon: <icon.xiaomi style={{color: '#EA5C06'}}/> ,
+        color: '#EA5C06'
     },{
-        icon: <icon.nokia style={{color: '#1B4291'}}/> 
+        name: 'Nokia',
+        icon: <icon.nokia style={{color: '#1B4291'}}/> ,
+        color: '#1B4291'
     },{
-        icon: <icon.sony style={{color: '#1B4291'}}/> 
+        name: 'Huawai',
+        icon: <icon.huawai style={{color: '#1B4291'}}/> ,
+        color: '#1B4291'
     },{
-        icon: <icon.hp style={{color: '#298ECB'}}/> 
+        name: 'HP',
+        icon: <icon.hp style={{color: '#298ECB'}}/> ,
+        color: '#298ECB'
     },
 
 ]
@@ -47,7 +63,7 @@ const listBranch = [
 export default Branch
 
 const Container = styled.div`
-    width: 100wh;
+    width: 100%;
     padding-top: 20px;
     height: auto;
     .branch-list-title {
@@ -72,6 +88,11 @@ const Container = styled.div`
             .img-wrapper{
                 width: 100%;
                 height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 30px;
+                font-weight: 900;
 
                 @media screen and (min-width: 769px) {
                     svg {

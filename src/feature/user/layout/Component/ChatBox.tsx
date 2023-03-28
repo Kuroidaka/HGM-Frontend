@@ -55,10 +55,10 @@ export default function ChatBox() {
 
             <ChatListWrapper className="chat-list-wrapper">
                 <ChatList className='list-chat'>{
-                  data.user &&  data.user.map((user) => {
+                  data.user &&  data.user.map((user, idx) => {
                     return (
                     
-                    <ChatItem className='chat-item' onMouseOver={() => handleHoverChat(user)}>
+                    <ChatItem key={idx} className='chat-item' onMouseOver={() => handleHoverChat(user)}>
                         <Tippy
                         interactive
                         visible={user.id === isHoverChat}

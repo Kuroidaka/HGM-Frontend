@@ -30,7 +30,7 @@ export interface NavItem  {
 
 const HeaderFooter = (props:propsType) => {
     const { children } = props
-    const screenWidth = UseMedia()
+    const {width} = UseMedia()
     const [headerHeight, setHeaderHeight] = useState<string>('')
     const [productList, setProductList] = useState<ProductType2[]>([])
     const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false)
@@ -38,14 +38,14 @@ const HeaderFooter = (props:propsType) => {
     const [isFlyoutCartOpen, setIsFlyoutCartOpen] = useState<boolean>(false)
     // move down the app as the header height change
     useEffect(() => {
-        if(screenWidth < 992) {
+        if(width < 992) {
             setHeaderHeight('var(--header-bar-height-mb)')
         }
-        else if (screenWidth >= 768) {
-            setHeaderHeight('calc(var(--header-bar-height) + var(--header-nav-height))')
+        else if (width >= 768) {
+            setHeaderHeight('calc(var(--header-bar-height))')
         }
         
-    },[screenWidth])
+    },[width])
 
 
     const handleClickOverlay = () => {

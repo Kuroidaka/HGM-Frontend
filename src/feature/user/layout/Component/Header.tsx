@@ -16,28 +16,42 @@ interface PropType {
 
 }
 
+interface PropStyleType {
+    currentPage : string
+    routes: {
+        home: string;
+        login: string;
+        register: string;
+        profile: string;
+        collection: string;
+        product: string;
+        productId: string;
+        about: string;
+        blog: string;
+    }
+}
 
 const HeaderCom = (props:PropType) => {
     const {handleToggle, isSideBarOpen, navList} = props
 
     const [avaToggle, setAvaToggle] = useState<boolean | undefined>(false)
     const [nav, setNav] = useState<boolean | undefined>()
-    const location = useLocation()
-    const screenWidth = UseMedia()
-    
+    const {pathname } = useLocation()
+    const {width} = UseMedia()
+    const routes = config.routePath
 
     const handleClickAvatar = () => {
         setAvaToggle(!avaToggle)
     }
 
     useEffect(() => {
-        if(screenWidth < 992) {
+        if(width < 992) {
             setNav(false)
         }
         else {
             setNav(true)
         }
-    }, [screenWidth]) 
+    }, [width]) 
 
    
     const handleClickMenuIcon = () => {
@@ -47,24 +61,24 @@ const HeaderCom = (props:PropType) => {
 
    
     return (
-        <Header>
+        <Header currentPage={pathname} routes={routes}>
             <div className="wrapper">
                 <Logo to={config.routePath.home}>
                     <img src={img.logo} alt="" />
                 </Logo>
                
                 <Navbar  style={nav ? {} : {display: 'none'}}>
-                    <li className={`nav-item ${location.pathname === config.routePath.home? 'active': ''}`}> 
-                        <Link to={config.routePath.home}>Home</Link>
+                    <li className={`nav-item ${pathname === routes.home? 'active': ''}`}> 
+                        <Link to={routes.home}>Home</Link>
                     </li>
-                    <li className={`nav-item ${location.pathname === config.routePath.collection? 'active': ''}`}> 
-                        <Link to={config.routePath.collection}>Product</Link>
+                    <li className={`nav-item ${pathname === routes.collection? 'active': ''}`}> 
+                        <Link to={routes.collection}>Product</Link>
                     </li>
-                    <li className={`nav-item ${location.pathname === config.routePath.about? 'active': ''}`}> 
-                        <Link to={config.routePath.about}>About</Link>
+                    <li className={`nav-item ${pathname === routes.about? 'active': ''}`}> 
+                        <Link to={routes.about}>About</Link>
                     </li>
-                    <li className={`nav-item ${location.pathname === config.routePath.blog? 'active': ''}`}> 
-                        <Link to={config.routePath.blog}>Blog</Link>
+                    <li className={`nav-item ${pathname === routes.blog? 'active': ''}`}> 
+                        <Link to={routes.blog}>Blog</Link>
                     </li>
 
                 </Navbar>
@@ -157,7 +171,7 @@ const rotateAnimation = keyframes`
     }
 `
 
-const Header = styled.div`
+const Header = styled.div<PropStyleType>`
 position: fixed;
 top: 0;
 right: 0;
@@ -168,12 +182,28 @@ height: auto;
 display: flex;
 justify-content: center;
 flex-direction: column;
-border-bottom: 1px solid #E0E0E0;
+border-bottom: 1px solid ${({currentPage, routes}) => currentPage === routes.about ? 'transparent' : '#E0E0E0'};
+
+@media screen and (min-width: 1200px) {
+        .wrapper {
+            padding: 0 120px;
+        }
+}
+@media screen and (max-width: 1200px) and (min-width: 768px) {
+    .wrapper {
+        padding: 0 50px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .wrapper {
+        padding: 0 20px;
+    }
+}
+
 
 @media screen and (min-width: 992px) {
     
     .wrapper {   
-        max-width: 1400px;
         width: 100%;
         height: var(--header-bar-height);
 
